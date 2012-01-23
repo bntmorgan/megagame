@@ -25,6 +25,7 @@ public class Main extends BasicGame {
 	public static void main(String[] args) {
 		try {
 			AppGameContainer app = new AppGameContainer(new Main());
+			app.setDisplayMode(800, 600, true);
 			app.start();
 		} catch (SlickException e) {
 			e.printStackTrace();
@@ -45,7 +46,7 @@ public class Main extends BasicGame {
 
 	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
-		g.drawString("Welcome to MegaUplaod!", 0, 100);
+		g.drawString("Welcome to MegaUpload!", 0, 100);
 
 	}
 }
