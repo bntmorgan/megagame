@@ -54,7 +54,7 @@ public class Main extends BasicGame {
 
 	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
-		Context.getCarte().draw();
+		Context.getCarte().draw(g);
 		g.drawString("Welcome to MegaUpload!", 10, 50);
 		g.setColor(Color.red);
 		if (this.mousePressed) {
@@ -66,13 +66,15 @@ public class Main extends BasicGame {
 
 	@Override
 	public void mouseMoved(int oldx, int oldy, int newx, int newy) {
+		Lieu selectedLieu = null;
 		for (Lieu l : Context.getCarte().getLieux()) {
 			if (newx >= l.getX() - l.getWidth()/2 && newx <= l.getX() + l.getWidth()/2 &&
 					newy >= l.getY() - l.getHeight()/2 && newy <= l.getY() + l.getHeight()/2) {
-				Context.setSelectedLieu(l);
+				selectedLieu = l;
 				break;
 			}
 		}
+		Context.setSelectedLieu(selectedLieu);
 	}
 
 	@Override

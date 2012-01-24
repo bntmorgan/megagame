@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
@@ -64,11 +65,11 @@ public class Carte extends Image {
 		return lieux;
 	}
 	
-	public void draw() {
+	public void draw(Graphics g) {
 		super.draw();
 		
 		for (Lieu l : lieux) {
-			l.draw();
+			l.draw(g);
 		}
 	}
 }

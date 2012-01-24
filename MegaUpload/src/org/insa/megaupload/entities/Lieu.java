@@ -3,6 +3,7 @@ package org.insa.megaupload.entities;
 import java.util.ArrayList;
 
 import org.insa.megaupload.example.Context;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
 public class Lieu {
@@ -75,9 +76,10 @@ public class Lieu {
 		this.trajets.add(trajet);
 	}
 
-	public void draw() {
+	public void draw(Graphics g) {
 		if (Context.getSelectedLieu() == this) {
 			imgH.draw(x - width / 2, y - height / 2);
+			g.drawString(this.nom, x, y + height / 2);
 		} else {
 			img.draw(x - width / 2, y - height / 2);
 		}
