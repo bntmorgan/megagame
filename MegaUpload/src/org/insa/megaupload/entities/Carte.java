@@ -14,7 +14,7 @@ public class Carte extends Image {
 	private Collection<Lieu> lieux;
 	
 	public Carte() throws SlickException {
-		super("/resources/img/map.png");
+		super("resources/img/map.png");
 		
 		try {
 			Map<String, Lieu> lieux = new HashMap<String, Lieu>();
