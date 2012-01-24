@@ -4,21 +4,16 @@ public class Trajet {
 
 	private Lieu depart;
 	private Lieu arrivee;
-	private int distance;
 	
 	/**
 	 * @param depart
 	 * @param arrivee
-	 * @param distance
 	 */
-	public Trajet(Lieu depart, Lieu arrivee, int distance) {
+	public Trajet(Lieu depart, Lieu arrivee) {
 		super();
 		this.depart = depart;
 		this.arrivee = arrivee;
-		this.distance = distance;
 	}
-
-
 
 	public Lieu getDepart() {
 		return depart;
@@ -27,12 +22,6 @@ public class Trajet {
 	public Lieu getArrivee() {
 		return arrivee;
 	}
-	
-	public int getDistance() {
-		return distance;
-	}
-	
-	
 	
 	public Lieu getCible(Lieu source) {
 		if (source == depart) {
@@ -44,9 +33,13 @@ public class Trajet {
 		}
 	}
 	
-	// Attribut calculé
+	public int getDistance() {
+		return (int) Math.sqrt((depart.getX() - arrivee.getX()) * (depart.getX() - arrivee.getX()) +
+				(depart.getY() - arrivee.getY()) * (depart.getY() - arrivee.getY()));
+	}
+	
 	public int getTemps() {
-		return 0;
+		return getDistance();
 	}
 	
 	@Override

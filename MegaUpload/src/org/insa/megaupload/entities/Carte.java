@@ -47,7 +47,7 @@ public class Carte extends Image implements Graphe{
 					Lieu arrivee = lieux.get(data[1]);
 					
 					if (depart != null && arrivee != null) {
-						Trajet t = new Trajet(depart, arrivee, 0);
+						Trajet t = new Trajet(depart, arrivee);
 						depart.addTrajet(t);
 						arrivee.addTrajet(t);
 					}

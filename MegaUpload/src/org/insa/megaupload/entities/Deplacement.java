@@ -1,14 +1,16 @@
 package org.insa.megaupload.entities;
 
-import java.util.Queue;
+import java.util.Stack;
 
 public class Deplacement {
-	private int avancementEtape;
+	private Personnage perso;
 	private Lieu source;
 	private Lieu cible;
-	private Queue<Trajet> trajets;
+	private Stack<Trajet> trajets;
+	private int avancementEtape;
 	
-	public Deplacement(Lieu source, Lieu cible, Queue<Trajet> trajets) {
+	public Deplacement(Personnage perso, Lieu source, Lieu cible, Stack<Trajet> trajets) {
+		this.perso = perso;
 		this.source = source;
 		this.cible = cible;
 		this.trajets = trajets;
@@ -33,12 +35,23 @@ public class Deplacement {
 	}
 	
 	public void etapeSuivante() {
-		this.trajets.poll();
+		Lieu lieuAtteint = this.trajets.peek().getCible(this.perso.getLieuActuel());
+		this.trajets.pop();
 		this.avancementEtape = 0;
+		if (this.trajets.isEmpty()) {
+			perso.setLieuActuel(this.getCible());
+			perso.setDeplacement(null);
+		} else {
+			perso.setLieuActuel(lieuAtteint);
+		}
 	}
 	
 	public Trajet getEtape() {
-		return this.trajets.peek();
+		if (this.trajets.isEmpty()) {
+			return null;
+		} else {
+			return this.trajets.peek();
+		}
 	}
 	
 	/**

@@ -1,5 +1,9 @@
 package org.insa.megaupload.entities;
 
+import java.util.Stack;
+
+import org.insa.megaupload.example.Context;
+import org.insa.megaupload.utils.Algo;
 import org.newdawn.slick.Image;
 
 public class Personnage {
@@ -16,8 +20,21 @@ public class Personnage {
 		return lieuActuel;
 	}
 	
-	public void seDeplacer(Trajet t){
-		
+	public void setLieuActuel(Lieu l) {
+		this.lieuActuel = l;
+	}
+	
+	public Deplacement getDeplacement() {
+		return deplacement;
+	}
+	
+	public void setDeplacement(Deplacement d) {
+		this.deplacement = d;
+	}
+	
+	public void seDeplacer(Lieu l){
+		Stack<Trajet> trajets = (Stack<Trajet>) Algo.PCC(Context.getCarte(), this.getLieuActuel(), l);
+		this.deplacement = new Deplacement(this, this.getLieuActuel(), l, trajets);
 	}
 	
 	public int getX() {
@@ -33,7 +50,7 @@ public class Personnage {
 			x = this.lieuActuel.getX();
 		}
 		
-		System.out.println("x: " + x);
+		//System.out.println("x: " + x);
 		
 		return x;
 	}
@@ -51,7 +68,7 @@ public class Personnage {
 			y = this.lieuActuel.getY();
 		}
 		
-		System.out.println("y: " + y);
+		//System.out.println("y: " + y);
 		
 		return y;
 	}

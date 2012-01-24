@@ -59,27 +59,27 @@ public class AlgoTest {
 
 			// Arêtes
 
-			Trajet t = new Trajet(a, c, 10);
+			Trajet t = new Trajet(a, c);
 			a.addTrajet(t);
 			c.addTrajet(t);
 
-			t = new Trajet(c, b, 30);
+			t = new Trajet(c, b);
 			b.addTrajet(t);
 			c.addTrajet(t);
 
-			t = new Trajet(b, e, 10);
+			t = new Trajet(b, e);
 			b.addTrajet(t);
 			e.addTrajet(t);
 
-			t = new Trajet(b, d, 60);
+			t = new Trajet(b, d);
 			b.addTrajet(t);
 			d.addTrajet(t);
 
-			t = new Trajet(a, e, 70);
+			t = new Trajet(a, e);
 			a.addTrajet(t);
 			e.addTrajet(t);
 
-			t = new Trajet(a, d, 10);
+			t = new Trajet(a, d);
 			a.addTrajet(t);
 			d.addTrajet(t);
 		}

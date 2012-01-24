@@ -4,6 +4,7 @@
 package org.insa.megaupload.example;
 
 import org.insa.megaupload.entities.Carte;
+import org.insa.megaupload.entities.Deplacement;
 import org.insa.megaupload.entities.Lieu;
 import org.insa.megaupload.entities.MegaPerso;
 import org.insa.megaupload.entities.Personnage;
@@ -52,7 +53,20 @@ public class Main extends BasicGame {
 
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
-		// TODO Auto-generated method stub
+		//System.out.println("Update: " + delta);
+		for (Personnage p : Context.getPersonnages()) {
+			Deplacement d = p.getDeplacement();
+			if (d != null) {
+				Lieu cible = d.getEtape().getCible(p.getLieuActuel());
+				System.out.println("Je vais de " + p.getLieuActuel().getNom() + " à " + cible.getNom());
+				System.out.println(d.getAvancementEtape() + "%");
+				System.out.println("->");
+				int distanceTotale = d.getEtape().getDistance();
+				int distanceParcourue = (d.getAvancementEtape() * distanceTotale) / 100;
+				d.setAvancementEtape(100*(distanceParcourue + delta)/distanceTotale);
+				System.out.println(d.getAvancementEtape() + "%");
+			}
+		}
 
 	}
 
@@ -111,6 +125,14 @@ public class Main extends BasicGame {
 		}
 		if (Context.getHoveredPerso() != null) {
 			Context.setSelectedPerso(Context.getHoveredPerso());
+		}
+		
+		MegaPerso selectedPerso = Context.getSelectedPerso();
+		Lieu selectedLieu = Context.getSelectedLieu();
+		if (selectedPerso != null && selectedLieu != null) {
+			selectedPerso.seDeplacer(selectedLieu);
+			Context.setSelectedPerso(null);
+			Context.setSelectedLieu(null);
 		}
 	}
 
