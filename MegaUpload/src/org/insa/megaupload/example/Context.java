@@ -1,12 +1,16 @@
 package org.insa.megaupload.example;
 
-import org.insa.megaupload.entities.Carte;
-import org.insa.megaupload.entities.Lieu;
-import org.insa.megaupload.entities.MegaPerso;
+import java.util.ArrayList;
+import java.util.Collection;
+
+import org.insa.megaupload.entities.*;
 
 public class Context {
+	private static Collection<Personnage> personnages = new ArrayList<Personnage>();
 	private static Carte carte;
+	private static MegaPerso hoveredPerso;
 	private static MegaPerso selectedPerso;
+	private static Lieu hoveredLieu;
 	private static Lieu selectedLieu;
 	
 	/**
@@ -49,6 +53,42 @@ public class Context {
 	 */
 	public static void setCarte(Carte carte) {
 		Context.carte = carte;
+	}
+
+	/**
+	 * @return the hoveredPerso
+	 */
+	public static MegaPerso getHoveredPerso() {
+		return hoveredPerso;
+	}
+
+	/**
+	 * @param hoveredPerso the hoveredPerso to set
+	 */
+	public static void setHoveredPerso(MegaPerso hoveredPerso) {
+		Context.hoveredPerso = hoveredPerso;
+	}
+
+	/**
+	 * @return the hoveredLieu
+	 */
+	public static Lieu getHoveredLieu() {
+		return hoveredLieu;
+	}
+
+	/**
+	 * @param hoveredLieu the hoveredLieu to set
+	 */
+	public static void setHoveredLieu(Lieu hoveredLieu) {
+		Context.hoveredLieu = hoveredLieu;
+	}
+	
+	public static void addPersonnage(Personnage p) {
+		Context.personnages.add(p);
+	}
+	
+	public static Collection<Personnage> getPersonnages() {
+		return Context.personnages;
 	}
 	
 }

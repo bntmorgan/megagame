@@ -1,10 +1,12 @@
 package org.insa.megaupload.entities;
 
-public class AgentFBI extends Personnage{
+import org.newdawn.slick.Image;
+
+public class AgentFBI extends Personnage {
+	private MegaPerso poursuivi;
 	
-	public AgentFBI(Lieu lieuInitial) {
-		super(lieuInitial);
+	public AgentFBI(Lieu lieuInitial, Image img) {
+		super(lieuInitial, img);
 	}
 
-	private MegaPerso poursuivi;
 }

@@ -49,10 +49,10 @@ public class Algo {
 			//mise a jour des voisins
 			for(Trajet t : courant.getTrajets()){
 				Lieu voisin = null;
-				if(t.getLieuDepart().equals(courant))
-					voisin = t.getLieuArrivee();
+				if(t.getDepart().equals(courant))
+					voisin = t.getArrivee();
 				else
-					voisin = t.getLieuDepart();
+					voisin = t.getDepart();
 					
 				//TODO ajouter pour cout infini  = -1
 				if(couts.get(voisin) > couts.get(courant) + t.getDistance()){

@@ -77,7 +77,7 @@ public class Lieu {
 	}
 
 	public void draw(Graphics g) {
-		if (Context.getSelectedLieu() == this) {
+		if (Context.getHoveredLieu() == this) {
 			imgH.draw(x - width / 2, y - height / 2);
 			g.drawString(this.nom, x, y + height / 2);
 		} else {
