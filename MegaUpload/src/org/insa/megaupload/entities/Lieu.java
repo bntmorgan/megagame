@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import org.insa.megaupload.example.Context;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
 
 public class Lieu {
 	private String nom;
@@ -14,11 +13,12 @@ public class Lieu {
 	private int x;
 	private int y;
 	private ArrayList<Trajet> trajets;
-	
-	private Image img, imgH;
+
+	private static int width;
+	private static int height;
+	private static Image img, imgH;
 
 	public Lieu(String nom, int x, int y, int coutHeberg, int risque, int tempsMiseEnPlace) {
-		super();
 		this.nom = nom;
 		this.x = x;
 		this.y = y;
@@ -26,16 +26,33 @@ public class Lieu {
 		this.risque = risque;
 		this.tempsMiseEnPlace = tempsMiseEnPlace;
 		this.trajets = new ArrayList<Trajet>();
-		try {
-			this.img = new Image("resources/img/point-bleu.png");
-			this.imgH = new Image("resources/img/point-orange.png");
-		} catch (SlickException e) {
-			e.printStackTrace();
-		}
+	}
+	
+	public static void setImages(Image img, Image imgH) {
+		Lieu.img = img;
+		Lieu.imgH = imgH;
+		width = img.getWidth();
+		height = img.getHeight();
 	}
 
 	public String getNom() {
 		return nom;
+	}
+	
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public int getHeight() {
+		return height;
 	}
 
 	public int getCoutHeberg() {
@@ -49,27 +66,20 @@ public class Lieu {
 	public int getTempsMiseEnPlace() {
 		return tempsMiseEnPlace;
 	}
-
-	public void draw() {
-		if (Context.getSelectedLieu() == this) {
-			imgH.draw(x, y);
-		} else {
-			img.draw(x, y);
-		}
-	}
-
-	/**
-	 * @return the trajets
-	 */
+	
 	public ArrayList<Trajet> getTrajets() {
 		return trajets;
 	}
 
-	/**
-	 * @param trajet the trajet to add
-	 */
 	public void addTrajet(Trajet trajet) {
 		this.trajets.add(trajet);
 	}
 
+	public void draw() {
+		if (Context.getSelectedLieu() == this) {
+			imgH.draw(x - width / 2, y - height / 2);
+		} else {
+			img.draw(x - width / 2, y - height / 2);
+		}
+	}
 }

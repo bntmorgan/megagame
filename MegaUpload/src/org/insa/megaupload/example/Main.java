@@ -4,11 +4,13 @@
 package org.insa.megaupload.example;
 
 import org.insa.megaupload.entities.Carte;
+import org.insa.megaupload.entities.Lieu;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 /**
@@ -39,8 +41,9 @@ public class Main extends BasicGame {
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
-		// TODO Auto-generated method stub
-
+		Carte c = new Carte();
+		Context.setCarte(c);
+		Lieu.setImages(new Image("resources/img/point-bleu.png"), new Image("resources/img/point-orange.png"));
 	}
 
 	@Override
@@ -51,14 +54,24 @@ public class Main extends BasicGame {
 
 	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
-		Carte c = new Carte();
-		c.draw();
+		Context.getCarte().draw();
 		g.drawString("Welcome to MegaUpload!", 10, 50);
 		g.setColor(Color.red);
 		if (this.mousePressed) {
 			int r = 6;
 			g.fillOval(this.mouseX - r/2, this.mouseY - r/2, r, r);
 			g.drawString("Mouse pressed: " + this.mouseX + ", " + this.mouseY, 10, 75);
+		}
+	}
+
+	@Override
+	public void mouseMoved(int oldx, int oldy, int newx, int newy) {
+		for (Lieu l : Context.getCarte().getLieux()) {
+			if (newx >= l.getX() - l.getWidth()/2 && newx <= l.getX() + l.getWidth()/2 &&
+					newy >= l.getY() - l.getHeight()/2 && newy <= l.getY() + l.getHeight()/2) {
+				Context.setSelectedLieu(l);
+				break;
+			}
 		}
 	}
 
