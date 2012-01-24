@@ -46,7 +46,7 @@ public class Main extends BasicGame {
 	public void init(GameContainer container) throws SlickException {
 		Carte c = new Carte();
 		Context.setCarte(c);
-		Lieu.setImages(new Image("resources/img/point-bleu.png"), new Image("resources/img/point-orange.png"));
+		Lieu.setImages(new Image("resources/img/City-30px.png"), new Image("resources/img/City-40px.png"));
 		Context.addPersonnage(new MegaPerso("Kim DotCom", (Lieu) c.getLieux().toArray()[42], new Image("resources/img/kim.png")));
 		Context.addPersonnage(new MegaPerso("Finn Batato", (Lieu) c.getLieux().toArray()[24], new Image("resources/img/finn.png")));
 	}
@@ -81,11 +81,11 @@ public class Main extends BasicGame {
 			g.drawString("Selected lieu: " + Context.getSelectedLieu().getNom(), 10, 620);
 		}
 		g.setColor(Color.red);
-		if (this.mousePressed) {
+		//if (this.mousePressed) {
 			int r = 6;
 			g.fillOval(this.mouseX - r/2, this.mouseY - r/2, r, r);
 			g.drawString("Mouse pressed: " + this.mouseX + ", " + this.mouseY, 10, 75);
-		}
+		//}
 		for (Personnage p : Context.getPersonnages()) {
 			p.draw();
 		}
