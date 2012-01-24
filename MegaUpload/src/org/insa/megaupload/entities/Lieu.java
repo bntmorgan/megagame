@@ -84,4 +84,9 @@ public class Lieu {
 			img.draw(x - width / 2, y - height / 2);
 		}
 	}
+	
+	@Override
+	public String toString() {
+		return this.nom;
+	}
 }

@@ -11,7 +11,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public class Carte extends Image {
+public class Carte extends Image implements Graphe{
 	private Collection<Lieu> lieux;
 	
 	public Carte() throws SlickException {
@@ -47,7 +47,7 @@ public class Carte extends Image {
 					Lieu arrivee = lieux.get(data[1]);
 					
 					if (depart != null && arrivee != null) {
-						Trajet t = new Trajet(depart, arrivee);
+						Trajet t = new Trajet(depart, arrivee, 0);
 						depart.addTrajet(t);
 						arrivee.addTrajet(t);
 					}
@@ -61,6 +61,7 @@ public class Carte extends Image {
 		}
 	}
 	
+	@Override
 	public Collection<Lieu> getLieux() {
 		return lieux;
 	}

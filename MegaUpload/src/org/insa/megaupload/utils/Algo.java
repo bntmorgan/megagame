@@ -1,82 +1,76 @@
 package org.insa.megaupload.utils;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Stack;
 
+import org.insa.megaupload.entities.Graphe;
 import org.insa.megaupload.entities.Lieu;
-import org.insa.megaupload.entities.Trajet;;
-
+import org.insa.megaupload.entities.Trajet;
 
 public class Algo {
-	
-	private class Carte{
-		public ArrayList<Lieu> getLieux(){return new ArrayList<Lieu>();}
-	}
-	
-	public static List<Trajet> PCC(Carte c, Lieu depart, Lieu arrivee){
 
-		Map<Lieu,Integer> couts = new HashMap<Lieu,Integer>(c.getLieux().size());
-		Map<Lieu,Boolean> marque = new HashMap<Lieu,Boolean>(c.getLieux().size());
-		Map<Lieu,Trajet> predecesseurs = new HashMap<Lieu,Trajet>(c.getLieux().size());
-		
-		//initialisation de l'algorithme
-		for (Lieu l : c.getLieux())
-			couts.put(l, -1);
-		
-		//cout a zero pour le depart
+	public static Stack<Trajet> PCC(Graphe g, Lieu depart, Lieu arrivee) {
+
+		Map<Lieu, Integer> couts = new HashMap<Lieu, Integer>(g.getLieux().size());
+		Map<Lieu, Boolean> marque = new HashMap<Lieu, Boolean>(g.getLieux().size());
+		Map<Lieu, Trajet> predecesseurs = new HashMap<Lieu, Trajet>(g.getLieux().size());
+
+		// initialisation de l'algorithme
+		for (Lieu l : g.getLieux()){
+			couts.put(l, Integer.MAX_VALUE);
+			marque.put(l, new Boolean(false));
+		}
+
+		// cout a zero pour le depart
 		couts.put(depart, 0);
-		
-		//boolean a false par defaut en java et null pour les prédécesseurs
-		
-		while(true){
+
+		Queue<Lieu> pq = new PriorityQueue<Lieu>(g.getLieux().size(), new LieuComparator(couts));
+		pq.add(depart);
+
+		// boolean a false par defaut en java et null pour les prédécesseurs
+		while (!pq.isEmpty()) {
+
+			// On cherche le premier non marqué de cout non infini
+			Lieu courant = pq.poll();
+
+			if (marque.get(courant).booleanValue())
+				continue;
+
+			// si on est arrivé
+			if (courant == arrivee)
+				break;
 			
-			//On cherche le premier non marqué de cout non infini 
-			Lieu courant = null;
-			for (Lieu l : c.getLieux()){
-				if(!couts.get(l).equals(-1) && marque.get(l) != true){
-					courant = l;
-					break;
+			// mise a jour des voisins
+			for (Trajet t : courant.getTrajets()) {
+				Lieu voisin = t.getCible(courant);
+
+				if(! marque.get(voisin) ){
+					if (couts.get(voisin) > couts.get(courant) + t.getDistance()) {
+						predecesseurs.put(voisin, t);
+						couts.put(voisin, couts.get(courant) + t.getDistance());
+						//on ajoute un voisin seulement s'il est pas marqué
+						pq.add(voisin);
+					}
 				}
 			}
-			
-			//condition de terminaison
-			if(courant == null)
-				break;
-			
-			//mise a jour des voisins
-			for(Trajet t : courant.getTrajets()){
-				Lieu voisin = null;
-				if(t.getDepart().equals(courant))
-					voisin = t.getArrivee();
-				else
-					voisin = t.getDepart();
-					
-				//TODO ajouter pour cout infini  = -1
-				if(couts.get(voisin) > couts.get(courant) + t.getDistance()){
-					predecesseurs.put(voisin, t);
-					couts.put(voisin, couts.get(courant) + t.getDistance());
-				}				
-			}
-			
-			//on se marque
+
+			// on se marque
 			marque.put(courant, true);
-			
-			//si on est arrivé
-			if(courant == arrivee)
-				break;
 		}
-		
-		//on constitue le trajet a partir de la lise de prédecesseurs en partant du point d'arrivée
+
+		// on constitue le trajet a partir de la lise de prédecesseurs en
+		// partant du point d'arrivée
 		Lieu courant = arrivee;
-		
+
 		Stack<Trajet> trajet = new Stack<Trajet>();
-		while(courant != depart){
+		while (courant != depart) {
 			trajet.push(predecesseurs.get(courant));
+			courant = predecesseurs.get(courant).getCible(courant);
 		}
-		
+
 		return trajet;
 	}
 }
