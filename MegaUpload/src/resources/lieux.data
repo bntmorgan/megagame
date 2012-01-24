@@ -1,19 +1,12 @@
 Moscow	706	96	1	2	3
 Berlin	632	110	1	2	3
 Madrid	575	160	1	2	3
-Barcelona	593	155	1	2	3
 Roma	629	152	1	2	3
-Mila	621	135	1	2	3
-London	588	111	1	2	3
+London	588	96	1	2	3
 Kiev	690	123	1	2	3
-Kharkov	699	126	1	2	3
 Budapest	653	128	1	2	3
-Bucharest	677	139	1	2	3
 Paris	598	125	1	2	3
-Warsaw	657	110	1	2	3
 Casablanca	563	185	1	2	3
-Algiers	597	175	1	2	3
-Tunis	622	175	1	2	3
 Tripoli	634	191	1	2	3
 Cairo	691	204	1	2	3
 Abuja	612	295	1	2	3
@@ -23,11 +16,9 @@ Niangara	686	313	1	2	3
 Buenos Aires	384	476	1	2	3
 Bahia	427	377	1	2	3
 Rio	de Janeiro	426	426	1	2	3
-Montreal	344	136	1	2	3
 Vancouver	189	120	1	2	3
 Santiago	341	465	1	2	3
 Bogota	309	306	1	2	3
-Havana	289	232	1	2	3
 Mexico	City	224	246	1	2	3
 Lima	300	376	1	2	3
 Chicago	291	153	1	2	3
@@ -41,7 +32,6 @@ Mumbai	853	253	1	2	3
 Delhi	869	210	1	2	3
 Jakarta	983	355	1	2	3
 Tehran	765	179	1	2	3
-Jerusalem	712	195	1	2	3
 Tokyo	1073	177	1	2	3
 Riyadh	751	229	1	2	3
 Seoul	1029	170	1	2	3
@@ -53,12 +43,8 @@ Adelaide	1071	478	1	2	3
 Darwin	1076	382	1	2	3
 Perth	997	460	1	2	3
 Auckland	1194	483	1	2	3
-Wellington	1148	500	1	2	3
-Christchurch	1169	509	1	2	3
 Dunedin	1153	520	1	2	3
-Port Moresby	1128	365	1	2	3
 Aitape	1115	343	1	2	3
-Kokopo	1148	347	1	2	3
 Suva	1237	403	1	2	3
 Nouméa	1191	421	1	2	3
 Vostok Station	878	640	1	2	3
