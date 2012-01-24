@@ -2,30 +2,40 @@ package org.insa.megaupload.entities;
 
 public class Trajet {
 
-	private Lieu lieuDepart;
-	private Lieu lieuArrivee;
+	private Lieu depart;
+	private Lieu arrivee;
 	
-	public Trajet(Lieu lieuDepart, Lieu lieuArrivee) {
-		this.lieuDepart = lieuDepart;
-		this.lieuArrivee = lieuArrivee;
+	public Trajet(Lieu depart, Lieu arrivee) {
+		this.depart = depart;
+		this.arrivee = arrivee;
 	}
 
-	public Lieu getLieuDepart() {
-		return lieuDepart;
+	public Lieu getDepart() {
+		return depart;
 	}
 	
-	public Lieu getLieuArrivee() {
-		return lieuArrivee;
+	public Lieu getArrivee() {
+		return arrivee;
 	}
 	
-	//attribut calculé
-	public int getDistance(){
+	public Lieu getCible(Lieu source) {
+		if (source == depart) {
+			return arrivee;
+		} else if (source == arrivee) {
+			return depart;
+		} else {
+			return null;
+		}
+	}
+	
+	// Attribut calculé
+	public int getDistance() {
 		return 0;
 	}
-	//attribut calculé
-	public int getTemps(){
+	
+	// Attribut calculé
+	public int getTemps() {
 		return 0;
 	}
-	
 	
 }
