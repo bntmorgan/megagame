@@ -36,6 +36,16 @@ public class AgentFBI extends Personnage {
 			}
 		}
 		
+		//s'il y a des serveurs sur la position actuelle, ils peuvent etre fermés
+		if(!this.getLieuActuel().getServeurs().isEmpty()){
+			double rand = Math.random();
+			Lieu l = this.getLieuActuel();
+			double risque = rand * l.getRisque();
+			if( risque > 1){
+				l.delServeurs();
+			}
+		}
+		
 		super.update(delta);
 	}
 	

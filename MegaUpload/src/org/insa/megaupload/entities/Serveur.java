@@ -5,9 +5,6 @@ import org.insa.megaupload.rules.ServeurRules;
 
 public class Serveur {
 
-	
-	
-
 	public Serveur() {
 		//décompte le cout d'ouverture du serveur du compteur de thune
 		Context.decCptThunes(ServeurRules.getRegleCoutOuverture());

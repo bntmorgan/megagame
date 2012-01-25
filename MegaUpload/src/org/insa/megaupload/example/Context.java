@@ -173,6 +173,10 @@ public class Context {
 		Context.cptServeursOuverts++;
 		
 	}
+
+	public static void decCptServeurs(int nb) {
+		Context.cptServeursOuverts -= nb;
+	}
 	
 	
 	

@@ -116,6 +116,8 @@ public class Main extends BasicGame {
 				g.drawLine(t.getDepart().getX(), t.getDepart().getY(), t.getArrivee().getX(), t.getArrivee().getY());
 			}
 		}
+		
+		
 	}
 
 	@Override

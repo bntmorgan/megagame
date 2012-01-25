@@ -4,6 +4,7 @@ import java.util.Stack;
 
 import org.insa.megaupload.example.Context;
 import org.insa.megaupload.example.CoolFireEmitter;
+import org.insa.megaupload.rules.DeplacementRules;
 import org.insa.megaupload.utils.Algo;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -103,8 +104,15 @@ public class Personnage {
 		Deplacement d;
 		
 		d = this.getDeplacement();
+		
+
 		if (d != null) {
 			int distanceTotale = d.getEtape().getDistance();
+			
+			if (this instanceof MegaPerso && d.getAvancementEtape() == 0 ){
+				Context.decCptThunes((int) (distanceTotale*DeplacementRules.getCoutDeplacement()));
+			}
+						
 			double distanceParcourue = (double)(d.getAvancementEtape() * distanceTotale) / 100.;
 			d.setAvancementEtape((int) (100.*(double)(distanceParcourue + 5)/(double)distanceTotale));
 		}
