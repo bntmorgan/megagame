@@ -32,7 +32,7 @@ public class MegaPerso extends Personnage {
 	}
 	 
 	public void ouvrirServeur() throws SlickException {
-		new Serveur(100, this.getLieuActuel());
+		new Serveur(100, 100, this.getLieuActuel());
 		this.nbServeursOuverts++;
 	}
 	
