@@ -99,6 +99,7 @@ public class Main extends BasicGame {
 		Lieu hoveredLieu = null;
 		MegaPerso hoveredPerso = null;
 		
+		//recherche d'un lieu correspondant à la position de la souris
 		for (Lieu l : Context.getCarte().getLieux()) {
 			if (newx >= l.getX() - l.getWidth()/2 && newx <= l.getX() + l.getWidth()/2 &&
 					newy >= l.getY() - l.getHeight()/2 && newy <= l.getY() + l.getHeight()/2) {
@@ -141,8 +142,14 @@ public class Main extends BasicGame {
 		//double click ou plus
 		else{
 			if(ServeurRules.peutOuvrirServeur()){
-				Lieu l = Context.getSelectedLieu();
-				l.addServeur(new Serveur());	
+				Lieu hovL = Context.getHoveredLieu();
+				if(hovL != null){
+					Context.setSelectedLieu(Context.getHoveredLieu());
+					Lieu selL = Context.getSelectedLieu();
+					if (selL != null){
+						selL.addServeur(new Serveur());					
+					}
+				}
 			}
 			else{
 				//affichage 
