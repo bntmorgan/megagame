@@ -12,7 +12,25 @@ public class Context {
 	private static MegaPerso selectedPerso;
 	private static Lieu hoveredLieu;
 	private static Lieu selectedLieu;
+	private static int cptThunes;
 	
+	public static int getCptThunes() {
+		return cptThunes;
+	}
+
+	//ajoute de l'argent au compteur de thune
+	public static void incCptThunes(int cptThunes) {
+		Context.cptThunes += cptThunes;
+	}
+	
+	//retire de l'argent au compteur de thune
+	public static void decCptThunes(int cptThunes){
+		Context.cptThunes -= cptThunes;
+		if(Context.cptThunes < 0){
+			Context.cptThunes = 0 ;
+		}
+	}
+
 	/**
 	 * @return the selectedPerso
 	 */
@@ -90,5 +108,7 @@ public class Context {
 	public static Collection<Personnage> getPersonnages() {
 		return Context.personnages;
 	}
+	
+	
 	
 }

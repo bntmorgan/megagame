@@ -82,6 +82,7 @@ public class Lieu {
 		if (Context.getHoveredLieu() == this) {
 			imgH.draw(x - widthH / 2, y - heightH / 2);
 			g.drawString(this.nom, x, y + heightH / 2);
+			g.drawString("ouvrir un serveur", x, y+ heightH);
 		} else {
 			img.draw(x - width / 2, y - height / 2);
 		}

@@ -36,7 +36,6 @@ public class Main extends BasicGame {
 		try {
 			AppGameContainer app = new AppGameContainer(new Main());
 			app.setDisplayMode(1280, 667, false);
-			app.start();
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
@@ -120,6 +119,7 @@ public class Main extends BasicGame {
 
 	@Override
 	public void mouseClicked(int button, int x, int y, int clickCount) {
+		
 		if (Context.getHoveredLieu() != null) {
 			Context.setSelectedLieu(Context.getHoveredLieu());
 		}
