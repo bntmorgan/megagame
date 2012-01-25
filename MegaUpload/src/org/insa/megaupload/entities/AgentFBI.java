@@ -10,8 +10,8 @@ public class AgentFBI extends Personnage {
 		return coefRand;
 	}
 	
-	public AgentFBI(Lieu lieuInitial, Image img) {
-		super(lieuInitial, img);
+	public AgentFBI(Lieu lieuInitial, Image imgBig, Image imgPawn) {
+		super(lieuInitial, imgBig, imgPawn);
 	}
 	
 	public void poursuivre(MegaPerso perso) {

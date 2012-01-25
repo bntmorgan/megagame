@@ -10,8 +10,8 @@ public class MegaPerso extends Personnage {
 	private int nbServeursOuverts;
 	private int num;
 	
-	public MegaPerso(String nom, Lieu lieuInitial, Image img) {
-		super(lieuInitial, img);
+	public MegaPerso(String nom, Lieu lieuInitial, Image imgBig, Image imgPawn) {
+		super(lieuInitial, imgBig, imgPawn);
 		this.nom = nom;
 		this.nbServeursOuverts = 0;
 		this.num = nbPersos;
@@ -34,9 +34,9 @@ public class MegaPerso extends Personnage {
 		super.draw();
 		
 		if (Context.getHoveredPerso() == this) {
-			img.drawFlash(10, 100*(1 + num), img.getWidth()*100/img.getHeight(), 100);
+			imgBig.drawFlash(10, 100*(1 + num), imgBig.getWidth()*100/imgBig.getHeight(), 100);
 		} else {
-			img.draw(10, 100*(1 + num), img.getWidth()*100/img.getHeight(), 100);
+			imgBig.draw(10, 100*(1 + num), imgBig.getWidth()*100/imgBig.getHeight(), 100);
 		}
 	}
 

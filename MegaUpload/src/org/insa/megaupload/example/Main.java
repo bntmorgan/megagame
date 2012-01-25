@@ -59,10 +59,10 @@ public class Main extends BasicGame {
 		Context.setCarte(c);
 		music = new Music("resources/sound/megasong.ogg");
 		Lieu.setImages(new Image("resources/img/City-20px.png"), new Image("resources/img/City-30px.png"));
-		MegaPerso kim = new MegaPerso("Kim DotCom", (Lieu) c.getLieux().toArray()[27], new Image("resources/img/kim.png"));
+		MegaPerso kim = new MegaPerso("Kim DotCom", (Lieu) c.getLieux().toArray()[27], new Image("resources/img/yellowguy2.png"), new Image("resources/img/yellow.png"));
 		Context.addPersonnage(kim);
-		Context.addPersonnage(new MegaPerso("Finn Batato", (Lieu) c.getLieux().toArray()[3], new Image("resources/img/finn.png")));
-		AgentFBI a = new AgentFBI((Lieu) c.getLieux().toArray()[2], new Image("resources/img/fbiagent-400px.png"));
+		Context.addPersonnage(new MegaPerso("Finn Batato", (Lieu) c.getLieux().toArray()[3], new Image("resources/img/redguy.png"), new Image("resources/img/red.png")));
+		AgentFBI a = new AgentFBI((Lieu) c.getLieux().toArray()[2], new Image("resources/img/fbiguy.png"), new Image("resources/img/fbi.png"));
 		Context.addPersonnage(a);
 		a.poursuivre(kim);
 		Context.setSelectedPerso(kim);

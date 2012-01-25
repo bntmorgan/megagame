@@ -12,7 +12,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.particles.ParticleSystem;
 
 public class Personnage {
-	protected Image img;
+	protected Image imgBig;
+	protected Image imgPawn;
 	private Lieu lieuActuel;
 	private Deplacement deplacement;
 	private CoolFireEmitter particleEmitter;
@@ -21,9 +22,10 @@ public class Personnage {
     
 	protected final static double coefRand = 0;
 	
-	public Personnage(Lieu lieuInitial, Image img) {
+	public Personnage(Lieu lieuInitial, Image imgBig, Image imgPawn) {
 		this.lieuActuel = lieuInitial;
-		this.img = img;
+		this.imgBig = imgBig;
+		this.imgPawn = imgPawn;
 		
 		particleEmitter = new CoolFireEmitter(this.getX(), this.getY(), 6f, Color.GREEN );
 		getParticleSystem().addEmitter(particleEmitter);
@@ -125,7 +127,7 @@ public class Personnage {
 	}
 	
 	public void draw() {
-		img.draw(this.getX() - 10, this.getY() - 10, 20, 20);
+		imgPawn.draw(this.getX() - 10, this.getY() - 10, 20, 20);
 	}
 	
 	public static ParticleSystem getParticleSystem(){
