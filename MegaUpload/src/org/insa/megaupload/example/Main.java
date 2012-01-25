@@ -73,7 +73,6 @@ public class Main extends BasicGame {
 
 	}
 
-	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
 		Context.getCarte().draw(g);
 		g.drawString("Welcome to MegaUpload!", 10, 50);

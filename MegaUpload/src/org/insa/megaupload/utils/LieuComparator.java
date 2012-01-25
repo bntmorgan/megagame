@@ -18,7 +18,6 @@ public class LieuComparator implements Comparator<Lieu> {
 			this.couts = couts;
 		}
 
-		@Override
 		public int compare(Lieu lieu1, Lieu lieu2) {
 			//si on est marqué on va a la fin
 			if (couts.get(lieu1) < couts.get(lieu2))

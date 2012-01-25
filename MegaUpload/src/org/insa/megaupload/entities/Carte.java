@@ -63,7 +63,6 @@ public class Carte extends Image implements Graphe{
 		}
 	}
 	
-	@Override
 	public Collection<Lieu> getLieux() {
 		return lieux;
 	}
