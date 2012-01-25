@@ -36,6 +36,10 @@ public class Main extends BasicGame {
 		try {
 			AppGameContainer app = new AppGameContainer(new Main());
 			app.setDisplayMode(1280, 667, false);
+			app.setMaximumLogicUpdateInterval(20);
+			app.setMinimumLogicUpdateInterval(20);
+
+			app.start();
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
@@ -132,6 +136,9 @@ public class Main extends BasicGame {
 		if (selectedPerso != null && selectedLieu != null) {
 			selectedPerso.seDeplacer(selectedLieu);
 			Context.setSelectedLieu(null);
+		}
+		if(clickCount > 1){
+			this.toString();
 		}
 	}
 
