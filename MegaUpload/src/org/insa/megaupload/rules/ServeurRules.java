@@ -1,5 +1,7 @@
 package org.insa.megaupload.rules;
 
+import org.insa.megaupload.entities.Lieu;
+import org.insa.megaupload.entities.Personnage;
 import org.insa.megaupload.example.Context;;
 
 public class ServeurRules {
@@ -18,8 +20,13 @@ public class ServeurRules {
 	}
 	
 	public static boolean peutOuvrirServeur(){
-		if (Context.getCptThunes()>coutOuverture){
-			return true;
+		//capacité financiere
+		if ( Context.getCptThunes()>coutOuverture ){
+			Personnage p = Context.getSelectedPerso();
+			Lieu l = Context.getSelectedLieu();
+			if (p != null && p.getLieuActuel() == l){
+				return true;				
+			}
 		}
 		return false;
 	}

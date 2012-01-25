@@ -173,10 +173,10 @@ public class Main extends BasicGame {
 		}
 		//double click ou plus
 		else{
+			if (Context.getHoveredLieu() != null) {
+				Context.setSelectedLieu(Context.getHoveredLieu());
+			
 			if(ServeurRules.peutOuvrirServeur()){
-				Lieu hovL = Context.getHoveredLieu();
-				if(hovL != null){
-					Context.setSelectedLieu(Context.getHoveredLieu());
 					Lieu selL = Context.getSelectedLieu();
 					if (selL != null){
 						selL.addServeur(new Serveur());					
