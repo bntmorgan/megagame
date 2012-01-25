@@ -22,6 +22,23 @@ public class AgentFBI extends Personnage {
 		return this.poursuivi;
 	}
 	
+	@Override
+	public void update(int delta) {
+
+		MegaPerso poursuivi = this.getPoursuivi();
+		if (poursuivi != null) {
+			if (this.getLieuActuel() == poursuivi.getLieuActuel()) {
+				 this.arreter(poursuivi);
+			} else if (this.getDeplacement() == null) {
+				this.seDeplacer(poursuivi.getLieuActuel());
+			} else if (this.getDeplacement().getCible() != poursuivi.getLieuActuel()) {
+				this.seDeplacer(poursuivi.getLieuActuel());
+			}
+		}
+		
+		super.update(delta);
+	}
+	
 	public void arreter(MegaPerso perso) {
 		if (this.getLieuActuel() == perso.getLieuActuel()) {
 			//System.out.println(perso.getNom() + " arrêté!");

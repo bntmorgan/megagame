@@ -3,19 +3,29 @@ package org.insa.megaupload.entities;
 import java.util.Stack;
 
 import org.insa.megaupload.example.Context;
+import org.insa.megaupload.example.CoolFireEmitter;
 import org.insa.megaupload.utils.Algo;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.particles.ParticleSystem;
 
 public class Personnage {
 	protected Image img;
 	private Lieu lieuActuel;
 	private Deplacement deplacement;
+	private CoolFireEmitter particleEmitter;
+	
+    private static ParticleSystem particleSystem = null; 
+    
 	protected final static double coefRand = 0;
 	
 	public Personnage(Lieu lieuInitial, Image img) {
 		this.lieuActuel = lieuInitial;
 		this.img = img;
+		
+		particleEmitter = new CoolFireEmitter(this.getX(), this.getY(), 10);
+		getParticleSystem().addEmitter(particleEmitter);
+		
 	}
 	
 	public double getCoefRand() {
@@ -68,8 +78,6 @@ public class Personnage {
 			x = this.lieuActuel.getX();
 		}
 		
-		//System.out.println("x: " + x);
-		
 		return x;
 	}
 	
@@ -86,13 +94,45 @@ public class Personnage {
 			y = this.lieuActuel.getY();
 		}
 		
-		//System.out.println("y: " + y);
-		
 		return y;
 	}
 	
+	public void update(int delta){
+		Deplacement d;
+		
+		d = this.getDeplacement();
+		if (d != null) {
+			int distanceTotale = d.getEtape().getDistance();
+			double distanceParcourue = (double)(d.getAvancementEtape() * distanceTotale) / 100.;
+			d.setAvancementEtape((int) (100.*(double)(distanceParcourue + 5)/(double)distanceTotale));
+		}
+		
+        particleSystem.update(delta);
+        particleEmitter.setX(this.getX());
+        particleEmitter.setY(this.getY());	
+        
+	}
+	
 	public void draw() {
+		particleSystem.render();
 		img.draw(this.getX() - 10, this.getY() - 10, 20, 20);
+	}
+	
+	private static ParticleSystem getParticleSystem(){
+
+		if (particleSystem == null) {
+			Image image = null;
+			try {
+				image = new Image("resources/img/dollard.png");
+			} catch (SlickException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			particleSystem = new ParticleSystem(image);
+			particleSystem.setPosition(0, 0);
+		}
+
+		return particleSystem;
 	}
 	
 }

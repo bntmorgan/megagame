@@ -80,32 +80,7 @@ public class Main extends BasicGame {
 		
 		//System.out.println("Update: " + delta);
 		for (Personnage p : Context.getPersonnages()) {
-			Deplacement d;
-			
-			if (p instanceof AgentFBI) {
-				MegaPerso poursuivi = ((AgentFBI) p).getPoursuivi();
-				if (poursuivi != null) {
-					if (p.getLieuActuel() == poursuivi.getLieuActuel()) {
-						((AgentFBI) p).arreter(poursuivi);
-					} else if (p.getDeplacement() == null) {
-						p.seDeplacer(poursuivi.getLieuActuel());
-					} else if (p.getDeplacement().getCible() != poursuivi.getLieuActuel()) {
-						p.seDeplacer(poursuivi.getLieuActuel());
-					}
-				}
-			}
-			
-			d = p.getDeplacement();
-			if (d != null) {
-				Lieu cible = d.getEtape().getCible(p.getLieuActuel());
-				/*System.out.println("Je vais de " + p.getLieuActuel().getNom() + " à " + cible.getNom());
-				System.out.println(d.getAvancementEtape() + "%");
-				System.out.println("->");*/
-				int distanceTotale = d.getEtape().getDistance();
-				double distanceParcourue = (double)(d.getAvancementEtape() * distanceTotale) / 100.;
-				d.setAvancementEtape((int) (100.*(double)(distanceParcourue + 5)/(double)distanceTotale));
-				//System.out.println(d.getAvancementEtape() + "%");
-			}
+			p.update(delta);
 		}
 		
 
