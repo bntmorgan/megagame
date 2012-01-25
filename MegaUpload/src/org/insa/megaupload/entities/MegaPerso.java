@@ -47,7 +47,7 @@ public class MegaPerso extends Personnage {
 			openServerImg.draw(110, 100*(1 + num)-25, openServerImg.getWidth()*100/openServerImg.getHeight(), 50);
 			moveImg.draw(110, 100*(1 + num)+25, moveImg.getWidth()*100/moveImg.getHeight(), 50);
 		} else {
-			imgBig.draw(10, 100*(1 + num), imgBig.getWidth()*100/imgBig.getHeight(), 100);
+			imgBig.draw(10, 125*(1 + num)+5, 125, 125);
 		}
 	}
 

@@ -62,14 +62,21 @@ public class Main extends BasicGame {
 		music = new Music("resources/sound/megasong.ogg");
 		Lieu.setImages(new Image("resources/img/City-20px.png"), new Image("resources/img/City-30px.png"));
 
-		MegaPerso kim = new MegaPerso("Kim DotCom", (Lieu) c.getLieux().toArray()[27], new Image("resources/img/yellowguy2.png"), new Image("resources/img/yellow.png"));
+		MegaPerso kim = new MegaPerso("Kim DotCom", (Lieu) c.getLieux().toArray()[27], new Image("resources/img/avatar-yellow.png"), new Image("resources/img/yellow.png"));
 		Context.addPersonnage(kim);
-
-		Context.addPersonnage(new MegaPerso("Finn Batato", (Lieu) c.getLieux().toArray()[3], new Image("resources/img/redguy.png"), new Image("resources/img/red.png")));
-		AgentFBI a = new AgentFBI((Lieu) c.getLieux().toArray()[2], new Image("resources/img/fbiguy.png"), new Image("resources/img/fbi.png"));
-
-		Context.addPersonnage(a);
-		a.poursuivre(kim);
+		
+		MegaPerso finn = new MegaPerso("Finn Batato", (Lieu) c.getLieux().toArray()[3], new Image("resources/img/avatar-red.png"), new Image("resources/img/red.png"));
+		Context.addPersonnage(finn);
+		/*
+		MegaPerso finn = new MegaPerso("Finn Batato", (Lieu) c.getLieux().toArray()[3], new Image("resources/img/redguy.png"), new Image("resources/img/red.png")));
+		Context.addPersonnage(finn);
+		
+		MegaPerso finn = new MegaPerso("Finn Batato", (Lieu) c.getLieux().toArray()[3], new Image("resources/img/redguy.png"), new Image("resources/img/red.png")));
+		Context.addPersonnage(finn);
+		*/
+		AgentFBI a1 = new AgentFBI((Lieu) c.getLieux().toArray()[2], new Image("resources/img/fbiguy.png"), new Image("resources/img/fbi.png"));
+		Context.addPersonnage(a1);
+		a1.poursuivre(kim);
 		Context.setSelectedPerso(kim);
 	}
 
@@ -127,6 +134,9 @@ public class Main extends BasicGame {
 					g.drawLine(t.getDepart().getX(), t.getDepart().getY(), t.getArrivee().getX(), t.getArrivee().getY());
 				}
 			}
+			
+
+			
 		}
 	}
 	
