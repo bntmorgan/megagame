@@ -12,8 +12,27 @@ Budapest	Bucharest
 Bucharest	Istanbul
 Istanbul	Tehran
 Tehran	Delhi
+
+Delhi	Beijing
+Vancouver	Chicago
+Chicago	New York
+Chicago	Miami
+Chicago	Los Angeles
+Vancouver	Los Angeles
+Miami	Bogota
+Bogota	Lima
+Bogota	Bahia
+Lima	Santiago
+Santiago	Buenos Aires
+Bahia	Santiago
+Cape Town	Antananarivo
+Niangara	Antananarivo
+Abuja	Cape Town
+Abuja	Niangara
+Cairo	Niangara
+Cairo	Riyadh
+Cairo	Tripoli
 Delhi	Beijing
 Tripoli	Casablanca
-Cape Town	Abuja
 Abuja	Casablanca
 Casablanca	Madrid
