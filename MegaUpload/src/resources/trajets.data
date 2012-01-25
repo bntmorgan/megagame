@@ -4,7 +4,7 @@ Mardid	Ibiza
 Ibiza	Barcelona
 Roma	Mila
 Khiev	Kharkov
-Paris	Londres
+Paris	London
 Paris	Madrid
 Paris	Mila
 Mila	Budapest
@@ -12,7 +12,6 @@ Budapest	Bucharest
 Bucharest	Istanbul
 Istanbul	Tehran
 Tehran	Delhi
-
 Delhi	Beijing
 Vancouver	Chicago
 Chicago	New York
@@ -36,3 +35,47 @@ Delhi	Beijing
 Tripoli	Casablanca
 Abuja	Casablanca
 Casablanca	Madrid
+Paris	London
+London	New York
+Paris	New York
+Berlin	London
+Paris	Berlin
+Budapest	Berlin
+Budapest	Roma
+Budapest	Istanbul
+Budapest	Kiev
+Kiev	Istanbul
+Kiev	Moscow
+Moscow	Tehran
+Tehran	Riyadh
+Tehran	Krasnoyarsk
+Moscow	Krasnoyarsk
+Delhi	Krasnoyarsk
+Delhi	Mumbai
+Delhi	Kolkata
+Krasnoyarsk	Beinjing
+Beijing	Seoul
+Beijing	Shanghai
+Seoul	Tokyo
+Kolkata	Jakarta
+Jakarta	Newman
+Jakarta	Darwin
+Newman	Darwin
+Darwin	Sydney
+Sydney	Adelaide
+Adelaide	Perth
+Perth	Newman
+Sydney	Auckland
+Auckland	Dunedin
+Sydney	Nouméa
+Auckland	Nouméa
+Almirante Brown	Buenos Aires
+Cape Town	Almirante Brown
+Cape Town	Vostok Station
+Vostok Station	Almirante Brown
+Vostok Station	Sydney
+Aitape	Darwin
+Aitape	Jakarta
+Suva	Nouméa
+Suva	Aitape
+Suva	Auckland
