@@ -46,9 +46,9 @@ public class Main extends BasicGame {
 	public void init(GameContainer container) throws SlickException {
 		Carte c = new Carte();
 		Context.setCarte(c);
-		Lieu.setImages(new Image("resources/img/City-30px.png"), new Image("resources/img/City-40px.png"));
-		Context.addPersonnage(new MegaPerso("Kim DotCom", (Lieu) c.getLieux().toArray()[42], new Image("resources/img/kim.png")));
-		Context.addPersonnage(new MegaPerso("Finn Batato", (Lieu) c.getLieux().toArray()[24], new Image("resources/img/finn.png")));
+		Lieu.setImages(new Image("resources/img/City-20px.png"), new Image("resources/img/City-30px.png"));
+		Context.addPersonnage(new MegaPerso("Kim DotCom", (Lieu) c.getLieux().toArray()[27], new Image("resources/img/kim.png")));
+		Context.addPersonnage(new MegaPerso("Finn Batato", (Lieu) c.getLieux().toArray()[3], new Image("resources/img/finn.png")));
 	}
 
 	@Override
@@ -131,7 +131,6 @@ public class Main extends BasicGame {
 		Lieu selectedLieu = Context.getSelectedLieu();
 		if (selectedPerso != null && selectedLieu != null) {
 			selectedPerso.seDeplacer(selectedLieu);
-			Context.setSelectedPerso(null);
 			Context.setSelectedLieu(null);
 		}
 	}

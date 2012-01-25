@@ -34,7 +34,9 @@ public class Personnage {
 	
 	public void seDeplacer(Lieu l){
 		Stack<Trajet> trajets = (Stack<Trajet>) Algo.PCC(Context.getCarte(), this.getLieuActuel(), l);
-		this.deplacement = new Deplacement(this, this.getLieuActuel(), l, trajets);
+		if (!trajets.isEmpty()) {
+			this.deplacement = new Deplacement(this, this.getLieuActuel(), l, trajets);
+		}
 	}
 	
 	public int getX() {

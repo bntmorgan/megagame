@@ -15,8 +15,8 @@ public class Lieu {
 	private int y;
 	private ArrayList<Trajet> trajets;
 
-	private static int width;
-	private static int height;
+	private static int width, height;
+	private static int widthH, heightH;
 	private static Image img, imgH;
 
 	public Lieu(String nom, int x, int y, int coutHeberg, int risque, int tempsMiseEnPlace) {
@@ -34,6 +34,8 @@ public class Lieu {
 		Lieu.imgH = imgH;
 		width = img.getWidth();
 		height = img.getHeight();
+		widthH = imgH.getWidth();
+		heightH = imgH.getHeight();
 	}
 
 	public String getNom() {
@@ -78,8 +80,8 @@ public class Lieu {
 
 	public void draw(Graphics g) {
 		if (Context.getHoveredLieu() == this) {
-			imgH.draw(x - width / 2, y - height / 2);
-			g.drawString(this.nom, x, y + height / 2);
+			imgH.draw(x - widthH / 2, y - heightH / 2);
+			g.drawString(this.nom, x, y + heightH / 2);
 		} else {
 			img.draw(x - width / 2, y - height / 2);
 		}

@@ -30,11 +30,12 @@ public class Algo {
 		Queue<Lieu> pq = new PriorityQueue<Lieu>(g.getLieux().size(), new LieuComparator(couts));
 		pq.add(depart);
 
+		Lieu courant = null;
 		// boolean a false par defaut en java et null pour les prédécesseurs
 		while (!pq.isEmpty()) {
 
 			// On cherche le premier non marqué de cout non infini
-			Lieu courant = pq.poll();
+			courant = pq.poll();
 
 			if (marque.get(courant).booleanValue())
 				continue;
@@ -61,16 +62,16 @@ public class Algo {
 			marque.put(courant, true);
 		}
 
-		// on constitue le trajet a partir de la lise de prédecesseurs en
-		// partant du point d'arrivée
-		Lieu courant = arrivee;
-
 		Stack<Trajet> trajet = new Stack<Trajet>();
-		while (courant != depart) {
-			trajet.push(predecesseurs.get(courant));
-			courant = predecesseurs.get(courant).getCible(courant);
+		if (courant == arrivee) {
+			// on constitue le trajet a partir de la lise de prédecesseurs en
+			// partant du point d'arrivée
+			while (courant != depart) {
+				trajet.push(predecesseurs.get(courant));
+				courant = predecesseurs.get(courant).getCible(courant);
+			}
 		}
-
-		return trajet;
+		
+		return trajet;		
 	}
 }
