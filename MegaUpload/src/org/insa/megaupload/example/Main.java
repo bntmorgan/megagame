@@ -59,7 +59,7 @@ public class Main extends BasicGame {
 		MegaPerso kim = new MegaPerso("Kim DotCom", (Lieu) c.getLieux().toArray()[27], new Image("resources/img/kim.png"));
 		Context.addPersonnage(kim);
 		Context.addPersonnage(new MegaPerso("Finn Batato", (Lieu) c.getLieux().toArray()[3], new Image("resources/img/finn.png")));
-		AgentFBI a = new AgentFBI((Lieu) c.getLieux().toArray()[2], new Image("resources/img/point-orange.png"));
+		AgentFBI a = new AgentFBI((Lieu) c.getLieux().toArray()[2], new Image("resources/img/fbiagent-400px.png"));
 		Context.addPersonnage(a);
 		a.poursuivre(kim);
 		Context.setSelectedPerso(kim);
