@@ -60,6 +60,10 @@ public class Main extends BasicGame {
 		AgentFBI a = new AgentFBI((Lieu) c.getLieux().toArray()[2], new Image("resources/img/point-orange.png"));
 		Context.addPersonnage(a);
 		a.poursuivre(kim);
+		
+		
+		Music music = new Music("resources/sound/megasong.ogg");
+		music.loop();
 	}
 
 	@Override
