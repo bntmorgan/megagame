@@ -15,26 +15,45 @@ public class Context {
 	private static int cptThunes;
 	private static int cptTelechargements;
 	
-	public static int getCptThunes() {
-		return cptThunes;
-	}
-
-	//ajoute de l'argent au compteur de thune
+	/**
+	 * Ajoute de l'argent au compteur de thune 
+	 * @param cptThunes
+	 */
 	public static void incCptThunes(int cptThunes) {
 		Context.cptThunes += cptThunes;
 	}
 	
-	//ajoute de l'argent au compteur de thune
+	/**
+	 * Ajoute de l'argent au compteur de thune
+	 * @param cptThunes
+	 */
 	public static void incCptTelechargements(int cptThunes) {
 		Context.cptTelechargements += cptTelechargements;
 	}
 	
-	//retire de l'argent au compteur de thune
+	/**
+	 * Retire de l'argent au compteur de thune 
+	 * @param cptThunes
+	 */
 	public static void decCptThunes(int cptThunes){
 		Context.cptThunes -= cptThunes;
 		if(Context.cptThunes < 0){
 			Context.cptThunes = 0 ;
 		}
+	}
+	
+	/**
+	 * @return the cptThunes
+	 */
+	public static int getCptThunes() {
+		return cptThunes;
+	}
+
+	/**
+	 * @return the cptTelechargements
+	 */
+	public static int getCptTelechargements() {
+		return cptTelechargements;
 	}
 
 	/**
