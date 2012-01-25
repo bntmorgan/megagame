@@ -3,6 +3,8 @@
  */
 package org.insa.megaupload.example;
 
+import java.awt.Color;
+
 import org.newdawn.slick.Image;
 import org.newdawn.slick.particles.Particle;
 import org.newdawn.slick.particles.ParticleEmitter;
@@ -25,10 +27,13 @@ public class CoolFireEmitter  implements ParticleEmitter {
 	/** The size of the initial particles */
 	private float size = 40;
 	
+	private Color color;
+	
 	/**
 	 * Create a default fire effect at 0,0
 	 */
 	public CoolFireEmitter() {
+		color = Color.WHITE;
 	}
 
 	/**
@@ -40,8 +45,11 @@ public class CoolFireEmitter  implements ParticleEmitter {
 	public CoolFireEmitter(int x, int y) {
 		this.x = x;
 		this.y = y;
+		color = Color.WHITE;
 	}
 
+	
+	
 	/**
 	 * Create a default fire effect at x,y
 	 * 
@@ -53,8 +61,23 @@ public class CoolFireEmitter  implements ParticleEmitter {
 		this.x = x;
 		this.y = y;
 		this.size = size;
+		color = Color.WHITE;
 	}
 	
+	/**
+	 * @param x
+	 * @param y
+	 * @param size
+	 * @param color
+	 */
+	public CoolFireEmitter(int x, int y, float size, Color color) {
+		super();
+		this.x = x;
+		this.y = y;
+		this.size = size;
+		this.color = color;
+	}
+
 	/**
 	 * @see org.newdawn.slick.particles.ParticleEmitter#update(org.newdawn.slick.particles.ParticleSystem, int)
 	 */
@@ -63,7 +86,7 @@ public class CoolFireEmitter  implements ParticleEmitter {
 		if (timer <= 0) {
 			timer = interval;
 			Particle p = system.getNewParticle(this, 1000);
-			p.setColor(1, 1, 1, 0.5f);
+			p.setColor(color.getRed(), color.getGreen(), color.getBlue(), 0.5f);
 			p.setPosition(x, y);
 			p.setSize(size);
 			float vx = (float) (-0.02f + (Math.random() * 0.04f));

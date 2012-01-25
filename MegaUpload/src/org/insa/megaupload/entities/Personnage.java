@@ -1,5 +1,6 @@
 package org.insa.megaupload.entities;
 
+import java.awt.Color;
 import java.util.Stack;
 
 import org.insa.megaupload.example.Context;
@@ -24,7 +25,7 @@ public class Personnage {
 		this.lieuActuel = lieuInitial;
 		this.img = img;
 		
-		particleEmitter = new CoolFireEmitter(this.getX(), this.getY(), 10);
+		particleEmitter = new CoolFireEmitter(this.getX(), this.getY(), 6f, Color.GREEN );
 		getParticleSystem().addEmitter(particleEmitter);
 		
 	}
@@ -134,7 +135,6 @@ public class Personnage {
 			try {
 				image = new Image("resources/img/dollard.png");
 			} catch (SlickException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			particleSystem = new ParticleSystem(image);
