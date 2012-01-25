@@ -12,7 +12,7 @@ public class Context {
 	private static MegaPerso selectedPerso;
 	private static Lieu hoveredLieu;
 	private static Lieu selectedLieu;
-	private static int cptThunes;
+	private static int cptThunes = 10000;
 	private static int cptTelechargements;
 	
 	/**

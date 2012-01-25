@@ -1,5 +1,7 @@
 package org.insa.megaupload.rules;
 
+import org.insa.megaupload.example.Context;;
+
 public class ServeurRules {
 	
 	//TODO valeurs à priori, on affinera
@@ -13,6 +15,13 @@ public class ServeurRules {
 	
 	public static int getRegleGainBase(){
 		return gainBase;
+	}
+	
+	public static boolean peutOuvrirServeur(){
+		if (Context.getCptThunes()>coutOuverture){
+			return true;
+		}
+		return false;
 	}
 	
 	public static int getRegleTelechargementsBase(){

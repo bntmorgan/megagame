@@ -14,7 +14,9 @@ public class Lieu {
 	private int x;
 	private int y;
 	private ArrayList<Trajet> trajets;
+
 	private ArrayList<Serveur> serveurs;
+
 
 	private static int width, height;
 	private static int widthH, heightH;
@@ -31,6 +33,8 @@ public class Lieu {
 		this.serveurs = new ArrayList<Serveur>();
 	}
 	
+
+
 	public static void setImages(Image img, Image imgH) {
 		Lieu.img = img;
 		Lieu.imgH = imgH;
@@ -80,19 +84,23 @@ public class Lieu {
 		this.trajets.add(trajet);
 	}
 	
-	public void addServeur(Serveur serveur) {
-		this.serveurs.add(serveur);
+	public ArrayList<Serveur> getServeurs() {
+		return serveurs;
 	}
-	
+
 	public void delServeurs() {
 		this.serveurs.removeAll(this.serveurs);
+	}
+
+	public void addServeur(Serveur serveur) {
+		this.serveurs.add(serveur);
 	}
 
 	public void draw(Graphics g) {
 		if (Context.getHoveredLieu() == this) {
 			imgH.draw(x - widthH / 2, y - heightH / 2);
 			g.drawString(this.nom, x, y + heightH / 2);
-			g.drawString("ouvrir un serveur", x, y+ heightH);
+			g.drawString(Integer.toString(this.serveurs.size()) + " serveurs" , x, y + heightH);
 		} else {
 			img.draw(x - width / 2, y - height / 2);
 		}

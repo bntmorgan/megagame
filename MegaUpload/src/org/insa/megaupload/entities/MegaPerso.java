@@ -30,11 +30,6 @@ public class MegaPerso extends Personnage {
 	public int getNbServeursOuverts() {
 		return nbServeursOuverts;
 	}
-	 
-	public void ouvrirServeur() throws SlickException {
-		new Serveur(100, 100, this.getLieuActuel());
-		this.nbServeursOuverts++;
-	}
 	
 	public void draw() {
 		super.draw();

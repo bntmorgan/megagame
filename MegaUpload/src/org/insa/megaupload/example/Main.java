@@ -8,6 +8,8 @@ import org.insa.megaupload.entities.Deplacement;
 import org.insa.megaupload.entities.Lieu;
 import org.insa.megaupload.entities.MegaPerso;
 import org.insa.megaupload.entities.Personnage;
+import org.insa.megaupload.entities.Serveur;
+import org.insa.megaupload.rules.ServeurRules;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
@@ -36,9 +38,8 @@ public class Main extends BasicGame {
 		try {
 			AppGameContainer app = new AppGameContainer(new Main());
 			app.setDisplayMode(1280, 667, false);
-			app.setMaximumLogicUpdateInterval(20);
-			app.setMinimumLogicUpdateInterval(20);
-
+			app.setMaximumLogicUpdateInterval(10);
+			app.setMinimumLogicUpdateInterval(10);
 			app.start();
 		} catch (SlickException e) {
 			e.printStackTrace();
@@ -122,22 +123,30 @@ public class Main extends BasicGame {
 
 	@Override
 	public void mouseClicked(int button, int x, int y, int clickCount) {
-		
-		if (Context.getHoveredLieu() != null) {
-			Context.setSelectedLieu(Context.getHoveredLieu());
+		if(clickCount == 1){
+			if (Context.getHoveredLieu() != null) {
+				Context.setSelectedLieu(Context.getHoveredLieu());
+			}
+			if (Context.getHoveredPerso() != null) {
+				Context.setSelectedPerso(Context.getHoveredPerso());
+			}
+			
+			MegaPerso selectedPerso = Context.getSelectedPerso();
+			Lieu selectedLieu = Context.getSelectedLieu();
+			if (selectedPerso != null && selectedLieu != null) {
+				selectedPerso.seDeplacer(selectedLieu);
+				Context.setSelectedLieu(null);
+			}
 		}
-		if (Context.getHoveredPerso() != null) {
-			Context.setSelectedPerso(Context.getHoveredPerso());
-		}
-		
-		MegaPerso selectedPerso = Context.getSelectedPerso();
-		Lieu selectedLieu = Context.getSelectedLieu();
-		if (selectedPerso != null && selectedLieu != null) {
-			selectedPerso.seDeplacer(selectedLieu);
-			Context.setSelectedLieu(null);
-		}
-		if(clickCount > 1){
-			this.toString();
+		//double click ou plus
+		else{
+			if(ServeurRules.peutOuvrirServeur()){
+				Lieu l = Context.getSelectedLieu();
+				l.addServeur(new Serveur());	
+			}
+			else{
+				//affichage 
+			}
 		}
 	}
 
