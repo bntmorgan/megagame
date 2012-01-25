@@ -3,11 +3,13 @@
  */
 package org.insa.megaupload.example;
 
+import org.insa.megaupload.entities.AgentFBI;
 import org.insa.megaupload.entities.Carte;
 import org.insa.megaupload.entities.Deplacement;
 import org.insa.megaupload.entities.Lieu;
 import org.insa.megaupload.entities.MegaPerso;
 import org.insa.megaupload.entities.Personnage;
+import org.insa.megaupload.entities.Trajet;
 import org.insa.megaupload.entities.Serveur;
 import org.insa.megaupload.rules.ServeurRules;
 import org.newdawn.slick.AppGameContainer;
@@ -16,6 +18,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 
 /**
@@ -51,24 +54,43 @@ public class Main extends BasicGame {
 		Carte c = new Carte();
 		Context.setCarte(c);
 		Lieu.setImages(new Image("resources/img/City-20px.png"), new Image("resources/img/City-30px.png"));
-		Context.addPersonnage(new MegaPerso("Kim DotCom", (Lieu) c.getLieux().toArray()[27], new Image("resources/img/kim.png")));
+		MegaPerso kim = new MegaPerso("Kim DotCom", (Lieu) c.getLieux().toArray()[27], new Image("resources/img/kim.png"));
+		Context.addPersonnage(kim);
 		Context.addPersonnage(new MegaPerso("Finn Batato", (Lieu) c.getLieux().toArray()[3], new Image("resources/img/finn.png")));
+		AgentFBI a = new AgentFBI((Lieu) c.getLieux().toArray()[2], new Image("resources/img/point-orange.png"));
+		Context.addPersonnage(a);
+		a.poursuivre(kim);
 	}
 
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 		//System.out.println("Update: " + delta);
 		for (Personnage p : Context.getPersonnages()) {
-			Deplacement d = p.getDeplacement();
+			Deplacement d;
+			
+			if (p instanceof AgentFBI) {
+				MegaPerso poursuivi = ((AgentFBI) p).getPoursuivi();
+				if (poursuivi != null) {
+					if (p.getLieuActuel() == poursuivi.getLieuActuel()) {
+						((AgentFBI) p).arreter(poursuivi);
+					} else if (p.getDeplacement() == null) {
+						p.seDeplacer(poursuivi.getLieuActuel());
+					} else if (p.getDeplacement().getCible() != poursuivi.getLieuActuel()) {
+						p.seDeplacer(poursuivi.getLieuActuel());
+					}
+				}
+			}
+			
+			d = p.getDeplacement();
 			if (d != null) {
 				Lieu cible = d.getEtape().getCible(p.getLieuActuel());
-				System.out.println("Je vais de " + p.getLieuActuel().getNom() + " à " + cible.getNom());
+				/*System.out.println("Je vais de " + p.getLieuActuel().getNom() + " à " + cible.getNom());
 				System.out.println(d.getAvancementEtape() + "%");
-				System.out.println("->");
+				System.out.println("->");*/
 				int distanceTotale = d.getEtape().getDistance();
-				int distanceParcourue = (d.getAvancementEtape() * distanceTotale) / 100;
-				d.setAvancementEtape(100*(distanceParcourue + delta)/distanceTotale);
-				System.out.println(d.getAvancementEtape() + "%");
+				double distanceParcourue = (double)(d.getAvancementEtape() * distanceTotale) / 100.;
+				d.setAvancementEtape((int) (100.*(double)(distanceParcourue + 5)/(double)distanceTotale));
+				//System.out.println(d.getAvancementEtape() + "%");
 			}
 		}
 
@@ -91,6 +113,12 @@ public class Main extends BasicGame {
 		//}
 		for (Personnage p : Context.getPersonnages()) {
 			p.draw();
+		}
+		
+		for (Lieu l : Context.getCarte().getLieux()) {
+			for (Trajet t : l.getTrajets()) {
+				g.drawLine(t.getDepart().getX(), t.getDepart().getY(), t.getArrivee().getX(), t.getArrivee().getY());
+			}
 		}
 	}
 

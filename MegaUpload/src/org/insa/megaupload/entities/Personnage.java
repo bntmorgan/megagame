@@ -11,10 +11,15 @@ public class Personnage {
 	protected Image img;
 	private Lieu lieuActuel;
 	private Deplacement deplacement;
+	protected final static double coefRand = 0;
 	
 	public Personnage(Lieu lieuInitial, Image img) {
 		this.lieuActuel = lieuInitial;
 		this.img = img;
+	}
+	
+	public double getCoefRand() {
+		return coefRand;
 	}
 
 	public Lieu getLieuActuel() {
@@ -33,10 +38,20 @@ public class Personnage {
 		this.deplacement = d;
 	}
 	
-	public void seDeplacer(Lieu l){
-		Stack<Trajet> trajets = (Stack<Trajet>) Algo.PCC(Context.getCarte(), this.getLieuActuel(), l);
-		if (!trajets.isEmpty()) {
-			this.deplacement = new Deplacement(this, this.getLieuActuel(), l, trajets);
+	public void seDeplacer(Lieu l) {
+		if (this.getDeplacement() == null) {
+			Stack<Trajet> trajets = (Stack<Trajet>) Algo.PCC(Context.getCarte(), this.getLieuActuel(), l, getCoefRand());
+			if (!trajets.isEmpty()) {
+				this.deplacement = new Deplacement(this, this.getLieuActuel(), l, trajets);
+			}
+		} else {
+			Lieu curCible = this.deplacement.getEtape().getCible(this.getLieuActuel());
+			Stack<Trajet> trajets = (Stack<Trajet>) Algo.PCC(Context.getCarte(), curCible, l, getCoefRand());
+			if (!trajets.isEmpty()) {
+				trajets.push(this.deplacement.getEtape());
+				this.deplacement.setEtapes(trajets);
+				this.deplacement.setCible(l);
+			}
 		}
 	}
 	

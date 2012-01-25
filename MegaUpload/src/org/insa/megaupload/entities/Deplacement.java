@@ -54,6 +54,10 @@ public class Deplacement {
 		}
 	}
 	
+	public void setEtapes(Stack<Trajet> etapes) {
+		this.trajets = etapes;
+	}
+	
 	/**
 	 * @return the source
 	 */
@@ -67,5 +71,9 @@ public class Deplacement {
 	public Lieu getCible() {
 		return cible;
 	}	
+	
+	public void setCible(Lieu cible) {
+		this.cible = cible;
+	}
 	
 }

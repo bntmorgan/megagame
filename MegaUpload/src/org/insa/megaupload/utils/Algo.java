@@ -13,6 +13,10 @@ import org.insa.megaupload.entities.Trajet;
 public class Algo {
 
 	public static Stack<Trajet> PCC(Graphe g, Lieu depart, Lieu arrivee) {
+		return PCC(g, depart, arrivee, 1);
+	}
+	
+	public static Stack<Trajet> PCC(Graphe g, Lieu depart, Lieu arrivee, double seuilRand) {
 
 		Map<Lieu, Integer> couts = new HashMap<Lieu, Integer>(g.getLieux().size());
 		Map<Lieu, Boolean> marque = new HashMap<Lieu, Boolean>(g.getLieux().size());
@@ -27,7 +31,7 @@ public class Algo {
 		// cout a zero pour le depart
 		couts.put(depart, 0);
 
-		Queue<Lieu> pq = new PriorityQueue<Lieu>(g.getLieux().size(), new LieuComparator(couts));
+		Queue<Lieu> pq = new PriorityQueue<Lieu>(g.getLieux().size(), new LieuComparator(couts, seuilRand));
 		pq.add(depart);
 
 		Lieu courant = null;
@@ -62,16 +66,16 @@ public class Algo {
 			marque.put(courant, true);
 		}
 
-		Stack<Trajet> trajet = new Stack<Trajet>();
+		Stack<Trajet> trajets = new Stack<Trajet>();
 		if (courant == arrivee) {
 			// on constitue le trajet a partir de la lise de prédecesseurs en
 			// partant du point d'arrivée
 			while (courant != depart) {
-				trajet.push(predecesseurs.get(courant));
+				trajets.push(predecesseurs.get(courant));
 				courant = predecesseurs.get(courant).getCible(courant);
 			}
 		}
 		
-		return trajet;		
+		return trajets;		
 	}
 }
