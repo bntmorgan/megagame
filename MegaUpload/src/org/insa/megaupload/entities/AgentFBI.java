@@ -4,7 +4,7 @@ import org.newdawn.slick.Image;
 
 public class AgentFBI extends Personnage {
 	private MegaPerso poursuivi;
-	protected final static double coefRand = 0.25;
+	protected final static double coefRand = 0.9;
 	
 	public double getCoefRand() {
 		return coefRand;

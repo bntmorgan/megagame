@@ -14,6 +14,7 @@ public class Context {
 	private static Lieu selectedLieu;
 	private static int cptThunes = 10000;
 	private static int cptTelechargements;
+	private static int cptServeursOuverts;
 	
 	/**
 	 * Ajoute de l'argent au compteur de thune 
@@ -132,6 +133,15 @@ public class Context {
 	
 	public static Collection<Personnage> getPersonnages() {
 		return Context.personnages;
+	}
+
+	public static int getCptServeursOuverts() {
+		return Context.cptServeursOuverts;
+	}
+
+	public static void incCptServeurs() {
+		Context.cptServeursOuverts++;
+		
 	}
 	
 	

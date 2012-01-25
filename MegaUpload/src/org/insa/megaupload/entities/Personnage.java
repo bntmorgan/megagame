@@ -40,13 +40,13 @@ public class Personnage {
 	
 	public void seDeplacer(Lieu l) {
 		if (this.getDeplacement() == null) {
-			Stack<Trajet> trajets = (Stack<Trajet>) Algo.PCC(Context.getCarte(), this.getLieuActuel(), l, getCoefRand());
+			Stack<Trajet> trajets = (Stack<Trajet>) Algo.PCC(Context.getCarte(), this.getLieuActuel(), l, 1 - getCoefRand());
 			if (!trajets.isEmpty()) {
 				this.deplacement = new Deplacement(this, this.getLieuActuel(), l, trajets);
 			}
 		} else {
 			Lieu curCible = this.deplacement.getEtape().getCible(this.getLieuActuel());
-			Stack<Trajet> trajets = (Stack<Trajet>) Algo.PCC(Context.getCarte(), curCible, l, getCoefRand());
+			Stack<Trajet> trajets = (Stack<Trajet>) Algo.PCC(Context.getCarte(), curCible, l, 1 - getCoefRand());
 			if (!trajets.isEmpty()) {
 				trajets.push(this.deplacement.getEtape());
 				this.deplacement.setEtapes(trajets);

@@ -16,6 +16,7 @@ public class Algo {
 		return PCC(g, depart, arrivee, 1);
 	}
 	
+	//seuilRand à 1 -> déplacement non aléatoire, seuilRand à 0 -> déplacement completement aléatoire
 	public static Stack<Trajet> PCC(Graphe g, Lieu depart, Lieu arrivee, double seuilRand) {
 
 		Map<Lieu, Integer> couts = new HashMap<Lieu, Integer>(g.getLieux().size());

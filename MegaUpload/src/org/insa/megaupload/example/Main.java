@@ -30,6 +30,8 @@ public class Main extends BasicGame {
 	private int mouseX;
 	private int mouseY;
 	
+	private int cptSoft;
+	
 	public Main () {
 		super("MegaUpload");
 	}
@@ -60,6 +62,7 @@ public class Main extends BasicGame {
 		AgentFBI a = new AgentFBI((Lieu) c.getLieux().toArray()[2], new Image("resources/img/point-orange.png"));
 		Context.addPersonnage(a);
 		a.poursuivre(kim);
+		Context.setSelectedPerso(kim);
 		
 		
 		Music music = new Music("resources/sound/megasong.ogg");
@@ -68,6 +71,13 @@ public class Main extends BasicGame {
 
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
+		
+		//toutes les secondes
+		if(++this.cptSoft%100 == 0){
+			//récupérer les gains des serveurs
+			Context.incCptThunes(ServeurRules.getRegleGainBase()*Context.getCptServeursOuverts());
+		}
+		
 		//System.out.println("Update: " + delta);
 		for (Personnage p : Context.getPersonnages()) {
 			Deplacement d;
@@ -97,12 +107,15 @@ public class Main extends BasicGame {
 				//System.out.println(d.getAvancementEtape() + "%");
 			}
 		}
+		
 
 	}
 
 	public void render(GameContainer container, Graphics g) throws SlickException {
 		Context.getCarte().draw(g);
 		g.drawString("Welcome to MegaUpload!", 10, 50);
+		g.drawString("Argent \n" + Integer.toString(Context.getCptThunes()), 1200, 50);
+		g.drawString("Serveurs\n" + Integer.toString(Context.getCptServeursOuverts()), 1200, 100);
 		if (Context.getSelectedPerso() != null) {
 			g.drawString("Selected perso: " + Context.getSelectedPerso().getNom(), 10, 600);
 		}

@@ -94,6 +94,7 @@ public class Lieu {
 
 	public void addServeur(Serveur serveur) {
 		this.serveurs.add(serveur);
+		Context.incCptServeurs();
 	}
 
 	public void draw(Graphics g) {
