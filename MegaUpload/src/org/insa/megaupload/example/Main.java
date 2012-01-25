@@ -176,12 +176,27 @@ public class Main extends BasicGame {
 			if (Context.getHoveredPerso() != null) {
 				Context.setSelectedPerso(Context.getHoveredPerso());
 			}
+			if (Context.getHoveredAction() != null) {
+				Context.setSelectedAction(Context.getHoveredAction());
+			}
 			
 			MegaPerso selectedPerso = Context.getSelectedPerso();
 			Lieu selectedLieu = Context.getSelectedLieu();
-			if (selectedPerso != null && selectedLieu != null) {
+			Action selectedAction = Context.getSelectedAction();
+			if (selectedAction != Action.SE_DEPLACER && selectedPerso != null && selectedLieu != null) {
 				selectedPerso.seDeplacer(selectedLieu);
 				Context.setSelectedLieu(null);
+			}
+			else if (selectedAction != Action.OUVRIR_SERVEUR && selectedPerso != null && selectedLieu != null) {
+				if(ServeurRules.peutOuvrirServeur()){
+					Lieu selL = Context.getSelectedLieu();
+					if (selL != null){
+						selL.addServeur(new Serveur());					
+					}
+				}
+				else{
+					//affichage 
+				}
 			}
 		}
 		//double click ou plus

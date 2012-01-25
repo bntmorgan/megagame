@@ -8,6 +8,8 @@ import org.insa.megaupload.entities.*;
 public class Context {
 	private static Collection<Personnage> personnages = new ArrayList<Personnage>();
 	private static Carte carte;
+	private static Action hoveredAction;
+	private static Action selectedAction;
 	private static MegaPerso hoveredPerso;
 	private static MegaPerso selectedPerso;
 	private static Lieu hoveredLieu;
@@ -48,6 +50,20 @@ public class Context {
 	 */
 	public static int getCptThunes() {
 		return cptThunes;
+	}
+	
+	/**
+	 * @return the selectedAction
+	 */
+	public static Action getSelectedAction() {
+		return selectedAction;
+	}
+
+	/**
+	 * @param selectedAction the selectedAction to set
+	 */
+	public static void setSelectedAction(Action selectedAction) {
+		Context.selectedAction = selectedAction;
 	}
 
 	/**
@@ -97,6 +113,20 @@ public class Context {
 	 */
 	public static void setCarte(Carte carte) {
 		Context.carte = carte;
+	}
+	
+	/**
+	 * @return the hoveredAction
+	 */
+	public static Action getHoveredAction() {
+		return hoveredAction;
+	}
+
+	/**
+	 * @param hoveredAction the hoveredAction to set
+	 */
+	public static void setHoveredAction(Action hoveredAction) {
+		Context.hoveredAction = hoveredAction;
 	}
 
 	/**
