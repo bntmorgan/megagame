@@ -8,7 +8,7 @@ public class ServeurRules {
 	
 	//TODO valeurs à priori, on affinera
 	private static int coutOuverture = 1000;
-	private static int gainBase = 500;
+	private static int gainBase = 50;
 	private static int telechargementsBase = 1000;
 
 	public static int getRegleCoutOuverture() {

@@ -49,12 +49,14 @@ public class Personnage {
 	}
 	
 	public void seDeplacer(Lieu l) {
+		//si pas en train de se déplacer
 		if (this.getDeplacement() == null) {
 			Stack<Trajet> trajets = (Stack<Trajet>) Algo.PCC(Context.getCarte(), this.getLieuActuel(), l, 1 - getCoefRand());
 			if (!trajets.isEmpty()) {
 				this.deplacement = new Deplacement(this, this.getLieuActuel(), l, trajets);
 			}
-		} else {
+		}
+		else {
 			Lieu curCible = this.deplacement.getEtape().getCible(this.getLieuActuel());
 			Stack<Trajet> trajets = (Stack<Trajet>) Algo.PCC(Context.getCarte(), curCible, l, 1 - getCoefRand());
 			if (!trajets.isEmpty()) {
