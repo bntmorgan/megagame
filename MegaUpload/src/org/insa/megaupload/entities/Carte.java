@@ -22,6 +22,7 @@ public class Carte extends Image implements Graphe{
 			BufferedReader br;
 			String filename;
 			
+			//parse les caracteristiques des lieux depuis le fichier de lieux
 			filename = "/resources/lieux.data";
 			br = new BufferedReader(new InputStreamReader(Carte.class.getResourceAsStream(filename)));
 			while (br.ready()) {
@@ -36,6 +37,7 @@ public class Carte extends Image implements Graphe{
 			}
 			br.close();
 			
+			//parse les arcs depuis le fichier
 			filename = "/resources/trajets.data";
 			br = new BufferedReader(new InputStreamReader(Carte.class.getResourceAsStream(filename)));
 			while (br.ready()) {
