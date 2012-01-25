@@ -10,8 +10,8 @@ public class MegaPerso extends Personnage {
 	private String nom;
 	private int nbServeursOuverts;
 	private int num;
-	private Image img1;
-	private Image img2;
+	private static Image moveImg;
+	private static Image openServerImg;
 	
 	public MegaPerso(String nom, Lieu lieuInitial, Image imgBig, Image imgPawn) throws SlickException {
 		super(lieuInitial, imgBig, imgPawn);
@@ -20,9 +20,11 @@ public class MegaPerso extends Personnage {
 		this.nbServeursOuverts = 0;
 		this.num = nbPersos;
 		nbPersos++;
-		
-		this.img1 = new Image("resources/img/Backup-IBM-Server-icon-30px.png");
-		this.img2 = new Image("resources/img/plane.png");
+	}
+	
+	public static void init() throws SlickException {
+		openServerImg = new Image("resources/img/Backup-IBM-Server-icon-30px.png");
+		moveImg = new Image("resources/img/plane.png");
 	}
 	
 	public String getNom() {
@@ -41,11 +43,9 @@ public class MegaPerso extends Personnage {
 		super.draw();
 		
 		if (Context.getHoveredPerso() == this) {
-
 			imgBig.draw(10, 100*(1 + num), imgBig.getWidth()*100/imgBig.getHeight(), 100);
-			img1.draw(110, 100*(1 + num)-25, img1.getWidth()*100/img2.getHeight(), 50);
-			img2.draw(110, 100*(1 + num)+25, img2.getWidth()*100/img2.getHeight(), 50);
-
+			openServerImg.draw(110, 100*(1 + num)-25, openServerImg.getWidth()*100/openServerImg.getHeight(), 50);
+			moveImg.draw(110, 100*(1 + num)+25, moveImg.getWidth()*100/moveImg.getHeight(), 50);
 		} else {
 			imgBig.draw(10, 100*(1 + num), imgBig.getWidth()*100/imgBig.getHeight(), 100);
 		}

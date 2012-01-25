@@ -30,10 +30,6 @@ public class Main extends BasicGame {
 	private Music music;
 	private Image loadingImg;
 	private int cptSoft;
-	
-	//private DrawAction drawAction;
-	private Image img1;
-	private Image img2;
 
 	public Main() {
 		super("MegaUpload");
@@ -59,8 +55,7 @@ public class Main extends BasicGame {
 		loadingImg = new Image("resources/img/megaupload-logo.png");
 		LoadingList.setDeferredLoading(true);
 		
-		img1 = new Image("resources/img/Backup-IBM-Server-icon-30px.png");
-		img2 = new Image("resources/img/plane.png");
+		MegaPerso.init();
 		
 		Carte c = new Carte();
 		Context.setCarte(c);
@@ -76,7 +71,6 @@ public class Main extends BasicGame {
 		Context.addPersonnage(a);
 		a.poursuivre(kim);
 		Context.setSelectedPerso(kim);
-		
 	}
 
 	@Override
@@ -134,8 +128,6 @@ public class Main extends BasicGame {
 				}
 			}
 		}
-		
-		
 	}
 	
 	@Override
