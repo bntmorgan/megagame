@@ -2,7 +2,6 @@ package org.insa.megaupload.entities;
 
 import org.insa.megaupload.example.Context;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
 
 public class MegaPerso extends Personnage {
 	private static int nbPersos = 0;
