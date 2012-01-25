@@ -14,6 +14,7 @@ public class Lieu {
 	private int x;
 	private int y;
 	private ArrayList<Trajet> trajets;
+	private ArrayList<Serveur> serveurs;
 
 	private static int width, height;
 	private static int widthH, heightH;
@@ -27,6 +28,7 @@ public class Lieu {
 		this.risque = risque;
 		this.tempsMiseEnPlace = tempsMiseEnPlace;
 		this.trajets = new ArrayList<Trajet>();
+		this.serveurs = new ArrayList<Serveur>();
 	}
 	
 	public static void setImages(Image img, Image imgH) {
@@ -76,6 +78,14 @@ public class Lieu {
 
 	public void addTrajet(Trajet trajet) {
 		this.trajets.add(trajet);
+	}
+	
+	public void addServeur(Serveur serveur) {
+		this.serveurs.add(serveur);
+	}
+	
+	public void delServeurs() {
+		this.serveurs.removeAll(this.serveurs);
 	}
 
 	public void draw(Graphics g) {

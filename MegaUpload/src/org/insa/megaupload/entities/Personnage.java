@@ -5,6 +5,7 @@ import java.util.Stack;
 import org.insa.megaupload.example.Context;
 import org.insa.megaupload.utils.Algo;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 public class Personnage {
 	protected Image img;
@@ -78,4 +79,5 @@ public class Personnage {
 	public void draw() {
 		img.draw(this.getX() - 10, this.getY() - 10, 20, 20);
 	}
+	
 }

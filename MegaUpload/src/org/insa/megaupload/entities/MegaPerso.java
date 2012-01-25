@@ -2,6 +2,7 @@ package org.insa.megaupload.entities;
 
 import org.insa.megaupload.example.Context;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 public class MegaPerso extends Personnage {
 	private static int nbPersos = 0;
@@ -30,8 +31,9 @@ public class MegaPerso extends Personnage {
 		return nbServeursOuverts;
 	}
 	 
-	public void ouvrirServeur() {
-		
+	public void ouvrirServeur() throws SlickException {
+		new Serveur(100, this.getLieuActuel());
+		this.nbServeursOuverts++;
 	}
 	
 	public void draw() {
