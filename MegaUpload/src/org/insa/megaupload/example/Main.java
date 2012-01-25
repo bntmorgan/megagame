@@ -30,6 +30,10 @@ public class Main extends BasicGame {
 	private Music music;
 	private Image loadingImg;
 	private int cptSoft;
+	
+	//private DrawAction drawAction;
+	private Image img1;
+	private Image img2;
 
 	public Main() {
 		super("MegaUpload");
@@ -55,17 +59,24 @@ public class Main extends BasicGame {
 		loadingImg = new Image("resources/img/megaupload-logo.png");
 		LoadingList.setDeferredLoading(true);
 		
+		img1 = new Image("resources/img/Backup-IBM-Server-icon-30px.png");
+		img2 = new Image("resources/img/plane.png");
+		
 		Carte c = new Carte();
 		Context.setCarte(c);
 		music = new Music("resources/sound/megasong.ogg");
 		Lieu.setImages(new Image("resources/img/City-20px.png"), new Image("resources/img/City-30px.png"));
+
 		MegaPerso kim = new MegaPerso("Kim DotCom", (Lieu) c.getLieux().toArray()[27], new Image("resources/img/yellowguy2.png"), new Image("resources/img/yellow.png"));
 		Context.addPersonnage(kim);
+
 		Context.addPersonnage(new MegaPerso("Finn Batato", (Lieu) c.getLieux().toArray()[3], new Image("resources/img/redguy.png"), new Image("resources/img/red.png")));
 		AgentFBI a = new AgentFBI((Lieu) c.getLieux().toArray()[2], new Image("resources/img/fbiguy.png"), new Image("resources/img/fbi.png"));
+
 		Context.addPersonnage(a);
 		a.poursuivre(kim);
 		Context.setSelectedPerso(kim);
+		
 	}
 
 	@Override
@@ -129,6 +140,7 @@ public class Main extends BasicGame {
 	
 	@Override
 	public void mouseMoved(int oldx, int oldy, int newx, int newy) {
+		Action hoveredAction = null;
 		Lieu hoveredLieu = null;
 		MegaPerso hoveredPerso = null;
 
@@ -143,6 +155,7 @@ public class Main extends BasicGame {
 			}
 		}
 
+		//recherche d'un personnage correspondant à la position de la souris
 		for (Personnage p : Context.getPersonnages()) {
 			if (p instanceof MegaPerso) {
 				int num = ((MegaPerso) p).getNum();
@@ -152,7 +165,11 @@ public class Main extends BasicGame {
 				}
 			}
 		}
+		
+		//recherche de l'action correspondant à la position de la souris
+		
 
+		Context.setHoveredAction(hoveredAction);
 		Context.setHoveredLieu(hoveredLieu);
 		Context.setHoveredPerso(hoveredPerso);
 	}
@@ -184,8 +201,8 @@ public class Main extends BasicGame {
 						selL.addServeur(new Serveur());					
 					}
 				}
-				else{
-					//affichage 
+				else {
+					//affichage : pas asez d'argent ! veuillez vendre plus de comptes premium !
 				}
 			}
 		}
@@ -201,8 +218,8 @@ public class Main extends BasicGame {
 					}
 				}
 			}
-			else{
-				//affichage 
+			else {
+				//affichage : pas asez d'argent ! veuillez vendre plus de comptes premium !
 			}
 		}
 	}
