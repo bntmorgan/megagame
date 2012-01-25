@@ -116,11 +116,10 @@ public class Personnage {
 	}
 	
 	public void draw() {
-		particleSystem.render();
 		img.draw(this.getX() - 10, this.getY() - 10, 20, 20);
 	}
 	
-	private static ParticleSystem getParticleSystem(){
+	public static ParticleSystem getParticleSystem(){
 
 		if (particleSystem == null) {
 			Image image = null;

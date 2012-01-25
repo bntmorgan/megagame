@@ -68,7 +68,7 @@ public class CoolFireEmitter  implements ParticleEmitter {
 			p.setSize(size);
 			float vx = (float) (-0.02f + (Math.random() * 0.04f));
 			float vy = (float) (-(Math.random() * 0.15f));
-			p.setVelocity(vx,vy,1.1f);
+			p.setVelocity(0,0,1.1f);
 		}
 	}
 

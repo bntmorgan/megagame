@@ -103,6 +103,10 @@ public class Main extends BasicGame {
 			g.fillOval(this.mouseX - r/2, this.mouseY - r/2, r, r);
 			g.drawString("Mouse pressed: " + this.mouseX + ", " + this.mouseY, 10, 75);
 		//}
+				
+		//render des particules pour les personnages
+		Personnage.getParticleSystem().render();
+		
 		for (Personnage p : Context.getPersonnages()) {
 			p.draw();
 		}
