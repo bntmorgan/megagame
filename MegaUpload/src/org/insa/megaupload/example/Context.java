@@ -13,6 +13,7 @@ public class Context {
 	private static Lieu hoveredLieu;
 	private static Lieu selectedLieu;
 	private static int cptThunes;
+	private static int cptTelechargements;
 	
 	public static int getCptThunes() {
 		return cptThunes;
@@ -21,6 +22,11 @@ public class Context {
 	//ajoute de l'argent au compteur de thune
 	public static void incCptThunes(int cptThunes) {
 		Context.cptThunes += cptThunes;
+	}
+	
+	//ajoute de l'argent au compteur de thune
+	public static void incCptTelechargements(int cptThunes) {
+		Context.cptTelechargements += cptTelechargements;
 	}
 	
 	//retire de l'argent au compteur de thune
