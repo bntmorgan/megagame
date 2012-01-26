@@ -91,6 +91,9 @@ public abstract class Personnage {
 					getDeplacement().setEtapes(trajets);
 					getDeplacement().setCible(l);
 				}
+				else {
+					Context.getMainScreenController().addInfoText("Pas assez d'argent pour voyager ! Veuillez vendre plus de comptes premium !");
+				}
 			}
 		}
 	}

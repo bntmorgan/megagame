@@ -66,11 +66,10 @@ public class MegaPerso extends Personnage {
 	public void ouvrirServeur() {
 		if (this.action == null) {
 			if (ServeurRules.peutOuvrirServeur(this)) {
-				System.out.println("ouverture serveur");
 				// XXX: constante
 				setAction(new OuvertureServeur(this, 10000));
 			} else {
-				// TODO: affichage : pas asez d'argent ! veuillez vendre plus de comptes premium !
+				Context.getMainScreenController().addInfoText("Pas assez d'argent pour ouvrir un serveur ! Veuillez vendre plus de comptes premium !");
 			}
 		}
 	}
