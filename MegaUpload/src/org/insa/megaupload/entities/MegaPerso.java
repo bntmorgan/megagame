@@ -18,7 +18,7 @@ public class MegaPerso extends Personnage {
 	private boolean ouvreUnServeur;
 	private int tempsRestant;
 	private int tempsTotal;
-	private Action action;
+	private Action hoveredAction;
 	
 	public MegaPerso(String nom, Lieu lieuInitial, Image imgBig, Image imgPawn) throws SlickException {
 		super(lieuInitial, imgBig, imgPawn);
@@ -45,19 +45,19 @@ public class MegaPerso extends Personnage {
 	public int getNbServeursOuverts() {
 		return nbServeursOuverts;
 	}
-	
+
 	/**
-	 * @return the action
+	 * @return the hoveredAction
 	 */
-	public Action getAction() {
-		return action;
+	public Action getHoveredAction() {
+		return hoveredAction;
 	}
 
 	/**
-	 * @param action the action to set
+	 * @param hoveredAction the hoveredAction to set
 	 */
-	public void setAction(Action action) {
-		this.action = action;
+	public void setHoveredAction(Action hoveredAction) {
+		this.hoveredAction = hoveredAction;
 	}
 
 	public void ouvrirServeur() {
@@ -105,7 +105,7 @@ public class MegaPerso extends Personnage {
 		int moveWidth = moveImg.getWidth()*actionHeight/moveImg.getHeight();
 		int leftmargin = 10;
 		
-		if (Context.getHoveredPerso() == this || this.action != null) {
+		if (Context.getHoveredPerso() == this || this.hoveredAction != null) {
 			imgBig.draw(leftmargin, leftmargin + (persoHeight + leftmargin)*num, persoWidth, persoHeight);
 			openServerImg.draw(leftmargin + persoHeight, leftmargin + (leftmargin + persoHeight)*num, openWidth, actionHeight);
 			moveImg.draw(leftmargin + persoHeight, leftmargin + (leftmargin + persoHeight)*num+50, moveWidth, actionHeight);

@@ -201,7 +201,7 @@ public class Context {
 		for (Personnage p : Context.getPersonnages()) {
 			if (p instanceof MegaPerso) {
 				int num = ((MegaPerso) p).getNum();
-				((MegaPerso) p).setAction(null);
+				((MegaPerso) p).setHoveredAction(null);
 				if (newx <= leftmargin + persoHeight && newy >= leftmargin + num * (leftmargin + persoHeight) && newy <= (num + 1) * (leftmargin + persoHeight)) {
 					hoveredPerso = ((MegaPerso) p);
 					break;
@@ -217,10 +217,10 @@ public class Context {
 			int num = hoveredPerso.getNum();
 			if (newx >= leftmargin + persoHeight && newx <= leftmargin + persoHeight + actionHeight) {
 				if (newy >= leftmargin + num * (leftmargin + persoHeight) && newy <= (num + 1) * (leftmargin + persoHeight) - actionHeight) {
-					hoveredPerso.setAction(Action.OUVRIR_SERVEUR);
+					hoveredPerso.setHoveredAction(Action.OUVRIR_SERVEUR);
 				}
 				else if (newy >= (num + 1) * (leftmargin + persoHeight) - actionHeight && newy <= (num + 1) * (leftmargin + persoHeight)) {
-					hoveredPerso.setAction(Action.SE_DEPLACER);
+					hoveredPerso.setHoveredAction(Action.SE_DEPLACER);
 				}
 			}
 		}
