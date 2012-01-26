@@ -102,7 +102,7 @@ public abstract class CoolNiftyOverlayBasicGame extends BasicGame {
     niftyGUI = new Nifty(renderDevice, soundDevice, inputSystem, timeProvider);
 
     /* Slick automatically adds the game as input listener. Undo this. */
-    input.removeListener(this);
+    //input.removeListener(this);
     input.removeListener(inputSystem);
     input.addListener(inputSystem);
 

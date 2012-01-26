@@ -52,8 +52,7 @@ public class MegaPerso extends Personnage {
 				tempsTotal = 10000;
 				tempsRestant = tempsTotal;
 			} else {
-				System.out.println("fuck !!");
-				//affichage : pas asez d'argent ! veuillez vendre plus de comptes premium !
+				// TODO: affichage : pas asez d'argent ! veuillez vendre plus de comptes premium !
 			}
 		}
 	}

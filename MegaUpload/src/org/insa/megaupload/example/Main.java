@@ -1,21 +1,8 @@
 package org.insa.megaupload.example;
 
-import java.io.IOException;
-
-import org.insa.megaupload.entities.AgentFBI;
-import org.insa.megaupload.entities.Carte;
-import org.insa.megaupload.entities.Lieu;
-import org.insa.megaupload.entities.MegaPerso;
-import org.insa.megaupload.entities.Personnage;
-import org.insa.megaupload.entities.Trajet;
+import org.insa.megaupload.entities.*;
 import org.insa.megaupload.rules.ServeurRules;
-import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.Music;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 import org.newdawn.slick.loading.DeferredResource;
 import org.newdawn.slick.loading.LoadingList;
 
@@ -49,93 +36,27 @@ public class Main extends CoolNiftyOverlayBasicGame {
 			e.printStackTrace();
 		}
 	}
-	
-	@Override
-	public void mouseMoved(int oldx, int oldy, int newx, int newy) {
-		Action hoveredAction = null;
-		Lieu hoveredLieu = null;
-		MegaPerso hoveredPerso = null;
-
-		// recherche d'un lieu correspondant à la position de la souris
-		for (Lieu l : Context.getCarte().getLieux()) {
-			if (newx >= l.getX() - l.getWidth() / 2
-					&& newx <= l.getX() + l.getWidth() / 2
-					&& newy >= l.getY() - l.getHeight() / 2
-					&& newy <= l.getY() + l.getHeight() / 2) {
-				hoveredLieu = l;
-				break;
-			}
-		}
-
-		//recherche d'un personnage correspondant à la position de la souris
-		for (Personnage p : Context.getPersonnages()) {
-			if (p instanceof MegaPerso) {
-				int num = ((MegaPerso) p).getNum();
-				if (newx <= 10 + 100 && newy >= 10 + num * (10 + 100) && newy <= (num + 1) * (10 + 100)) {
-					hoveredPerso = ((MegaPerso) p);
-					break;
-				}
-			}
-		}
-		
-		//recherche de l'action correspondant à la position de la souris
-		
-
-		Context.setHoveredAction(hoveredAction);
-		Context.setHoveredLieu(hoveredLieu);
-		Context.setHoveredPerso(hoveredPerso);
-	}
-	
-	@Override
-	public void mouseClicked(int button, int x, int y, int clickCount) {
-		if(clickCount == 1){
-			if (Context.getHoveredLieu() != null) {
-				Context.setSelectedLieu(Context.getHoveredLieu());
-			}
-			if (Context.getHoveredPerso() != null) {
-				Context.setSelectedPerso(Context.getHoveredPerso());
-			}
-			if (Context.getHoveredAction() != null) {
-				Context.setSelectedAction(Context.getHoveredAction());
-			}
-			
-			MegaPerso selectedPerso = Context.getSelectedPerso();
-			Lieu selectedLieu = Context.getSelectedLieu();
-			Action selectedAction = Context.getSelectedAction();
-			if (selectedAction != Action.SE_DEPLACER && selectedPerso != null && selectedLieu != null) {
-				selectedPerso.seDeplacer(selectedLieu);
-				Context.setSelectedLieu(null);
-			}
-			else if (selectedAction != Action.OUVRIR_SERVEUR && selectedPerso != null && selectedLieu != null) {
-				selectedPerso.ouvrirServeur();
-			}
-		}
-		//double click ou plus
-		else{
-			if (Context.getHoveredLieu() != null) {
-				Context.setSelectedLieu(Context.getHoveredLieu());
-			}
-			
-			if (Context.getSelectedPerso() != null) {
-				Context.getSelectedPerso().ouvrirServeur();
-			}
-		}
-	}
 
 	@Override
 	protected void initGameAndGUI(GameContainer container) throws SlickException {		
-		container.setShowFPS(false);
+		// Initialisation ressources
+		// Chargée directement pour pouvoir être affichée pendant le chargement des autres
 		loadingImg = new Image("resources/img/megaupload-logo.png");
+		
+		// Chargement différé pour afficher l'écran de chargement
 		LoadingList.setDeferredLoading(true);
 		
+		// Initialisation ressources
+		music = new Music("resources/sound/megasong.ogg");
 		MegaPerso.init();
 		AgentFBI.init();
+		Lieu.init();
 		
+		// Initialisation carte
 		Carte c = new Carte();
 		Context.setCarte(c);
-		music = new Music("resources/sound/megasong.ogg");
-		Lieu.setImages(new Image("resources/img/City-20px.png"), new Image("resources/img/City-30px.png"));
 
+		// Initialisation personnages
 		MegaPerso kim = new MegaPerso("Kim DotCom", (Lieu) c.getLieux().toArray()[27], new Image("resources/img/avatar-yellow.png"), new Image("resources/img/yellow.png"));
 		MegaPerso mathias = new MegaPerso("Mathias Ortmann", (Lieu) c.getLieux().toArray()[10], new Image("resources/img/avatar-green.png"), new Image("resources/img/green.png"));
 		MegaPerso bram = new MegaPerso("Bram van der Kolk", (Lieu) c.getLieux().toArray()[42], new Image("resources/img/avatar-purple.png"), new Image("resources/img/purple.png"));
@@ -146,10 +67,12 @@ public class Main extends CoolNiftyOverlayBasicGame {
 		Context.addPersonnage(bram);
 		Context.addPersonnage(finn);
 
+		// Initialisation agents FBI
 		AgentFBI a1 = new AgentFBI((Lieu) c.getLieux().toArray()[1]);
 		AgentFBI a2 = new AgentFBI((Lieu) c.getLieux().toArray()[2]);
 		AgentFBI a3 = new AgentFBI((Lieu) c.getLieux().toArray()[3]);
 		AgentFBI a4 = new AgentFBI((Lieu) c.getLieux().toArray()[4]);
+		
 		Context.addPersonnage(a1);
 		Context.addPersonnage(a2);
 		Context.addPersonnage(a3);
@@ -158,52 +81,21 @@ public class Main extends CoolNiftyOverlayBasicGame {
 		a1.poursuivre(kim);
 		
 		Context.setSelectedPerso(kim);
+		
+		// Paramètres d'affichage
+		container.setShowFPS(false);
 	}
 
 	@Override
 	protected void prepareNifty(Nifty nifty) {
 	    nifty.fromXml("src/org/insa/megaupload/example/helloworld.xml", "start");		
 	}
-
-	@Override
-	protected void renderGame(GameContainer container, Graphics g)
-			throws SlickException {
-		if (!started) {
-			g.drawString("Loading...", 500, 100);
-			loadingImg.draw((container.getWidth() - loadingImg.getWidth()) / 2,
-					(container.getHeight() - loadingImg.getHeight()) / 2);
-		} else {
-			Context.getCarte().draw(g);
-			g.drawString("Argent " + Integer.toString(Context.getCptThunes()), 1100, 10);
-			g.drawString("Serveurs " + Integer.toString(Context.getCptServeursOuverts()), 1100, 30);
-			if (Context.getSelectedPerso() != null) {
-				g.drawString("Selected perso: "	+ Context.getSelectedPerso().getNom(), 10, 600);
-			}
-			if (Context.getSelectedLieu() != null) {
-				g.drawString("Selected lieu: " + Context.getSelectedLieu().getNom(), 10, 620);
-			}
-			g.setColor(Color.red);
-
-			Personnage.getParticleSystem().render();
-			for (Personnage p : Context.getPersonnages()) {
-				p.draw(g);
-			}
-
-			for (Lieu l : Context.getCarte().getLieux()) {
-				for (Trajet t : l.getTrajets()) {
-					g.drawLine(t.getDepart().getX(), t.getDepart().getY(), t.getArrivee().getX(), t.getArrivee().getY());
-				}
-			}
-
-			
-			g.drawRoundRect(10, container.getHeight() - 200 - 10, 300, 200, 5);
-		}
-	}
-
+	
 	@Override
 	protected void updateGame(GameContainer container, int delta)
 			throws SlickException {
 		if (LoadingList.get().getRemainingResources() > 0) {
+			// Chargement de la prochaine ressource différée
 			DeferredResource nextResource = LoadingList.get().getNext();
 			try {
 				nextResource.load();
@@ -212,22 +104,76 @@ public class Main extends CoolNiftyOverlayBasicGame {
 			}
 		} else {
 			if (!started) {
-				started = true;
-				music.loop();
+				// Chargement différé terminé, démarrage du jeu
 				LoadingList.setDeferredLoading(false);
 				initNifty(container);
+				music.loop();
+				started = true;
 			}
 
-			//toutes les secondes
-			if(++this.cptSoft%100 == 0){
-				//récupérer les gains des serveurs
-				Context.incCptThunes(ServeurRules.getRegleGainBase()*Context.getCptServeursOuverts());
+			// Toutes les secondes
+			if (++this.cptSoft % 100 == 0) {
+				// Récupérer les gains des serveurs
+				Context.incCptThunes(ServeurRules.getRegleGainBase() * Context.getCptServeursOuverts());
 			}
 			
-			//System.out.println("Update: " + delta);
+			// Update des actions et déplacements des personnages
 			for (Personnage p : Context.getPersonnages()) {
 				p.update(delta);
 			}
 		}
+	}
+
+	@Override
+	protected void renderGame(GameContainer container, Graphics g)
+			throws SlickException {
+		if (!started) {
+			// XXX: laid (taille, alignement, couleur...)
+			g.drawString("Loading...", 500, 100);
+			loadingImg.draw((container.getWidth() - loadingImg.getWidth()) / 2,
+					(container.getHeight() - loadingImg.getHeight()) / 2);
+		} else {
+			Context.getCarte().draw(g);
+			
+			g.setColor(Color.red);
+			
+			// XXX: alignement
+			g.drawString("Argent " + Integer.toString(Context.getCptThunes()), 1100, 10);
+			g.drawString("Serveurs " + Integer.toString(Context.getCptServeursOuverts()), 1100, 30);
+
+			// Dessin des personnages à leur nouvelle position
+			Personnage.getParticleSystem().render();
+			for (Personnage p : Context.getPersonnages()) {
+				p.draw(g);
+			}
+			
+			// XXX: debug
+			if (Context.getSelectedPerso() != null) {
+				g.drawString("Selected perso: "	+ Context.getSelectedPerso().getNom(), 10, 600);
+			}
+			if (Context.getSelectedLieu() != null) {
+				g.drawString("Selected lieu: " + Context.getSelectedLieu().getNom(), 10, 620);
+			}
+
+			// XXX: debug: affichage des arêtes
+			for (Lieu l : Context.getCarte().getLieux()) {
+				for (Trajet t : l.getTrajets()) {
+					g.drawLine(t.getDepart().getX(), t.getDepart().getY(), t.getArrivee().getX(), t.getArrivee().getY());
+				}
+			}
+
+			// TODO: Zone de notification
+			g.drawRoundRect(10, container.getHeight() - 200 - 10, 300, 200, 5);
+		}
+	}
+	
+	@Override
+	public void mouseMoved(int oldx, int oldy, int newx, int newy) {
+		Context.mouseMoved(oldx, oldy, newx, newy);
+	}
+	
+	@Override
+	public void mouseClicked(int button, int x, int y, int clickCount) {
+		Context.mouseClicked(button, x, y, clickCount);
 	}
 }

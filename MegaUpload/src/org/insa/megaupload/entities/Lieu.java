@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.insa.megaupload.example.Context;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 public class Lieu {
 	private String nom;
@@ -14,12 +15,8 @@ public class Lieu {
 	private int x;
 	private int y;
 	private ArrayList<Trajet> trajets;
-
 	private ArrayList<Serveur> serveurs;
 
-
-	private static int width, height;
-	private static int widthH, heightH;
 	private static Image img, imgH;
 
 	public Lieu(String nom, int x, int y, int coutHeberg, int risque, int tempsMiseEnPlace) {
@@ -33,15 +30,9 @@ public class Lieu {
 		this.serveurs = new ArrayList<Serveur>();
 	}
 	
-
-
-	public static void setImages(Image img, Image imgH) {
-		Lieu.img = img;
-		Lieu.imgH = imgH;
-		width = img.getWidth();
-		height = img.getHeight();
-		widthH = imgH.getWidth();
-		heightH = imgH.getHeight();
+	public static void init() throws SlickException {
+		img = new Image("resources/img/City-20px.png");
+		imgH = new Image("resources/img/City-30px.png");
 	}
 
 	public String getNom() {
@@ -57,11 +48,11 @@ public class Lieu {
 	}
 
 	public int getWidth() {
-		return width;
+		return img.getWidth();
 	}
 
 	public int getHeight() {
-		return height;
+		return img.getWidth();
 	}
 
 	public int getCoutHeberg() {
@@ -101,11 +92,11 @@ public class Lieu {
 
 	public void draw(Graphics g) {
 		if (Context.getHoveredLieu() == this) {
-			imgH.draw(x - widthH / 2, y - heightH / 2);
-			g.drawString(this.nom, x, y + heightH / 2);
-			g.drawString(Integer.toString(this.serveurs.size()) + " serveurs" , x, y + heightH);
+			imgH.draw(x - imgH.getWidth() / 2, y - imgH.getHeight() / 2);
+			g.drawString(this.nom, x, y + imgH.getHeight() / 2);
+			g.drawString(Integer.toString(this.serveurs.size()) + " serveurs" , x, y + imgH.getHeight());
 		} else {
-			img.draw(x - width / 2, y - height / 2);
+			img.draw(x - img.getWidth() / 2, y - img.getHeight() / 2);
 		}
 	}
 	
