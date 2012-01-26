@@ -181,6 +181,7 @@ public class Context {
 	public static void mouseMoved(int oldx, int oldy, int newx, int newy) {
 		Lieu hoveredLieu = null;
 		MegaPerso hoveredPerso = null;
+		Action hoveredAction = null;
 		
 		int persoHeight = 100;
 		int actionHeight = 50;
@@ -217,14 +218,16 @@ public class Context {
 			int num = hoveredPerso.getNum();
 			if (newx >= leftmargin + persoHeight && newx <= leftmargin + persoHeight + actionHeight) {
 				if (newy >= leftmargin + num * (leftmargin + persoHeight) && newy <= (num + 1) * (leftmargin + persoHeight) - actionHeight) {
+					hoveredAction = Action.OUVRIR_SERVEUR;
 					hoveredPerso.setHoveredAction(Action.OUVRIR_SERVEUR);
 				}
 				else if (newy >= (num + 1) * (leftmargin + persoHeight) - actionHeight && newy <= (num + 1) * (leftmargin + persoHeight)) {
+					hoveredAction = Action.SE_DEPLACER;
 					hoveredPerso.setHoveredAction(Action.SE_DEPLACER);
 				}
 			}
 		}
-		
+		Context.setHoveredAction(hoveredAction);
 		Context.setHoveredLieu(hoveredLieu);
 		Context.setHoveredPerso(hoveredPerso);
 	}
@@ -246,11 +249,15 @@ public class Context {
 			MegaPerso selectedPerso = Context.getSelectedPerso();
 			Lieu selectedLieu = Context.getSelectedLieu();
 			Action selectedAction = Context.getSelectedAction();
-			if (selectedAction != Action.SE_DEPLACER && selectedPerso != null && selectedLieu != null) {
+			if (selectedAction == Action.SE_DEPLACER && selectedPerso != null && selectedLieu != null) {
 				selectedPerso.seDeplacer(selectedLieu);
 				Context.setSelectedLieu(null);
-			}  else if (selectedAction != Action.OUVRIR_SERVEUR && selectedPerso != null) {
+				Context.setSelectedAction(null);
+			}  else if (selectedAction == Action.OUVRIR_SERVEUR && selectedPerso != null) {
+				Context.setSelectedLieu(selectedPerso.getLieuActuel());
 				selectedPerso.ouvrirServeur();
+				Context.setSelectedLieu(null);
+				Context.setSelectedAction(null);
 			}
 		} else { // Double clic (ou plus)
 			if (Context.getHoveredLieu() != null) {
