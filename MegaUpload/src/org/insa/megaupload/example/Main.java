@@ -2,6 +2,7 @@ package org.insa.megaupload.example;
 
 import org.insa.megaupload.entities.*;
 import org.insa.megaupload.rules.ServeurRules;
+import org.insa.megaupload.utils.FontUtils;
 import org.newdawn.slick.*;
 import org.newdawn.slick.loading.DeferredResource;
 import org.newdawn.slick.loading.LoadingList;
@@ -129,7 +130,7 @@ public class Main extends CoolNiftyOverlayBasicGame {
 			throws SlickException {
 		if (!started) {
 			// XXX: laid (taille, alignement, couleur...)
-			g.drawString("Loading...", 500, 100);
+			FontUtils.drawCenter(g.getFont(), "Loading...", 0, 150, 1280);
 			loadingImg.draw((container.getWidth() - loadingImg.getWidth()) / 2,
 					(container.getHeight() - loadingImg.getHeight()) / 2);
 		} else {
@@ -138,8 +139,8 @@ public class Main extends CoolNiftyOverlayBasicGame {
 			g.setColor(Color.red);
 			
 			// XXX: alignement
-			g.drawString("Argent " + Integer.toString(Context.getCptThunes()), 1100, 10);
-			g.drawString("Serveurs " + Integer.toString(Context.getCptServeursOuverts()), 1100, 30);
+			FontUtils.drawRight(g.getFont(), "Cash: " + Integer.toString(Context.getCptThunes()) + "$", 0, 10, 1280 - 15);
+			FontUtils.drawRight(g.getFont(), Integer.toString(Context.getCptServeursOuverts()) + " servers up", 0, 30, 1280 - 15);
 
 			// Dessin des personnages à leur nouvelle position
 			Personnage.getParticleSystem().render();

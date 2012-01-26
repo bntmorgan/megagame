@@ -133,7 +133,7 @@ public abstract class Personnage {
 	}
 	
 	public void draw(Graphics g) {
-		imgPawn.draw(this.getX() - 10, this.getY() - 10, 20, 20);
+		imgPawn.draw(this.getX() - imgPawn.getWidth()/2, this.getY() - imgPawn.getHeight()/2, imgPawn.getWidth(), imgPawn.getHeight());
 		
 		// XXX: uniformiser draw/render
 		if (action != null) {
@@ -142,8 +142,8 @@ public abstract class Personnage {
 		
 		if (this.timestampDenierAchat.after(new Timestamp(System.currentTimeMillis()-1*1000))) {
 			String str = String.valueOf(-this.frais) + "$";
-			int x = this.getX() - ((10 + g.getFont().getWidth(str))/2);
-			int y = this.getY() + 10;
+			int x = this.getX() - ((imgPawn.getWidth()/2 + g.getFont().getWidth(str))/2);
+			int y = this.getY() + imgPawn.getHeight()/2;
 			g.drawString(str, x, y);
 		}
 	}
