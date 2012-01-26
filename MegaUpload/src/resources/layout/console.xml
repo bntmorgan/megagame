@@ -10,17 +10,24 @@
   <!-- +++++++++++++++++++++++++++++++++++++++ -->
   <!-- start screen -->
   <!-- +++++++++++++++++++++++++++++++++++++++ -->
+  <!-- Aide en bas à droite -->
   <screen id="start" controller="org.insa.megaupload.example.ConsoleDemoStartScreen" defaultFocusElement="name">
     <layer id="layer1" childLayout="center">
-      <panel id="dialog" style="nifty-panel-simple" padding="10px,1px,1px,10px" childLayout="center" right="10px" bottom="10px" width="260px" height="30px" align="right" valign="bottom">
-        <panel childLayout="vertical" align="center" valign="center">
-          <panel id="namePanel" childLayout="horizontal">
-            <text id="labelName" style="nifty-label" text="press F1 to toggle console" width="100%" align="left" textVAlign="center" textHAlign="left" />
-          </panel>
-          <panel childLayout="horizontal" height="8px" />
-        </panel>
+    	<panel childLayout="horizontal" width="270px" height="42px" align="right" valign="bottom">
+	      <panel childLayout="vertical">
+		      <panel id="dialog" style="nifty-panel-simple" padding="10px,0px,0px,10px" childLayout="center">
+		        <panel childLayout="vertical" align="left" valign="top">
+		          <panel id="namePanel" childLayout="horizontal">
+		            <text id="labelName" style="nifty-label" text="press F1 to toggle console" width="100%" align="left" textVAlign="top" textHAlign="left" />
+		          </panel>
+		        </panel>
+		      </panel>
+          <panel height="10px" />
+	      </panel>
+        <panel width="10px" />
       </panel>
     </layer>
+    <!-- Console en bas à gauche -->
     <layer id="layer2" childLayout="center">
     	<panel id="leftMarginContainer" childLayout="horizontal" width="310px" height="218px" align="left" valign="bottom">
     		<panel width="10px" />
