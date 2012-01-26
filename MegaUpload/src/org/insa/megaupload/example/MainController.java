@@ -23,7 +23,6 @@ public class MainController implements ScreenController {
   }
 
   public void quit() {
-    /*nifty.setAlternateKeyForNextLoadXml("fade");
-    nifty.fromXml("all/intro.xml", "menu");*/
+	  nifty.removeScreen("start");
   }
 }
