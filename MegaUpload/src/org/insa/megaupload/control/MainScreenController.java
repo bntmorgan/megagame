@@ -1,5 +1,10 @@
 package org.insa.megaupload.control;
 
+import org.insa.megaupload.entities.MegaPerso;
+import org.insa.megaupload.entities.Personnage;
+import org.insa.megaupload.example.Action;
+import org.insa.megaupload.example.Context;
+
 import de.lessvoid.nifty.EndNotify;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
@@ -17,7 +22,7 @@ import de.lessvoid.nifty.screen.ScreenController;
  * 
  * @author void
  */
-public class ConsoleScreen implements ScreenController, KeyInputHandler {
+public class MainScreenController implements ScreenController, KeyInputHandler {
 	private Nifty nifty;
 	private Screen screen;
 	private Element consolePopup;
@@ -33,6 +38,11 @@ public class ConsoleScreen implements ScreenController, KeyInputHandler {
 	}
 
 	public void onStartScreen() {
+		for (Personnage p : Context.getPersonnages()) {
+			if (p instanceof MegaPerso) {
+				((MegaPerso) p).startNifty(nifty);
+			}
+		}
 		Console console = screen.findNiftyControl("consoleInfo", Console.class);
 		console.output("Game started HFGL");
 	}
@@ -106,4 +116,26 @@ public class ConsoleScreen implements ScreenController, KeyInputHandler {
 		consoleInfo.output("your input was: " + command.getCommandLine() + " ["
 				+ command.getArgumentCount() + " parameter(s)]");
 	}
+	
+	  private MegaPerso getSelectedMegaPerso(String nom) {
+		  for (Personnage p : Context.getPersonnages()) {
+			  if (p instanceof MegaPerso && ((MegaPerso) p).getNom().equals(nom)) {
+				  return ((MegaPerso) p);
+			  }
+		  }
+		  return null;
+	  }
+	  
+	  public void megaPersoSelected(String nom) {
+		Context.setSelectedPerso(getSelectedMegaPerso(nom));
+	  }
+
+	  public void megaPersoActionSelected(String nom, String action) {
+		  Action a = Action.valueOf(action);
+		  Context.setSelectedAction(null);
+		  if (a == Action.OUVRIR_SERVEUR) {
+			  getSelectedMegaPerso(nom).ouvrirServeur();
+			  Context.setSelectedAction(null);
+		  }
+	  }
 }

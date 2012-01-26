@@ -12,7 +12,7 @@
   <!-- start screen -->
   <!-- +++++++++++++++++++++++++++++++++++++++ -->
   <!-- Aide en bas à droite -->
-  <screen id="start" controller="org.insa.megaupload.control.ConsoleScreen" defaultFocusElement="name">
+  <screen id="mainScreen" controller="org.insa.megaupload.control.MainScreenController" defaultFocusElement="name">
     <layer id="layer1" childLayout="center">
     	<panel childLayout="horizontal" width="270px" height="42px" align="right" valign="bottom">
 	      <panel childLayout="vertical">
@@ -43,6 +43,9 @@
 			     <panel height="10px" />
 		     </panel>
 	     </panel>
+    </layer>
+    <layer id="menuLayer" childLayout="center">
+    	<panel id="menuPanel" childLayout="absolute" />
     </layer>
   </screen>
 

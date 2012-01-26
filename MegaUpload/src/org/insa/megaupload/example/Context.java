@@ -180,12 +180,6 @@ public class Context {
 	
 	public static void mouseMoved(int oldx, int oldy, int newx, int newy) {
 		Lieu hoveredLieu = null;
-		MegaPerso hoveredPerso = null;
-		Action hoveredAction = null;
-		
-		int persoHeight = 100;
-		int actionHeight = 50;
-		int leftmargin = 10;
 
 		// Recherche d'un lieu correspondant à la position de la souris
 		for (Lieu l : Context.getCarte().getLieux()) {
@@ -197,75 +191,29 @@ public class Context {
 				break;
 			}
 		}
-
-		// Recherche d'un personnage correspondant à la position de la souris
-		for (Personnage p : Context.getPersonnages()) {
-			if (p instanceof MegaPerso) {
-				int num = ((MegaPerso) p).getNum();
-				((MegaPerso) p).setHoveredAction(null);
-				if (newx <= leftmargin + persoHeight && newy >= leftmargin + num * (leftmargin + persoHeight) && newy <= (num + 1) * (leftmargin + persoHeight)) {
-					hoveredPerso = ((MegaPerso) p);
-					break;
-				}
-			}
-		}
 		
-		// TODO: Recherche de l'action correspondant à la position de la souris
-		if (hoveredPerso == null) {
-			hoveredPerso = Context.getHoveredPerso();
-		}
-		if (hoveredPerso != null) {
-			int num = hoveredPerso.getNum();
-			if (newx >= leftmargin + persoHeight && newx <= leftmargin + persoHeight + actionHeight) {
-				if (newy >= leftmargin + num * (leftmargin + persoHeight) && newy <= (num + 1) * (leftmargin + persoHeight) - actionHeight) {
-					hoveredAction = Action.OUVRIR_SERVEUR;
-					hoveredPerso.setHoveredAction(Action.OUVRIR_SERVEUR);
-				}
-				else if (newy >= (num + 1) * (leftmargin + persoHeight) - actionHeight && newy <= (num + 1) * (leftmargin + persoHeight)) {
-					hoveredAction = Action.SE_DEPLACER;
-					hoveredPerso.setHoveredAction(Action.SE_DEPLACER);
-				}
-			}
-		}
-		Context.setHoveredAction(hoveredAction);
 		Context.setHoveredLieu(hoveredLieu);
-		Context.setHoveredPerso(hoveredPerso);
 	}
 	
 	public static void mouseClicked(int button, int x, int y, int clickCount) {
-		if (clickCount == 1) { // Simple clic
-			if (Context.getHoveredLieu() != null) {
-				Context.setSelectedLieu(Context.getHoveredLieu());
-			}
-			
-			if (Context.getHoveredPerso() != null) {
-				Context.setSelectedPerso(Context.getHoveredPerso());
-			}
-			
-			if (Context.getHoveredAction() != null) {
-				Context.setSelectedAction(Context.getHoveredAction());
-			}
-			
-			MegaPerso selectedPerso = Context.getSelectedPerso();
-			Lieu selectedLieu = Context.getSelectedLieu();
-			Action selectedAction = Context.getSelectedAction();
-			if (selectedAction == Action.SE_DEPLACER && selectedPerso != null && selectedLieu != null) {
-				selectedPerso.seDeplacer(selectedLieu);
-				Context.setSelectedLieu(null);
-				Context.setSelectedAction(null);
-			}  else if (selectedAction == Action.OUVRIR_SERVEUR && selectedPerso != null) {
-				Context.setSelectedLieu(selectedPerso.getLieuActuel());
-				selectedPerso.ouvrirServeur();
-				Context.setSelectedLieu(null);
-				Context.setSelectedAction(null);
-			}
-		} else { // Double clic (ou plus)
-			if (Context.getHoveredLieu() != null) {
-				Context.setSelectedLieu(Context.getHoveredLieu());
-			}
-			
-			if (Context.getSelectedPerso() != null) {
-				Context.getSelectedPerso().ouvrirServeur();
+		if (Context.getHoveredLieu() != null) {
+			Context.setSelectedLieu(Context.getHoveredLieu());
+		
+			if (clickCount == 1) {
+				MegaPerso selectedPerso = Context.getSelectedPerso();
+				Lieu selectedLieu = Context.getSelectedLieu();
+				Action selectedAction = Context.getSelectedAction();
+				
+				if (selectedPerso != null && selectedLieu != null) {
+					selectedPerso.seDeplacer(selectedLieu);
+				} else if (selectedAction == Action.SE_DEPLACER && selectedLieu != null) {
+					selectedPerso.seDeplacer(selectedLieu);
+					Context.setSelectedAction(null);
+				}		
+			} else {
+				if (Context.getSelectedPerso() != null) {
+					Context.getSelectedPerso().ouvrirServeur();
+				}
 			}
 		}
 	}

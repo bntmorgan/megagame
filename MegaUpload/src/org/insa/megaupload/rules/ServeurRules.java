@@ -1,8 +1,7 @@
 package org.insa.megaupload.rules;
 
-import org.insa.megaupload.entities.Lieu;
-import org.insa.megaupload.entities.Personnage;
-import org.insa.megaupload.example.Context;;
+import org.insa.megaupload.entities.MegaPerso;
+import org.insa.megaupload.example.Context;
 
 public class ServeurRules {
 	
@@ -19,16 +18,9 @@ public class ServeurRules {
 		return gainBase;
 	}
 	
-	public static boolean peutOuvrirServeur(){
-		//capacité financiere
-		if (Context.getCptThunes()>coutOuverture) {
-			Personnage p = Context.getSelectedPerso();
-			Lieu l = Context.getSelectedLieu();
-			if (p != null && p.getLieuActuel() == l) {
-				return true;				
-			}
-		}
-		return false;
+	public static boolean peutOuvrirServeur(MegaPerso p) {
+		// Capacité financiere
+		return (Context.getCptThunes() > coutOuverture);
 	}
 	
 	public static int getRegleTelechargementsBase(){
