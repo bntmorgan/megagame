@@ -20,13 +20,12 @@ import org.newdawn.slick.loading.DeferredResource;
 import org.newdawn.slick.loading.LoadingList;
 
 import de.lessvoid.nifty.Nifty;
-import de.lessvoid.nifty.slick2d.NiftyOverlayBasicGame;
 
 /**
  * @author fougeanoob
  * 
  */
-public class Main extends NiftyOverlayBasicGame {
+public class Main extends CoolNiftyOverlayBasicGame {
 	private boolean started;
 	private Music music;
 	private Image loadingImg;
@@ -124,10 +123,7 @@ public class Main extends NiftyOverlayBasicGame {
 	}
 
 	@Override
-	protected void initGameAndGUI(GameContainer container) throws SlickException {
-		//on initialise le cul
-		initNifty(container);
-		
+	protected void initGameAndGUI(GameContainer container) throws SlickException {		
 		container.setShowFPS(false);
 		loadingImg = new Image("resources/img/megaupload-logo.png");
 		LoadingList.setDeferredLoading(true);
@@ -211,13 +207,15 @@ public class Main extends NiftyOverlayBasicGame {
 			DeferredResource nextResource = LoadingList.get().getNext();
 			try {
 				nextResource.load();
-			} catch (IOException e) {
+			} catch (Exception e) {
 				throw new SlickException("Failed to load: " + nextResource.getDescription(), e);
 			}
 		} else {
 			if (!started) {
 				started = true;
 				music.loop();
+				LoadingList.setDeferredLoading(false);
+				initNifty(container);
 			}
 
 			//toutes les secondes
