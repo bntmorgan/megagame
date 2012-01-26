@@ -8,6 +8,7 @@ import org.insa.megaupload.actions.Action;
 import org.insa.megaupload.actions.Deplacement;
 import org.insa.megaupload.example.Context;
 import org.insa.megaupload.example.CoolFireEmitter;
+import org.insa.megaupload.rules.DeplacementRules;
 import org.insa.megaupload.utils.Algo;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -83,9 +84,11 @@ public abstract class Personnage {
 			Lieu curCible = getDeplacement().getEtape().getCible(this.getLieuActuel());
 			Stack<Trajet> trajets = (Stack<Trajet>) Algo.PCC(Context.getCarte(), curCible, l, 1 - getCoefRand());
 			if (!trajets.isEmpty()) {
-				trajets.push(getDeplacement().getEtape());
-				getDeplacement().setEtapes(trajets);
-				getDeplacement().setCible(l);
+				if (DeplacementRules.peutSeDeplacer(Deplacement.getDistance(trajets))) {
+					trajets.push(getDeplacement().getEtape());
+					getDeplacement().setEtapes(trajets);
+					getDeplacement().setCible(l);
+				}
 			}
 		}
 	}
