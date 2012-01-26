@@ -1,4 +1,4 @@
-package org.insa.megaupload.example;
+package org.insa.megaupload.control;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.screen.Screen;

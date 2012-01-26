@@ -6,12 +6,13 @@
   <useStyles filename="src/resources/layout/custom-console-style.xml" />
   <useStyles filename="nifty-default-styles.xml" />
   <useControls filename="nifty-default-controls.xml" />
+  <useControls filename="src/resources/controls/megaupload-controls.xml" />
 
   <!-- +++++++++++++++++++++++++++++++++++++++ -->
   <!-- start screen -->
   <!-- +++++++++++++++++++++++++++++++++++++++ -->
   <!-- Aide en bas à droite -->
-  <screen id="start" controller="org.insa.megaupload.example.ConsoleDemoStartScreen" defaultFocusElement="name">
+  <screen id="start" controller="org.insa.megaupload.control.ConsoleScreen" defaultFocusElement="name">
     <layer id="layer1" childLayout="center">
     	<panel childLayout="horizontal" width="270px" height="42px" align="right" valign="bottom">
 	      <panel childLayout="vertical">
@@ -35,7 +36,7 @@
 			   	<panel id="dialog" style="nifty-panel-simple" padding="10px,10px,10px,10px" childLayout="center">
 						<panel childLayout="vertical" align="left" valign="top">
 			         <panel id="namePanel" childLayout="horizontal">
-			         	<control id="consoleInfo" name="nifty-console" lines="12" align="left" valign="top" />
+			         	<control id="consoleInfo" name="cool-nifty-console" lines="13" align="left" valign="top" />
 			         </panel>
 			       </panel>
 			     </panel>

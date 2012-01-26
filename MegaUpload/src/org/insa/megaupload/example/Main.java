@@ -10,12 +10,12 @@ import org.newdawn.slick.loading.LoadingList;
 import de.lessvoid.nifty.Nifty;
 
 /**
- * @author fougeanoob
+ * @author fougeane
  * 
  */
 public class Main extends CoolNiftyOverlayBasicGame {
 	private boolean started;
-	private Music music;
+	//private Music music;
 	private Image loadingImg;
 	private int cptSoft;
 
@@ -48,7 +48,7 @@ public class Main extends CoolNiftyOverlayBasicGame {
 		LoadingList.setDeferredLoading(true);
 		
 		// Initialisation ressources
-		music = new Music("resources/sound/megasong.ogg");
+		//music = new Music("resources/sound/megasong.ogg");
 		MegaPerso.init();
 		AgentFBI.init();
 		Lieu.init();
@@ -108,7 +108,7 @@ public class Main extends CoolNiftyOverlayBasicGame {
 				// Chargement différé terminé, démarrage du jeu
 				LoadingList.setDeferredLoading(false);
 				initNifty(container);
-				music.loop();
+				//music.loop();
 				started = true;
 			}
 
@@ -162,9 +162,6 @@ public class Main extends CoolNiftyOverlayBasicGame {
 					g.drawLine(t.getDepart().getX(), t.getDepart().getY(), t.getArrivee().getX(), t.getArrivee().getY());
 				}
 			}
-
-			// TODO: Zone de notification
-			g.drawRoundRect(10, container.getHeight() - 200 - 10, 300, 200, 5);
 		}
 	}
 	

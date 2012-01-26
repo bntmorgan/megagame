@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty-controls>
+  <controlDefinition name="cool-nifty-console" controller="org.insa.megaupload.control.CoolConsoleControl">
+    <panel style="nifty-console-panel">
+      <control id="#listBox" name="listBox" focusable="false" style="nifty-console-listbox" displayItems="$lines" selectionMode="Disabled" horizontal="off" vertical="optional">
+        <text text="Template" style="nifty-console-listbox-item" controller="de.lessvoid.nifty.controls.listbox.ListBoxItemController" inputMapping="de.lessvoid.nifty.input.mapping.MenuInputMapping" />
+      </control>
+    </panel>
+  </controlDefinition>
+</nifty-controls>
