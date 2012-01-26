@@ -89,7 +89,7 @@ public class Main extends CoolNiftyOverlayBasicGame {
 
 	@Override
 	protected void prepareNifty(Nifty nifty) {
-	    nifty.fromXml("src/org/insa/megaupload/example/helloworld.xml", "start");		
+	    nifty.fromXml("src/resources/layout/console.xml", "start");		
 	}
 	
 	@Override
