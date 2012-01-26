@@ -7,7 +7,7 @@ public class Deplacement {
 	private Lieu source;
 	private Lieu cible;
 	private Stack<Trajet> trajets;
-	private int avancementEtape;
+	private double avancementEtape;
 	
 	public Deplacement(Personnage perso, Lieu source, Lieu cible, Stack<Trajet> trajets) {
 		this.perso = perso;
@@ -19,14 +19,14 @@ public class Deplacement {
 	/**
 	 * @return the avancement
 	 */
-	public int getAvancementEtape() {
+	public double getAvancementEtape() {
 		return avancementEtape;
 	}
 	
 	/**
 	 * @param avancement the avancementEtape to set
 	 */
-	public void setAvancementEtape(int avancement) {
+	public void setAvancementEtape(double avancement) {
 		if (avancement >= 100) {
 			this.etapeSuivante();
 		} else {

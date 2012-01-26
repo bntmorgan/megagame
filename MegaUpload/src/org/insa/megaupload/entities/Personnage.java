@@ -7,6 +7,7 @@ import org.insa.megaupload.example.Context;
 import org.insa.megaupload.example.CoolFireEmitter;
 import org.insa.megaupload.rules.DeplacementRules;
 import org.insa.megaupload.utils.Algo;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.particles.ParticleSystem;
@@ -17,6 +18,7 @@ public class Personnage {
 	private Lieu lieuActuel;
 	private Deplacement deplacement;
 	private CoolFireEmitter particleEmitter;
+	private int vitesse;
 	
     private static ParticleSystem particleSystem = null; 
     
@@ -26,6 +28,7 @@ public class Personnage {
 		this.lieuActuel = lieuInitial;
 		this.imgBig = imgBig;
 		this.imgPawn = imgPawn;
+		this.vitesse = 5;
 		
 		particleEmitter = new CoolFireEmitter(this.getX(), this.getY(), 6f, Color.GREEN );
 		getParticleSystem().addEmitter(particleEmitter);
@@ -78,8 +81,8 @@ public class Personnage {
 			Trajet etape = this.deplacement.getEtape();
 			Lieu source = this.getLieuActuel();
 			Lieu cible = etape.getCible(source);
-			int avancement = this.deplacement.getAvancementEtape();
-			x = source.getX() + (avancement * (cible.getX() - source.getX()))/100; 
+			double avancement = this.deplacement.getAvancementEtape();
+			x = (int) (source.getX() + (avancement * (cible.getX() - source.getX()))/100); 
 		} else {
 			x = this.lieuActuel.getX();
 		}
@@ -94,8 +97,8 @@ public class Personnage {
 			Trajet etape = this.deplacement.getEtape();
 			Lieu source = this.getLieuActuel();
 			Lieu cible = etape.getCible(source);
-			int avancement = this.deplacement.getAvancementEtape();
-			y = source.getY() + (avancement * (cible.getY() - source.getY()))/100;  
+			double avancement = this.deplacement.getAvancementEtape();
+			y = (int) (source.getY() + (avancement * (cible.getY() - source.getY()))/100);  
 		} else {
 			y = this.lieuActuel.getY();
 		}
@@ -104,29 +107,25 @@ public class Personnage {
 	}
 	
 	public void update(int delta){
-		Deplacement d;
+		Deplacement d = this.getDeplacement();
 		
-		d = this.getDeplacement();
-		
-
 		if (d != null) {
-			int distanceTotale = d.getEtape().getDistance();
-			
 			if (this instanceof MegaPerso && d.getAvancementEtape() == 0 ){
+				int distanceTotale = d.getEtape().getDistance();
 				Context.decCptThunes((int) (distanceTotale*DeplacementRules.getCoutDeplacement()));
 			}
-						
-			double distanceParcourue = (double)(d.getAvancementEtape() * distanceTotale) / 100.;
-			d.setAvancementEtape((int) (100.*(double)(distanceParcourue + 5)/(double)distanceTotale));
+			
+			int tempsTotal = d.getEtape().getTemps();
+			double tempsParcouru = (d.getAvancementEtape() * tempsTotal) / 100.;
+			d.setAvancementEtape(100 * (tempsParcouru + vitesse)/tempsTotal);
 		}
 		
         particleSystem.update(delta);
         particleEmitter.setX(this.getX());
         particleEmitter.setY(this.getY());	
-        
 	}
 	
-	public void draw() {
+	public void draw(Graphics g) {
 		imgPawn.draw(this.getX() - 10, this.getY() - 10, 20, 20);
 	}
 	

@@ -39,7 +39,7 @@ public class Trajet {
 	}
 	
 	public int getTemps() {
-		return getDistance();
+		return getDistance() * 10;
 	}
 	
 	@Override

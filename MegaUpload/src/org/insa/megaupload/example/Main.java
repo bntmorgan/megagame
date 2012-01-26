@@ -8,7 +8,6 @@ import org.insa.megaupload.entities.Lieu;
 import org.insa.megaupload.entities.MegaPerso;
 import org.insa.megaupload.entities.Personnage;
 import org.insa.megaupload.entities.Trajet;
-import org.insa.megaupload.entities.Serveur;
 import org.insa.megaupload.rules.ServeurRules;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
@@ -52,10 +51,12 @@ public class Main extends BasicGame {
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
+		container.setShowFPS(false);
 		loadingImg = new Image("resources/img/megaupload-logo.png");
 		LoadingList.setDeferredLoading(true);
 		
 		MegaPerso.init();
+		AgentFBI.init();
 		
 		Carte c = new Carte();
 		Context.setCarte(c);
@@ -63,20 +64,26 @@ public class Main extends BasicGame {
 		Lieu.setImages(new Image("resources/img/City-20px.png"), new Image("resources/img/City-30px.png"));
 
 		MegaPerso kim = new MegaPerso("Kim DotCom", (Lieu) c.getLieux().toArray()[27], new Image("resources/img/avatar-yellow.png"), new Image("resources/img/yellow.png"));
-		Context.addPersonnage(kim);
-		
+		MegaPerso mathias = new MegaPerso("Mathias Ortmann", (Lieu) c.getLieux().toArray()[10], new Image("resources/img/avatar-green.png"), new Image("resources/img/green.png"));
+		MegaPerso bram = new MegaPerso("Bram van der Kolk", (Lieu) c.getLieux().toArray()[42], new Image("resources/img/avatar-purple.png"), new Image("resources/img/purple.png"));
 		MegaPerso finn = new MegaPerso("Finn Batato", (Lieu) c.getLieux().toArray()[3], new Image("resources/img/avatar-red.png"), new Image("resources/img/red.png"));
-		Context.addPersonnage(finn);
-		/*
-		MegaPerso finn = new MegaPerso("Finn Batato", (Lieu) c.getLieux().toArray()[3], new Image("resources/img/redguy.png"), new Image("resources/img/red.png")));
-		Context.addPersonnage(finn);
 		
-		MegaPerso finn = new MegaPerso("Finn Batato", (Lieu) c.getLieux().toArray()[3], new Image("resources/img/redguy.png"), new Image("resources/img/red.png")));
+		Context.addPersonnage(kim);
+		Context.addPersonnage(mathias);
+		Context.addPersonnage(bram);
 		Context.addPersonnage(finn);
-		*/
-		AgentFBI a1 = new AgentFBI((Lieu) c.getLieux().toArray()[2], new Image("resources/img/fbiguy.png"), new Image("resources/img/fbi.png"));
+
+		AgentFBI a1 = new AgentFBI((Lieu) c.getLieux().toArray()[1]);
+		AgentFBI a2 = new AgentFBI((Lieu) c.getLieux().toArray()[2]);
+		AgentFBI a3 = new AgentFBI((Lieu) c.getLieux().toArray()[3]);
+		AgentFBI a4 = new AgentFBI((Lieu) c.getLieux().toArray()[4]);
 		Context.addPersonnage(a1);
+		Context.addPersonnage(a2);
+		Context.addPersonnage(a3);
+		Context.addPersonnage(a4);
+		
 		a1.poursuivre(kim);
+		
 		Context.setSelectedPerso(kim);
 	}
 
@@ -107,6 +114,7 @@ public class Main extends BasicGame {
 			}
 		}
 	}
+	
 	public void render(GameContainer container, Graphics g)	throws SlickException {
 		if (!started) {
 			g.drawString("Loading...", 500, 100);
@@ -114,9 +122,8 @@ public class Main extends BasicGame {
 					(container.getHeight() - loadingImg.getHeight()) / 2);
 		} else {
 			Context.getCarte().draw(g);
-			g.drawString("Welcome to MegaUpload!", 10, 50);
-			g.drawString("Argent \n" + Integer.toString(Context.getCptThunes()), 1200, 50);
-			g.drawString("Serveurs\n" + Integer.toString(Context.getCptServeursOuverts()), 1200, 100);
+			g.drawString("Argent " + Integer.toString(Context.getCptThunes()), 1100, 10);
+			g.drawString("Serveurs " + Integer.toString(Context.getCptServeursOuverts()), 1100, 30);
 			if (Context.getSelectedPerso() != null) {
 				g.drawString("Selected perso: "	+ Context.getSelectedPerso().getNom(), 10, 600);
 			}
@@ -126,7 +133,7 @@ public class Main extends BasicGame {
 			g.setColor(Color.red);
 			
 			for (Personnage p : Context.getPersonnages()) {
-				p.draw();
+				p.draw(g);
 			}
 
 			for (Lieu l : Context.getCarte().getLieux()) {
@@ -134,9 +141,9 @@ public class Main extends BasicGame {
 					g.drawLine(t.getDepart().getX(), t.getDepart().getY(), t.getArrivee().getX(), t.getArrivee().getY());
 				}
 			}
-			
 
 			
+			g.drawRoundRect(10, container.getHeight() - 200 - 10, 300, 200, 5);
 		}
 	}
 	
@@ -161,7 +168,7 @@ public class Main extends BasicGame {
 		for (Personnage p : Context.getPersonnages()) {
 			if (p instanceof MegaPerso) {
 				int num = ((MegaPerso) p).getNum();
-				if (newx <= 100 && newy >= (num + 1) * 100 && newy <= (num + 2) * 100) {
+				if (newx <= 10 + 100 && newy >= 10 + num * (10 + 100) && newy <= (num + 1) * (10 + 100)) {
 					hoveredPerso = ((MegaPerso) p);
 					break;
 				}
@@ -197,31 +204,17 @@ public class Main extends BasicGame {
 				Context.setSelectedLieu(null);
 			}
 			else if (selectedAction != Action.OUVRIR_SERVEUR && selectedPerso != null && selectedLieu != null) {
-				if(ServeurRules.peutOuvrirServeur()){
-					Lieu selL = Context.getSelectedLieu();
-					if (selL != null){
-						selL.addServeur(new Serveur());					
-					}
-				}
-				else {
-					//affichage : pas asez d'argent ! veuillez vendre plus de comptes premium !
-				}
+				selectedPerso.ouvrirServeur();
 			}
 		}
 		//double click ou plus
 		else{
 			if (Context.getHoveredLieu() != null) {
 				Context.setSelectedLieu(Context.getHoveredLieu());
-			
-			if(ServeurRules.peutOuvrirServeur()){
-					Lieu selL = Context.getSelectedLieu();
-					if (selL != null){
-						selL.addServeur(new Serveur());					
-					}
-				}
 			}
-			else {
-				//affichage : pas asez d'argent ! veuillez vendre plus de comptes premium !
+			
+			if (Context.getSelectedPerso() != null) {
+				Context.getSelectedPerso().ouvrirServeur();
 			}
 		}
 	}

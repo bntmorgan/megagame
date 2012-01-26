@@ -21,10 +21,10 @@ public class ServeurRules {
 	
 	public static boolean peutOuvrirServeur(){
 		//capacité financiere
-		if ( Context.getCptThunes()>coutOuverture ){
+		if (Context.getCptThunes()>coutOuverture) {
 			Personnage p = Context.getSelectedPerso();
 			Lieu l = Context.getSelectedLieu();
-			if (p != null && p.getLieuActuel() == l){
+			if (p != null && p.getLieuActuel() == l) {
 				return true;				
 			}
 		}

@@ -1,17 +1,32 @@
 package org.insa.megaupload.entities;
 
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 public class AgentFBI extends Personnage {
-	private MegaPerso poursuivi;
+	private static int nbAgents = 0;
+	private static Image imgBig;
+	private static Image imgPawn;
+	
 	protected final static double coefRand = 0.9;
+	
+	private MegaPerso poursuivi;
+	private int num;
 	
 	public double getCoefRand() {
 		return coefRand;
 	}
 	
-	public AgentFBI(Lieu lieuInitial, Image imgBig, Image imgPawn) {
+	public static void init() throws SlickException {
+		imgBig = new Image("resources/img/fbiguy.png");
+		imgPawn = new Image("resources/img/fbi.png");
+	}
+	
+	public AgentFBI(Lieu lieuInitial) {
 		super(lieuInitial, imgBig, imgPawn);
+		this.num = nbAgents;
+		nbAgents++;
 	}
 	
 	public void poursuivre(MegaPerso perso) {
@@ -58,6 +73,15 @@ public class AgentFBI extends Personnage {
 	
 	public void fermerServeur() {
 		this.getLieuActuel().delServeurs();
+	}
+	
+	@Override
+	public void draw(Graphics g) {
+		super.draw(g);
+		
+		int height = 75;
+		int width = imgBig.getWidth()*height/imgBig.getHeight();
+		imgBig.draw(1280 - width - 10, 50 + (height+10)*num, width, height);
 	}
 
 }
