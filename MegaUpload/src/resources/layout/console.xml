@@ -12,30 +12,30 @@
   <!-- +++++++++++++++++++++++++++++++++++++++ -->
   <screen id="start" controller="org.insa.megaupload.example.ConsoleDemoStartScreen" defaultFocusElement="name">
     <layer id="layer1" childLayout="center">
-      <panel id="dialog" style="nifty-panel" padding="1px,1px,1px,10px" childLayout="center" width="300px" height="100px" align="right" valign="bottom">
+      <panel id="dialog" style="nifty-panel-simple" padding="10px,1px,1px,10px" childLayout="center" right="10px" bottom="10px" width="260px" height="30px" align="right" valign="bottom">
         <panel childLayout="vertical" align="center" valign="center">
           <panel id="namePanel" childLayout="horizontal">
-            <text id="labelName" style="nifty-label" text="press F1 to toggle console" width="90%" align="left" textVAlign="center" textHAlign="left" />
+            <text id="labelName" style="nifty-label" text="press F1 to toggle console" width="100%" align="left" textVAlign="center" textHAlign="left" />
           </panel>
           <panel childLayout="horizontal" height="8px" />
         </panel>
       </panel>
     </layer>
-     <layer id="layer2" childLayout="center">
-      <panel id="dialog" style="nifty-panel" padding="1px,1px,1px,10px"
-	childLayout="center" width="300px" height="100px" align="left" valign="bottom">
-	<panel childLayout="vertical" align="center" valign="center">
-          <panel id="namePanel" childLayout="horizontal">
-          	<control id="console" name="nifty-console" lines="25" align="center" valign="center">
-	        <effect>
-	          <onStartScreen name="move" direction="top" mode="in" length="200" startDelay="100" inherit="true" />
-	          <onEndScreen name="move" direction="top" mode="out" length="200" startDelay="0" inherit="true" />
-	        </effect>
-	      </control>
-          </panel>
-          <panel childLayout="horizontal" height="8px" />
-        </panel>
-      </panel>
+    <layer id="layer2" childLayout="center">
+    	<panel id="leftMarginContainer" childLayout="horizontal" width="310px" height="218px" align="left" valign="bottom">
+    		<panel width="10px" />
+    		<panel id="bottomMarginContainer" childLayout="vertical">
+			   	<panel id="dialog" style="nifty-panel-simple" padding="10px,10px,10px,10px" childLayout="center">
+						<panel childLayout="vertical" align="left" valign="top">
+			         <panel id="namePanel" childLayout="horizontal">
+			         	<control id="console" name="nifty-console" lines="12" align="left" valign="top">
+			      		</control>
+			         </panel>
+			       </panel>
+			     </panel>
+			     <panel height="10px" />
+		     </panel>
+	     </panel>
     </layer>
   </screen>
 
@@ -48,7 +48,7 @@
       <onEndScreen name="fade" start="#a" end="#0" length="200" startDelay="100" inherit="true" />
     </effect>
     <panel childLayout="center" width="95%" align="center" valign="center">
-      <control id="console" name="nifty-console" lines="25" align="center" valign="center">
+      <control id="console1" name="nifty-console" lines="25" align="center" valign="center">
         <effect>
           <onStartScreen name="move" direction="top" mode="in" length="200" startDelay="100" inherit="true" />
           <onEndScreen name="move" direction="top" mode="out" length="200" startDelay="0" inherit="true" />
