@@ -94,7 +94,11 @@ public class Lieu {
 		if (Context.getHoveredLieu() == this) {
 			imgH.draw(x - imgH.getWidth() / 2, y - imgH.getHeight() / 2);
 			g.drawString(this.nom, x, y + imgH.getHeight() / 2);
-			g.drawString(Integer.toString(this.serveurs.size()) + " serveurs" , x, y + imgH.getHeight());
+			if (this.serveurs.size() <= 1)
+				g.drawString(Integer.toString(this.serveurs.size()) + " server" , x, y + imgH.getHeight());
+			else
+				g.drawString(Integer.toString(this.serveurs.size()) + " servers" , x, y + imgH.getHeight());
+				
 		} else {
 			img.draw(x - img.getWidth() / 2, y - img.getHeight() / 2);
 		}

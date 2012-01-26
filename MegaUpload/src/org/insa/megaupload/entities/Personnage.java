@@ -1,6 +1,7 @@
 package org.insa.megaupload.entities;
 
 import java.awt.Color;
+import java.sql.Timestamp;
 import java.util.Stack;
 
 import org.insa.megaupload.example.Context;
@@ -19,6 +20,8 @@ public class Personnage {
 	private Deplacement deplacement;
 	private CoolFireEmitter particleEmitter;
 	private int vitesse;
+	private int frais;
+	private Timestamp timestampDenierAchat;
 	
     private static ParticleSystem particleSystem = null; 
     
@@ -29,6 +32,8 @@ public class Personnage {
 		this.imgBig = imgBig;
 		this.imgPawn = imgPawn;
 		this.vitesse = 5;
+		this.frais = 0;
+		this.timestampDenierAchat = new Timestamp(0);
 		
 		particleEmitter = new CoolFireEmitter(this.getX(), this.getY(), 6f, Color.GREEN );
 		getParticleSystem().addEmitter(particleEmitter);
@@ -112,7 +117,10 @@ public class Personnage {
 		if (d != null) {
 			if (this instanceof MegaPerso && d.getAvancementEtape() == 0 ){
 				int distanceTotale = d.getEtape().getDistance();
-				Context.decCptThunes((int) (distanceTotale*DeplacementRules.getCoutDeplacement()));
+				this.frais = (int) (distanceTotale*DeplacementRules.getCoutDeplacement());
+				this.timestampDenierAchat = new Timestamp(System.currentTimeMillis());
+				Context.decCptThunes(this.frais);
+				
 			}
 			
 			int tempsTotal = d.getEtape().getTemps();
@@ -127,6 +135,13 @@ public class Personnage {
 	
 	public void draw(Graphics g) {
 		imgPawn.draw(this.getX() - 10, this.getY() - 10, 20, 20);
+		if (this.timestampDenierAchat.after(new Timestamp(System.currentTimeMillis()-1*1000))) {
+			String str = String.valueOf(-this.frais) + "$";
+			int x = this.getX() - ((10 + g.getFont().getWidth(str))/2);
+			int y = this.getY() + 10;
+			g.drawString(str, x, y);
+		}
+		
 	}
 	
 	public static ParticleSystem getParticleSystem(){
