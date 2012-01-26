@@ -1,5 +1,6 @@
 package org.insa.megaupload.entities;
 
+import org.insa.megaupload.example.Action;
 import org.insa.megaupload.example.Context;
 import org.insa.megaupload.rules.ServeurRules;
 import org.newdawn.slick.Graphics;
@@ -17,6 +18,7 @@ public class MegaPerso extends Personnage {
 	private boolean ouvreUnServeur;
 	private int tempsRestant;
 	private int tempsTotal;
+	private Action action;
 	
 	public MegaPerso(String nom, Lieu lieuInitial, Image imgBig, Image imgPawn) throws SlickException {
 		super(lieuInitial, imgBig, imgPawn);
@@ -28,7 +30,7 @@ public class MegaPerso extends Personnage {
 	}
 	
 	public static void init() throws SlickException {
-		openServerImg = new Image("resources/img/Backup-IBM-Server-icon-30px.png");
+		openServerImg = new Image("resources/img/Backup-IBM-Server-icon.png");
 		moveImg = new Image("resources/img/plane.png");
 	}
 	
@@ -44,6 +46,20 @@ public class MegaPerso extends Personnage {
 		return nbServeursOuverts;
 	}
 	
+	/**
+	 * @return the action
+	 */
+	public Action getAction() {
+		return action;
+	}
+
+	/**
+	 * @param action the action to set
+	 */
+	public void setAction(Action action) {
+		this.action = action;
+	}
+
 	public void ouvrirServeur() {
 		if (!ouvreUnServeur) {
 			if (ServeurRules.peutOuvrirServeur()) {
@@ -82,21 +98,25 @@ public class MegaPerso extends Personnage {
 	public void draw(Graphics g) {
 		super.draw(g);
 		
-		int height = 100;
-		int width = imgBig.getWidth()*100/imgBig.getHeight(); 
+		int persoHeight = 100;
+		int persoWidth = imgBig.getWidth()*persoHeight/imgBig.getHeight();
+		int actionHeight = 50;
+		int openWidth = openServerImg.getWidth()*actionHeight/openServerImg.getHeight();
+		int moveWidth = moveImg.getWidth()*actionHeight/moveImg.getHeight();
+		int leftmargin = 10;
 		
-		if (Context.getHoveredPerso() == this) {
-			imgBig.draw(10, 10 + (height + 10)*num, width, height);
-			openServerImg.draw(110, 10 + 110*num, openServerImg.getWidth()*100/openServerImg.getHeight(), 50);
-			moveImg.draw(110, 10 + 110*num+50, moveImg.getWidth()*100/moveImg.getHeight(), 50);
+		if (Context.getHoveredPerso() == this || this.action != null) {
+			imgBig.draw(leftmargin, leftmargin + (persoHeight + leftmargin)*num, persoWidth, persoHeight);
+			openServerImg.draw(leftmargin + persoHeight, leftmargin + (leftmargin + persoHeight)*num, openWidth, actionHeight);
+			moveImg.draw(leftmargin + persoHeight, leftmargin + (leftmargin + persoHeight)*num+50, moveWidth, actionHeight);
 		} else {
-			imgBig.draw(10, 10 + (height + 10)*num, width, height);
+			imgBig.draw(10, 10 + (persoHeight + 10)*num, persoWidth, persoHeight);
 		}
 		
 		if (ouvreUnServeur) {
-			g.drawRect(10, (height + 10)*(num + 1) - 10, width, 10);
+			g.drawRect(10, (persoHeight + 10)*(num + 1) - 10, persoWidth, 10);
 			int filledWidth = (int) (100. * ((double)(tempsTotal - tempsRestant)/(double)tempsTotal));
-			g.fillRect(10, (height + 10)*(num + 1) - 10, filledWidth, 10);
+			g.fillRect(10, (persoHeight + 10)*(num + 1) - 10, filledWidth, 10);
 		}
 	}
 

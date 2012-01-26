@@ -179,9 +179,12 @@ public class Context {
 	}
 	
 	public static void mouseMoved(int oldx, int oldy, int newx, int newy) {
-		Action hoveredAction = null;
 		Lieu hoveredLieu = null;
 		MegaPerso hoveredPerso = null;
+		
+		int persoHeight = 100;
+		int actionHeight = 50;
+		int leftmargin = 10;
 
 		// Recherche d'un lieu correspondant à la position de la souris
 		for (Lieu l : Context.getCarte().getLieux()) {
@@ -198,8 +201,8 @@ public class Context {
 		for (Personnage p : Context.getPersonnages()) {
 			if (p instanceof MegaPerso) {
 				int num = ((MegaPerso) p).getNum();
-				// XXX: constantes
-				if (newx <= 10 + 100 && newy >= 10 + num * (10 + 100) && newy <= (num + 1) * (10 + 100)) {
+				((MegaPerso) p).setAction(null);
+				if (newx <= leftmargin + persoHeight && newy >= leftmargin + num * (leftmargin + persoHeight) && newy <= (num + 1) * (leftmargin + persoHeight)) {
 					hoveredPerso = ((MegaPerso) p);
 					break;
 				}
@@ -207,8 +210,21 @@ public class Context {
 		}
 		
 		// TODO: Recherche de l'action correspondant à la position de la souris
+		if (hoveredPerso == null) {
+			hoveredPerso = Context.getHoveredPerso();
+		}
+		if (hoveredPerso != null) {
+			int num = hoveredPerso.getNum();
+			if (newx >= leftmargin + persoHeight && newx <= leftmargin + persoHeight + actionHeight) {
+				if (newy >= leftmargin + num * (leftmargin + persoHeight) && newy <= (num + 1) * (leftmargin + persoHeight) - actionHeight) {
+					hoveredPerso.setAction(Action.OUVRIR_SERVEUR);
+				}
+				else if (newy >= (num + 1) * (leftmargin + persoHeight) - actionHeight && newy <= (num + 1) * (leftmargin + persoHeight)) {
+					hoveredPerso.setAction(Action.SE_DEPLACER);
+				}
+			}
+		}
 		
-		Context.setHoveredAction(hoveredAction);
 		Context.setHoveredLieu(hoveredLieu);
 		Context.setHoveredPerso(hoveredPerso);
 	}
