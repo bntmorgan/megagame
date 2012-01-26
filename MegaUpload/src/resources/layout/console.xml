@@ -35,8 +35,7 @@
 			   	<panel id="dialog" style="nifty-panel-simple" padding="10px,10px,10px,10px" childLayout="center">
 						<panel childLayout="vertical" align="left" valign="top">
 			         <panel id="namePanel" childLayout="horizontal">
-			         	<control id="console" name="nifty-console" lines="12" align="left" valign="top">
-			      		</control>
+			         	<control id="consoleInfo" name="nifty-console" lines="12" align="left" valign="top" />
 			         </panel>
 			       </panel>
 			     </panel>
@@ -55,7 +54,7 @@
       <onEndScreen name="fade" start="#a" end="#0" length="200" startDelay="100" inherit="true" />
     </effect>
     <panel childLayout="center" width="95%" align="center" valign="center">
-      <control id="console1" name="nifty-console" lines="25" align="center" valign="center">
+      <control id="consoleAction" name="nifty-console" lines="25" align="center" valign="center">
         <effect>
           <onStartScreen name="move" direction="top" mode="in" length="200" startDelay="100" inherit="true" />
           <onEndScreen name="move" direction="top" mode="out" length="200" startDelay="0" inherit="true" />
