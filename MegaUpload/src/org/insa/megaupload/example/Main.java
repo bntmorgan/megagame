@@ -1,5 +1,6 @@
 package org.insa.megaupload.example;
 
+import org.insa.megaupload.control.MainScreenController;
 import org.insa.megaupload.entities.*;
 import org.insa.megaupload.rules.ServeurRules;
 import org.insa.megaupload.utils.FontUtils;
@@ -18,6 +19,7 @@ public class Main extends CoolNiftyOverlayBasicGame {
 	//private Music music;
 	private Image loadingImg;
 	private int cptSoft;
+	private Nifty nifty;
 
 	public Main() {
 		super("MegaUpload");
@@ -89,7 +91,9 @@ public class Main extends CoolNiftyOverlayBasicGame {
 
 	@Override
 	protected void prepareNifty(Nifty nifty) {
+		this.nifty = nifty;
 		nifty.fromXml("src/resources/layout/console.xml", "mainScreen");
+		Context.setMainScreenController((MainScreenController) nifty.getCurrentScreen().getScreenController());
 	}
 	
 	@Override
@@ -145,7 +149,7 @@ public class Main extends CoolNiftyOverlayBasicGame {
 			// Dessin des personnages à leur nouvelle position
 			Personnage.getParticleSystem().render();
 			for (Personnage p : Context.getPersonnages()) {
-				p.draw(g);
+				p.draw(g, nifty);
 			}
 			
 			// XXX: debug

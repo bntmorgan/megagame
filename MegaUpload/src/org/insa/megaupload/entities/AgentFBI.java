@@ -5,6 +5,8 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+import de.lessvoid.nifty.Nifty;
+
 public class AgentFBI extends Personnage {
 	private static int nbAgents = 0;
 	private static Image imgBig;
@@ -97,8 +99,8 @@ public class AgentFBI extends Personnage {
 	}
 	
 	@Override
-	public void draw(Graphics g) {
-		super.draw(g);
+	public void draw(Graphics g, Nifty nifty) {
+		super.draw(g, nifty);
 		
 		imgBig.draw(getAvatarX(), getAvatarY(), getAvatarWidth(), getAvatarHeight());
 	}

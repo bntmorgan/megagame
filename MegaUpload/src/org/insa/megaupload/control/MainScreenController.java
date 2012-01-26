@@ -29,6 +29,8 @@ public class MainScreenController implements ScreenController, KeyInputHandler {
 	private boolean consoleVisible = false;
 	private boolean allowConsoleToggle = true;
 	private boolean firstConsoleShow = true;
+	private Console infoConsole;
+	private Console actionConsole;
 
 	public void bind(final Nifty newNifty, final Screen newScreen) {
 		nifty = newNifty;
@@ -38,13 +40,14 @@ public class MainScreenController implements ScreenController, KeyInputHandler {
 	}
 
 	public void onStartScreen() {
+		infoConsole = screen.findNiftyControl("consoleInfo", Console.class);
+		infoConsole.output("Game started HFGL");
+		actionConsole = screen.findNiftyControl("consoleAction", Console.class);
 		for (Personnage p : Context.getPersonnages()) {
 			if (p instanceof MegaPerso) {
 				((MegaPerso) p).startNifty(nifty);
 			}
 		}
-		Console console = screen.findNiftyControl("consoleInfo", Console.class);
-		console.output("Game started HFGL");
 	}
 
 	public void onEndScreen() {
@@ -110,6 +113,9 @@ public class MainScreenController implements ScreenController, KeyInputHandler {
 		if ("exit".equals(command.getCommand())) {
 			back();
 		}
+		if ("killdamothafucka".equals(command.getCommand())) {
+			nifty.exit();
+		}
 		
 		//TODO: pour test
 		Console consoleInfo = screen.findNiftyControl("consoleInfo", Console.class);
@@ -117,25 +123,34 @@ public class MainScreenController implements ScreenController, KeyInputHandler {
 				+ command.getArgumentCount() + " parameter(s)]");
 	}
 	
-	  private MegaPerso getSelectedMegaPerso(String nom) {
-		  for (Personnage p : Context.getPersonnages()) {
-			  if (p instanceof MegaPerso && ((MegaPerso) p).getNom().equals(nom)) {
-				  return ((MegaPerso) p);
-			  }
-		  }
-		  return null;
-	  }
-	  
-	  public void megaPersoSelected(String nom) {
-		Context.setSelectedPerso(getSelectedMegaPerso(nom));
-	  }
+	public void addActionText(String text){
+		actionConsole.output(text);
+	}
+	
+	public void addInfoText(String text){
+		infoConsole.output(text);
+	}
+	
+	
+	private MegaPerso getSelectedMegaPerso(String nom) {
+		for (Personnage p : Context.getPersonnages()) {
+			if (p instanceof MegaPerso && ((MegaPerso) p).getNom().equals(nom)) {
+				return ((MegaPerso) p);
+			}
+		}
+		return null;
+	}
 
-	  public void megaPersoActionSelected(String nom, String action) {
-		  Action a = Action.valueOf(action);
-		  Context.setSelectedAction(null);
-		  if (a == Action.OUVRIR_SERVEUR) {
-			  getSelectedMegaPerso(nom).ouvrirServeur();
-			  Context.setSelectedAction(null);
-		  }
-	  }
+	public void megaPersoSelected(String nom) {
+		Context.setSelectedPerso(getSelectedMegaPerso(nom));
+	}
+
+	public void megaPersoActionSelected(String nom, String action) {
+		Action a = Action.valueOf(action);
+		Context.setSelectedAction(null);
+		if (a == Action.OUVRIR_SERVEUR) {
+			getSelectedMegaPerso(nom).ouvrirServeur();
+			Context.setSelectedAction(null);
+		}
+	}
 }

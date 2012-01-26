@@ -2,6 +2,7 @@ package org.insa.megaupload.entities;
 
 import org.insa.megaupload.actions.OuvertureServeur;
 import org.insa.megaupload.example.Action;
+import org.insa.megaupload.example.Context;
 import org.insa.megaupload.rules.ServeurRules;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;

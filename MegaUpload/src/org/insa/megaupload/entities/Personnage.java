@@ -15,6 +15,8 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.particles.ParticleSystem;
 
+import de.lessvoid.nifty.Nifty;
+
 public abstract class Personnage {
 	protected Image imgBig;
 	protected Image imgPawn;
@@ -135,8 +137,8 @@ public abstract class Personnage {
         particleEmitter.setY(this.getY());
 	}
 	
-	public void draw(Graphics g) {
-		imgPawn.draw(this.getX() - imgPawn.getWidth()/2, this.getY() - imgPawn.getHeight()/2, imgPawn.getWidth(), imgPawn.getHeight());
+	public void draw(Graphics g, Nifty nifty) {
+				imgPawn.draw(this.getX() - imgPawn.getWidth()/2, this.getY() - imgPawn.getHeight()/2, imgPawn.getWidth(), imgPawn.getHeight());
 		
 		// XXX: uniformiser draw/render
 		if (action != null) {

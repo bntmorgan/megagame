@@ -3,6 +3,7 @@ package org.insa.megaupload.example;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.insa.megaupload.control.MainScreenController;
 import org.insa.megaupload.entities.*;
 
 public class Context {
@@ -17,6 +18,7 @@ public class Context {
 	private static int cptThunes = 10000;
 	private static int cptTelechargements;
 	private static int cptServeursOuverts;
+	private static MainScreenController mainScreenController;
 	
 	/**
 	 * Ajoute de l'argent au compteur de thune 
@@ -217,6 +219,20 @@ public class Context {
 			}
 		}
 	}
-	
+
+	/**
+	 * @return the mainScreenController
+	 */
+	public static MainScreenController getMainScreenController() {
+		return mainScreenController;
+	}
+
+	/**
+	 * @param mainScreenController the mainScreenController to set
+	 */
+	public static void setMainScreenController(
+			MainScreenController mainScreenController) {
+		Context.mainScreenController = mainScreenController;
+	}
 	
 }

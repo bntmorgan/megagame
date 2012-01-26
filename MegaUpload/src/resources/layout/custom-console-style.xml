@@ -2,7 +2,7 @@
 <nifty-styles>
   <!-- console line -->
   <style id="nifty-console-line">
-    <attributes font="console.fnt" backgroundColor="#CC06" align="left" />
+    <attributes font="console.fnt" backgroundColor="#CC06" align="left" size="2"/>
   </style>
 
   <!-- the background of the textfield -->
