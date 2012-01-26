@@ -23,7 +23,7 @@ public class Deplacement extends Action {
 		this.trajets = trajets;
 	}
 	
-	private static int getDistance(Stack<Trajet> trajets) {
+	public static int getDistance(Stack<Trajet> trajets) {
 		int dist = 0;
 		for (Trajet t : trajets) {
 			dist += t.getDistance();
