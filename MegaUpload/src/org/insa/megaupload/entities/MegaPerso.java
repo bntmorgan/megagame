@@ -1,5 +1,6 @@
 package org.insa.megaupload.entities;
 
+import org.insa.megaupload.actions.OuvertureServeur;
 import org.insa.megaupload.example.Action;
 import org.insa.megaupload.example.Context;
 import org.insa.megaupload.rules.ServeurRules;
@@ -14,10 +15,6 @@ public class MegaPerso extends Personnage {
 	
 	private String nom;
 	private int nbServeursOuverts;
-	private int num;
-	private boolean ouvreUnServeur;
-	private int tempsRestant;
-	private int tempsTotal;
 	private Action hoveredAction;
 	
 	public MegaPerso(String nom, Lieu lieuInitial, Image imgBig, Image imgPawn) throws SlickException {
@@ -36,10 +33,6 @@ public class MegaPerso extends Personnage {
 	
 	public String getNom() {
 		return this.nom;
-	}
-	
-	public int getNum() {
-		return num;
 	}
 
 	public int getNbServeursOuverts() {
@@ -61,62 +54,50 @@ public class MegaPerso extends Personnage {
 	}
 
 	public void ouvrirServeur() {
-		if (!ouvreUnServeur) {
+		if (this.action == null) {
 			if (ServeurRules.peutOuvrirServeur()) {
 				System.out.println("ouverture serveur");
-				ouvreUnServeur = true;
-				tempsTotal = 10000;
-				tempsRestant = tempsTotal;
+				// XXX: constante
+				setAction(new OuvertureServeur(this, 10000));
 			} else {
 				// TODO: affichage : pas asez d'argent ! veuillez vendre plus de comptes premium !
 			}
 		}
 	}
 	
-	@Override
-	public void update(int delta) {
-		super.update(delta);
-		
-		if (ouvreUnServeur) {
-			if (tempsRestant <= 0) {
-				getLieuActuel().addServeur(new Serveur());
-				ouvreUnServeur = false;
-			} else {
-				tempsRestant -= delta;
-			}
-		}
+	public int getAvatarX() {
+		// XXX: constante
+		return 10;
 	}
 	
-	@Override
-	public void seDeplacer(Lieu l) {
-		if (!ouvreUnServeur) {
-			super.seDeplacer(l);
-		}
+	public int getAvatarY() {
+		// XXX: constantes
+		return 10 + (getAvatarHeight() + 10) * num;
+	}
+	
+	public int getAvatarWidth() {
+		return imgBig.getWidth() * getAvatarHeight() / imgBig.getHeight();
+	}
+	
+	public int getAvatarHeight() {
+		// XXX: constante
+		return 100;
 	}
 	
 	@Override
 	public void draw(Graphics g) {
 		super.draw(g);
 		
-		int persoHeight = 100;
-		int persoWidth = imgBig.getWidth()*persoHeight/imgBig.getHeight();
 		int actionHeight = 50;
 		int openWidth = openServerImg.getWidth()*actionHeight/openServerImg.getHeight();
 		int moveWidth = moveImg.getWidth()*actionHeight/moveImg.getHeight();
-		int leftmargin = 10;
 		
 		if (Context.getHoveredPerso() == this || this.hoveredAction != null) {
-			imgBig.draw(leftmargin, leftmargin + (persoHeight + leftmargin)*num, persoWidth, persoHeight);
-			openServerImg.draw(leftmargin + persoHeight, leftmargin + (leftmargin + persoHeight)*num, openWidth, actionHeight);
-			moveImg.draw(leftmargin + persoHeight, leftmargin + (leftmargin + persoHeight)*num+50, moveWidth, actionHeight);
+			imgBig.draw(getAvatarX(), getAvatarY(), getAvatarWidth(), getAvatarHeight());
+			openServerImg.draw(getAvatarX() + getAvatarWidth(), getAvatarY(), openWidth, actionHeight);
+			moveImg.draw(getAvatarX() + getAvatarWidth(), getAvatarY() + 50, moveWidth, actionHeight);
 		} else {
-			imgBig.draw(10, 10 + (persoHeight + 10)*num, persoWidth, persoHeight);
-		}
-		
-		if (ouvreUnServeur) {
-			g.drawRect(10, (persoHeight + 10)*(num + 1) - 10, persoWidth, 10);
-			int filledWidth = (int) (100. * ((double)(tempsTotal - tempsRestant)/(double)tempsTotal));
-			g.fillRect(10, (persoHeight + 10)*(num + 1) - 10, filledWidth, 10);
+			imgBig.draw(getAvatarX(), getAvatarY(), getAvatarWidth(), getAvatarHeight());
 		}
 	}
 

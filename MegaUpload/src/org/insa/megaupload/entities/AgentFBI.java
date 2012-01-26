@@ -1,5 +1,6 @@
 package org.insa.megaupload.entities;
 
+import org.insa.megaupload.actions.FermetureServeurs;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -51,13 +52,13 @@ public class AgentFBI extends Personnage {
 			}
 		}
 		
-		//s'il y a des serveurs sur la position actuelle, ils peuvent etre fermés
-		if(!this.getLieuActuel().getServeurs().isEmpty()){
+		// S'il y a des serveurs sur la position actuelle, ils peuvent etre fermés
+		if (!this.getLieuActuel().getServeurs().isEmpty() && !(this.action instanceof FermetureServeurs)) {
 			double rand = Math.random();
 			Lieu l = this.getLieuActuel();
 			double risque = rand * l.getRisque();
-			if( risque > 1){
-				l.delServeurs();
+			if (risque > 1) {
+				setAction(new FermetureServeurs(this, this.getLieuActuel().getServeurs().size() * 10000));
 			}
 		}
 		
@@ -75,13 +76,31 @@ public class AgentFBI extends Personnage {
 		this.getLieuActuel().delServeurs();
 	}
 	
+
+	public int getAvatarX() {
+		// XXX: constantes
+		return 1280 - getAvatarWidth() - 10;
+	}
+	
+	public int getAvatarY() {
+		// XXX: constantes
+		return 50 + (getAvatarHeight() + 10)*num;
+	}
+	
+	public int getAvatarWidth() {
+		return imgBig.getWidth() * getAvatarHeight() / imgBig.getHeight();
+	}
+	
+	public int getAvatarHeight() {
+		// XXX: constante
+		return 75;
+	}
+	
 	@Override
 	public void draw(Graphics g) {
 		super.draw(g);
 		
-		int height = 75;
-		int width = imgBig.getWidth()*height/imgBig.getHeight();
-		imgBig.draw(1280 - width - 10, 50 + (height+10)*num, width, height);
+		imgBig.draw(getAvatarX(), getAvatarY(), getAvatarWidth(), getAvatarHeight());
 	}
 
 }
