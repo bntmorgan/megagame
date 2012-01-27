@@ -24,7 +24,7 @@ import de.lessvoid.nifty.screen.Screen;
 
 public class MegaPerso extends Personnage {
 	private static int nbPersos = 0;
-	private static Image moveImg;
+	private static Image runawayImg;
 	private static Image openServerImg;
 	
 	private String nom;
@@ -60,8 +60,8 @@ public class MegaPerso extends Personnage {
 	}
 	
 	public static void init() throws SlickException {
-		openServerImg = new Image("resources/img/Backup-IBM-Server-icon.png");
-		moveImg = new Image("resources/img/plane.png");
+		openServerImg = new Image("resources/img/add-server.png");
+		runawayImg = new Image("resources/img/run_away.png");
 	}
 	
 	public String getNom() {
@@ -166,16 +166,16 @@ public class MegaPerso extends Personnage {
 		    	  y(Integer.toString(getAvatarY()));
 		    	  width(Integer.toString(openServerImg.getWidth() * 50/openServerImg.getHeight()));
 		    	  height("50");
-		    	  filename("resources/img/Backup-IBM-Server-icon.png");
+		    	  filename("resources/img/add-server.png");
 		    	  visibleToMouse(true);
 		    	  interactOnClick("megaPersoActionSelected(" + getNom() + ", OUVRIR_SERVEUR)");
 		      }});
 		      image(new ImageBuilder() {{
 		    	  x(Integer.toString(getAvatarX() + getAvatarWidth()));
 		    	  y(Integer.toString(getAvatarY() + 50));
-		    	  width(Integer.toString(moveImg.getWidth() * 50/moveImg.getHeight()));
+		    	  width(Integer.toString(runawayImg.getWidth() * 50/runawayImg.getHeight()));
 		    	  height("50");
-		    	  filename("resources/img/plane.png");
+		    	  filename("resources/img/run_away.png");
 		    	  visibleToMouse(true);
 		    	  interactOnClick("megaPersoActionSelected(" + getNom() + ", FUIR)");
 		      }});
