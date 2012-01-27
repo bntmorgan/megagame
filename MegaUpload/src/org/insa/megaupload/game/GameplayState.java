@@ -149,6 +149,7 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 	
 				// Dessin des personnages à leur nouvelle position
 				MegaPerso.getParticleSystem().render();
+				AgentFBI.getParticleSystem().render();
 				for (Personnage p : Context.getPersonnages()) {
 					p.draw(g, nifty);
 				}
