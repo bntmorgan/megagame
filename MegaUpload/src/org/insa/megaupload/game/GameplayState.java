@@ -73,7 +73,7 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 		// Chargée directement pour pouvoir être affichée pendant le chargement des autres
 		loadingImg = new Image("resources/img/megaupload-logo.png");
 		loseImg = new Image("resources/img/fbi-closed.jpg");
-		winImg = new Image("resources/img/megaupload-premiumacces.png");
+		winImg = new Image("resources/img/megaupload-premiumacces.jpg");
 		
 		// Chargement différé pour afficher l'écran de chargement
 		//LoadingList.setDeferredLoading(true);
@@ -229,7 +229,7 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 						this.state = MegaUploadGameState.LOST;
 					}
 					
-					if (Context.getCptServeursOuverts() >= 50) {
+					if (Context.getCptServeursOuverts() >= 1) {
 						this.state = MegaUploadGameState.WON;
 					}
 					
