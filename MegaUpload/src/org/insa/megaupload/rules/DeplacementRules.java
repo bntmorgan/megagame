@@ -1,7 +1,6 @@
 package org.insa.megaupload.rules;
 
 import org.insa.megaupload.entities.AgentFBI;
-import org.insa.megaupload.entities.Lieu;
 import org.insa.megaupload.entities.MegaPerso;
 import org.insa.megaupload.entities.Personnage;
 import org.insa.megaupload.example.Context;
