@@ -33,14 +33,19 @@ import de.lessvoid.nifty.slick2d.NiftyOverlayBasicGameState;
  * @author garfunk
  *
  */
+
 public class GameplayState extends NiftyOverlayBasicGameState {
 	
-	private boolean started;
+	private enum MegaUploadGameState {
+		LOADING, RUNNING, WON, LOST;
+	}
+	
 	private Music music;
 	private Image loadingImg;
 	private int cptSoft;
 	private Nifty nifty;
 	private boolean returnToMenu;
+	private MegaUploadGameState state;
 
 	public GameplayState() {
 		// TODO Auto-generated constructor stub
@@ -94,6 +99,8 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 
 		// On initialise le cul
 		initNifty(container, game);
+		
+		this.state = MegaUploadGameState.LOADING;
 	}
 
 	/* (non-Javadoc)
@@ -121,44 +128,51 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 	@Override
 	protected void renderGame(GameContainer container, StateBasedGame game,
 			Graphics g) throws SlickException {
-		if (!started) {
-			// XXX: laid (taille, alignement, couleur...)
-			FontUtils.drawCenter(g.getFont(), "Loading...", 0, 150, 1280);
-			loadingImg.draw((container.getWidth() - loadingImg.getWidth()) / 2,
-					(container.getHeight() - loadingImg.getHeight()) / 2);
-		} else {
-			Context.getCarte().draw(g);
-			
-			g.setColor(Color.red);
-			
-			// XXX: alignement
-			FontUtils.drawRight(g.getFont(), "Cash: " + Integer.toString(Context.getCptThunes()) + "$", 0, 10, 1280 - 15);
-			FontUtils.drawRight(g.getFont(), Integer.toString(Context.getCptServeursOuverts()) + " servers up", 0, 30, 1280 - 15);
-
-			// Dessin des personnages à leur nouvelle position
-			MegaPerso.getParticleSystem().render();
-			for (Personnage p : Context.getPersonnages()) {
-				p.draw(g, nifty);
-			}
-			
-			// XXX: debug
-			if (Context.getSelectedPerso() != null) {
-				Context.getSelectedPerso().activateParticleSystem();
-				for(MegaPerso mp : Context.getNonSelectedPerso()){
-					mp.desactivateParticleSystem();
+		switch (state) {
+			case LOADING:
+				// XXX: laid (taille, alignement, couleur...)
+				FontUtils.drawCenter(g.getFont(), "Loading...", 0, 150, 1280);
+				loadingImg.draw((container.getWidth() - loadingImg.getWidth()) / 2,
+						(container.getHeight() - loadingImg.getHeight()) / 2);
+				break;
+			case RUNNING:
+				Context.getCarte().draw(g);
+				
+				g.setColor(Color.red);
+				
+				// XXX: alignement
+				FontUtils.drawRight(g.getFont(), "Cash: " + Integer.toString(Context.getCptThunes()) + "$", 0, 10, 1280 - 15);
+				FontUtils.drawRight(g.getFont(), Integer.toString(Context.getCptServeursOuverts()) + " servers up", 0, 30, 1280 - 15);
+	
+				// Dessin des personnages à leur nouvelle position
+				MegaPerso.getParticleSystem().render();
+				for (Personnage p : Context.getPersonnages()) {
+					p.draw(g, nifty);
 				}
-				g.drawString("Selected perso: "	+ Context.getSelectedPerso().getNom(), 10, 600);
-			}
-			if (Context.getSelectedLieu() != null) {
-				g.drawString("Selected lieu: " + Context.getSelectedLieu().getNom(), 10, 620);
-			}
-
-			// XXX: debug: affichage des arêtes
-			for (Lieu l : Context.getCarte().getLieux()) {
-				for (Trajet t : l.getTrajets()) {
-					g.drawLine(t.getDepart().getX(), t.getDepart().getY(), t.getArrivee().getX(), t.getArrivee().getY());
+				
+				// XXX: debug
+				if (Context.getSelectedPerso() != null) {
+					Context.getSelectedPerso().activateParticleSystem();
+					for(MegaPerso mp : Context.getNonSelectedPerso()){
+						mp.desactivateParticleSystem();
+					}
+					g.drawString("Selected perso: "	+ Context.getSelectedPerso().getNom(), 10, 600);
 				}
-			}
+				if (Context.getSelectedLieu() != null) {
+					g.drawString("Selected lieu: " + Context.getSelectedLieu().getNom(), 10, 620);
+				}
+	
+				// XXX: debug: affichage des arêtes
+				for (Lieu l : Context.getCarte().getLieux()) {
+					for (Trajet t : l.getTrajets()) {
+						g.drawLine(t.getDepart().getX(), t.getDepart().getY(), t.getArrivee().getX(), t.getArrivee().getY());
+					}
+				}
+				break;
+			case WON:
+				break;
+			case LOST:
+				break;
 		}
 	}
 
@@ -177,29 +191,36 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 				throw new SlickException("Failed to load: " + nextResource.getDescription(), e);
 			}
 		} else {
-			if (!started) {
-				// Chargement différé terminé, démarrage du jeu
-				LoadingList.setDeferredLoading(false);
-				music.loop();
-				started = true;
+			switch (state) {
+				case LOADING:
+					// Chargement différé terminé, démarrage du jeu
+					LoadingList.setDeferredLoading(false);
+					music.loop();
+					state = MegaUploadGameState.RUNNING;
+					break;
+				case RUNNING:
+					// Update du contexte
+					Context.update(delta);
+					
+					// Toutes les secondes
+					if (++this.cptSoft % 100 == 0) {
+						// Récupérer les gains des serveurs
+						Context.incCptThunes(ServeurRules.getRegleGainBase() * Context.getCptServeursOuverts());
+					}
+					
+					// Update des actions et déplacements des personnages
+					for (Personnage p : Context.getPersonnages()) {
+						p.update(delta);
+					}
+					
+					// Update du FBI
+					FBI.getInstance().update(delta);
+					break;
+				case WON:
+					break;
+				case LOST:
+					break;
 			}
-
-			// Update du contexte
-			Context.update(delta);
-			
-			// Toutes les secondes
-			if (++this.cptSoft % 100 == 0) {
-				// Récupérer les gains des serveurs
-				Context.incCptThunes(ServeurRules.getRegleGainBase() * Context.getCptServeursOuverts());
-			}
-			
-			// Update des actions et déplacements des personnages
-			for (Personnage p : Context.getPersonnages()) {
-				p.update(delta);
-			}
-			
-			// Update du FBI
-			FBI.getInstance().update(delta);
 		}
 		
 		if (returnToMenu) {
