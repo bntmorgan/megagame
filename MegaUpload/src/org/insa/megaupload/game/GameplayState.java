@@ -157,12 +157,17 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 				// XXX: debug
 				if (Context.getSelectedPerso() != null) {
 					Context.getSelectedPerso().activateParticleSystem();
-					for(MegaPerso mp : Context.getNonSelectedPerso()){
-					if(!(mp.getAction() instanceof OuvertureServeur)){
-						mp.desactivateParticleSystem();
-					}					}
 					g.drawString("Selected perso: "	+ Context.getSelectedPerso().getNom(), 10, 600);
 				}
+
+				for (MegaPerso mp : Context.getNonSelectedPerso()) {
+					if (mp.getAction() instanceof OuvertureServeur) {
+						mp.activateParticleSystem();
+					} else {
+						mp.desactivateParticleSystem();
+					}
+				}
+
 				if (Context.getSelectedLieu() != null) {
 					g.drawString("Selected lieu: " + Context.getSelectedLieu().getNom(), 10, 620);
 				}
