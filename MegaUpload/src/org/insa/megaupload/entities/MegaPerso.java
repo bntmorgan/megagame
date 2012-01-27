@@ -44,6 +44,7 @@ public class MegaPerso extends Personnage {
 		
 		particleEmitter = new CoolFireEmitter(this.getX(), this.getY(), 6f, Color.GREEN );
 		getParticleSystem().addEmitter(particleEmitter);	
+		particleEmitter.setEnabled(false);
 	}
 	
 	public MegaPerso(String nom, String imgBig, String imgPawn) throws SlickException {
@@ -192,6 +193,14 @@ public class MegaPerso extends Personnage {
 		}
 
 		return particleSystem;
+	}
+	
+	public void activateParticleSystem(){
+		particleEmitter.setEnabled(true);
+	}
+	
+	public void desactivateParticleSystem(){
+		particleEmitter.setEnabled(false);
 	}
 
 }

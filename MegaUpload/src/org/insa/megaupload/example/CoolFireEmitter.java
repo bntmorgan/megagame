@@ -29,6 +29,8 @@ public class CoolFireEmitter  implements ParticleEmitter {
 	
 	private Color color;
 	
+	private boolean enabled = false;
+	
 	/**
 	 * Create a default fire effect at 0,0
 	 */
@@ -83,7 +85,7 @@ public class CoolFireEmitter  implements ParticleEmitter {
 	 */
 	public void update(ParticleSystem system, int delta) {
 		timer -= delta;
-		if (timer <= 0) {
+		if (timer <= 0 && this.enabled == true) {
 			timer = interval;
 			Particle p = system.getNewParticle(this, 1000);
 			p.setColor(color.getRed(), color.getGreen(), color.getBlue(), 0.5f);
@@ -119,6 +121,7 @@ public class CoolFireEmitter  implements ParticleEmitter {
 	 * @see org.newdawn.slick.particles.ParticleEmitter#setEnabled(boolean)
 	 */
 	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	/**

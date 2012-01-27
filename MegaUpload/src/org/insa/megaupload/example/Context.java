@@ -113,6 +113,20 @@ public class Context {
 	}
 
 	/**
+	 * @return the non selectedPerso
+	 */
+	public static ArrayList<MegaPerso> getNonSelectedPerso() {
+		ArrayList<MegaPerso> ret = new ArrayList<MegaPerso>();
+		for(Personnage p : personnages){
+			if(p instanceof MegaPerso && p != Context.getSelectedPerso()){
+				ret.add((MegaPerso)p);
+			}
+		}
+		return ret;
+	}
+	
+	
+	/**
 	 * @return the selectedLieu
 	 */
 	public static Lieu getSelectedLieu() {

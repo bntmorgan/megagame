@@ -3,6 +3,8 @@
  */
 package org.insa.megaupload.game;
 
+import java.util.ArrayList;
+
 import org.insa.megaupload.control.MainScreenController;
 import org.insa.megaupload.entities.AgentFBI;
 import org.insa.megaupload.entities.Carte;
@@ -139,7 +141,6 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 			FontUtils.drawRight(g.getFont(), Integer.toString(Context.getCptServeursOuverts()) + " servers up", 0, 30, 1280 - 15);
 
 			// Dessin des personnages à leur nouvelle position
-			//Personnage.getParticleSystem().render();
 			MegaPerso.getParticleSystem().render();
 			for (Personnage p : Context.getPersonnages()) {
 				p.draw(g, nifty);
@@ -147,6 +148,10 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 			
 			// XXX: debug
 			if (Context.getSelectedPerso() != null) {
+				Context.getSelectedPerso().activateParticleSystem();
+				for(MegaPerso mp : Context.getNonSelectedPerso()){
+					mp.desactivateParticleSystem();
+				}
 				g.drawString("Selected perso: "	+ Context.getSelectedPerso().getNom(), 10, 600);
 			}
 			if (Context.getSelectedLieu() != null) {
