@@ -22,13 +22,10 @@ public abstract class Personnage {
 	protected Image imgPawn;
 	private Lieu lieuActuel;
 	protected Action action;
-	// CoolFireEmitter particleEmitter;
 	private int vitesse;
 	protected int num;
 	private int frais;
 	private Timestamp timestampDenierAchat;
-	
-    //private static ParticleSystem particleSystem = null; 
     
 	protected final static double coefRand = 0;
 	
@@ -39,9 +36,7 @@ public abstract class Personnage {
 		this.vitesse = 5;
 		this.frais = 0;
 		this.timestampDenierAchat = new Timestamp(0);
-		
-		//particleEmitter = new CoolFireEmitter(this.getX(), this.getY(), 6f, Color.GREEN );
-		//getParticleSystem().addEmitter(particleEmitter);	
+			
 	}
 	
 	public int getNum() {
@@ -134,15 +129,10 @@ public abstract class Personnage {
         if (action != null) {
         	action.update(delta);
         }
-        /*
-        particleSystem.update(delta);
-        particleEmitter.setX(this.getX());
-        particleEmitter.setY(this.getY());
-        */
 	}
 	
 	public void draw(Graphics g, Nifty nifty) {
-				imgPawn.draw(this.getX() - imgPawn.getWidth()/2, this.getY() - imgPawn.getHeight()/2, imgPawn.getWidth(), imgPawn.getHeight());
+		imgPawn.draw(this.getX() - imgPawn.getWidth()/2, this.getY() - imgPawn.getHeight()/2, imgPawn.getWidth(), imgPawn.getHeight());
 		
 		// XXX: uniformiser draw/render
 		if (action != null) {
@@ -162,20 +152,4 @@ public abstract class Personnage {
 	public abstract int getAvatarWidth();
 	public abstract int getAvatarHeight();
 	
-	/*
-	public static ParticleSystem getParticleSystem() {
-		if (particleSystem == null) {
-			Image image = null;
-			try {
-				image = new Image("resources/img/dollard.png");
-			} catch (SlickException e) {
-				e.printStackTrace();
-			}
-			particleSystem = new ParticleSystem(image);
-			particleSystem.setPosition(0, 0);
-		}
-
-		return particleSystem;
-	}
-	*/
 }
