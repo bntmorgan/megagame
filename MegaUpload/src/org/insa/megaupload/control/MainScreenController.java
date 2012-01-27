@@ -180,4 +180,20 @@ public class MainScreenController implements ScreenController, KeyInputHandler {
 		this.gameplayState = gameplayState;
 	}
 	
+	/**
+	 * pupop de win
+	 * @param exit
+	 */
+	public void popupExit(final String exit) {
+		nifty.closePopup("popupWin", new EndNotify() {
+			public void perform() {
+				if ("yes".equals(exit)) {
+					gameplayState.closePopup();
+					gameplayState.setPopupOn(false);
+					gameplayState.returnToMenu();
+				}
+			}
+		});
+	}
+	
 }

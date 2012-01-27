@@ -47,6 +47,7 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 	private Nifty nifty;
 	private boolean returnToMenu;
 	private MegaUploadGameState state;
+	private boolean popupOn;
 
 	public GameplayState() {
 		// TODO Auto-generated constructor stub
@@ -185,12 +186,26 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 				
 				g.drawImage( winImg, (container.getWidth() - winImg.getWidth() ) /2,
 						(container.getHeight()-winImg.getHeight())/2 );
+
+				if(!popupOn){
+					popupOn = true;
+					nifty.createPopupWithId("popupWin", "popupWin");
+					nifty.showPopup(nifty.getCurrentScreen(), "popupWin", null);
+				}
+				
 				break;
 				
 			case LOST:
 				
 				g.drawImage( loseImg, (container.getWidth() - loseImg.getWidth() ) /2,
 								(container.getHeight()-loseImg.getHeight())/2 );
+				
+				if(!popupOn){
+					popupOn = true;
+					nifty.createPopupWithId("popupWin", "popupWin");
+					nifty.showPopup(nifty.getCurrentScreen(), "popupWin", null);
+				}
+				
 				break;
 		}
 	}
@@ -229,7 +244,7 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 						this.state = MegaUploadGameState.LOST;
 					}
 					
-					if (Context.getCptServeursOuverts() >= 1) {
+					if (Context.getCptServeursOuverts() >= 50) {
 						this.state = MegaUploadGameState.WON;
 					}
 					
@@ -286,5 +301,25 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 		this.music.stop();
 		this.returnToMenu = true;
 	}
+
+	/**
+	 * @return the popupOn
+	 */
+	public boolean isPopupOn() {
+		return popupOn;
+	}
+
+	/**
+	 * @param popupOn the popupOn to set
+	 */
+	public void setPopupOn(boolean popupOn) {
+		this.popupOn = popupOn;
+	}
+	
+	public void closePopup(){
+		nifty.closePopup("popupWin");
+	}
+	
+	
 	
 }

@@ -66,4 +66,44 @@
       </control>
     </panel>
   </popup>
+  
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+  <!-- the console popup -->
+  <!-- +++++++++++++++++++++++++++++++++++++++ -->
+  <popup id="popupWin" childLayout="center" backgroundColor="#000a">
+    <effect>
+      <onStartScreen name="fade" startColor="#0000" endColor="#000a" length="250" />
+      <onStartScreen name="playSound" sound="popup" startDelay="250" />
+      <onEndScreen name="fade" startColor="#000a" endColor="#0000" length="250" startDelay="250" />
+    </effect>
+    <panel style="nifty-panel-red" childLayout="center" padding="18px,28px,40px,16px" width="30%" height="20%" align="center" valign="center">
+      <effect>
+        <onStartScreen name="fade" start="#0" end="#f" length="150" startDelay="250"/>
+        <onStartScreen name="imageSize" timeType="exp" factor="3.5" startSize="1.5" endSize="1.0" inherit="true" length="150" startDelay="250"/>
+        <onEndScreen name="fade" start="#f" end="#0" length="150" startDelay="0"/>
+        <onEndScreen name="imageSize" timeType="exp" factor="3.5" startSize="1.0" endSize="1.5" inherit="true" length="150" startDelay="0"/>
+      </effect>
+      <panel childLayout="vertical" align="center" valign="center">
+        <effect>
+          <onStartScreen name="alphaHide" length="500" inherit="true" />
+          <onEndScreen name="fade" length="10" start="#f" end="#0" inherit="true" />
+        </effect>
+        <panel childLayout="center" height="70%" width="100%">
+          <text text="Return to menu ?" style="base-font" align="center" valign="center" color="#000f"/>
+        </panel>
+        <panel childLayout="horizontal" align="center" height="30%">
+          <panel childLayout="center" width="50%">
+            <control id="yesButton" name="button" label="Yes" width="100px" align="center">
+              <interact onClick="popupExit(yes)" /> 
+            </control>
+          </panel>
+          <panel childLayout="center" width="50%">
+            <control id="noButton" name="button" label="No" width="100px" align="center">
+              <interact onClick="popupExit(no)" /> 
+            </control>
+          </panel>
+        </panel>
+      </panel>
+    </panel>
+  </popup>
 </nifty>
