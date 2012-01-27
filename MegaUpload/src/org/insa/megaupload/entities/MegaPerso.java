@@ -46,6 +46,10 @@ public class MegaPerso extends Personnage {
 		getParticleSystem().addEmitter(particleEmitter);	
 	}
 	
+	public MegaPerso(String nom, String imgBig, String imgPawn) throws SlickException {
+		this(nom, Context.getMegaPersoSpawnLieu(), imgBig, imgPawn);
+	}
+	
 	public static void init() throws SlickException {
 		openServerImg = new Image("resources/img/Backup-IBM-Server-icon.png");
 		moveImg = new Image("resources/img/plane.png");

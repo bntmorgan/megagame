@@ -289,5 +289,14 @@ public class Context {
 	public static int rand(int max) {
 		return rand(0, max);
 	}
+	
+	public static Lieu getMegaPersoSpawnLieu() {
+		Lieu randomLieu;
+		do {
+			randomLieu = getCarte().getLieux().get(rand(getCarte().getLieux().size() -1));
+		} while (randomLieu.getNom() == AgentFBI.SPAWN_LIEU);
+		
+		return randomLieu;
+	}
 
 }

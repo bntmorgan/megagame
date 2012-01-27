@@ -14,7 +14,7 @@ public class FBI {
 	}
 	
 	private void nouvelAgent() {
-		AgentFBI a1 = new AgentFBI((Lieu) Context.getCarte().getLieux().toArray()[1]);
+		AgentFBI a1 = new AgentFBI();
 		Context.addPersonnage(a1);
 		nbAgents++;
 	}

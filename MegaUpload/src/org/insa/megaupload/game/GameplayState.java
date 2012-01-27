@@ -79,10 +79,10 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 		Context.setCarte(c);
 
 		// Initialisation personnages
-		MegaPerso kim = new MegaPerso("Kim DotCom", (Lieu) c.getLieux().toArray()[27], "resources/img/avatar-yellow.png", "resources/img/yellow.png");
-		MegaPerso mathias = new MegaPerso("Mathias Ortmann", (Lieu) c.getLieux().toArray()[10], "resources/img/avatar-green.png", "resources/img/green.png");
-		MegaPerso bram = new MegaPerso("Bram van der Kolk", (Lieu) c.getLieux().toArray()[42], "resources/img/avatar-purple.png", "resources/img/purple.png");
-		MegaPerso finn = new MegaPerso("Finn Batato", (Lieu) c.getLieux().toArray()[3], "resources/img/avatar-red.png", "resources/img/red.png");
+		MegaPerso kim = new MegaPerso("Kim DotCom", "resources/img/avatar-yellow.png", "resources/img/yellow.png");
+		MegaPerso mathias = new MegaPerso("Mathias Ortmann", "resources/img/avatar-green.png", "resources/img/green.png");
+		MegaPerso bram = new MegaPerso("Bram van der Kolk", "resources/img/avatar-purple.png", "resources/img/purple.png");
+		MegaPerso finn = new MegaPerso("Finn Batato", "resources/img/avatar-red.png", "resources/img/red.png");
 		
 		Context.addPersonnage(kim);
 		Context.addPersonnage(mathias);

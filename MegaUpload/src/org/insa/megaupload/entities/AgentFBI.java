@@ -1,6 +1,7 @@
 package org.insa.megaupload.entities;
 
 import org.insa.megaupload.actions.FermetureServeurs;
+import org.insa.megaupload.example.Context;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -11,6 +12,7 @@ public class AgentFBI extends Personnage {
 	private static int nbAgents = 0;
 	private static Image imgBig;
 	private static Image imgPawn;
+	public static final String SPAWN_LIEU = "New York";
 	
 	protected final static double coefRand = 0.9;
 	
@@ -26,8 +28,8 @@ public class AgentFBI extends Personnage {
 		imgPawn = new Image("resources/img/fbi.png");
 	}
 	
-	public AgentFBI(Lieu lieuInitial) {
-		super(lieuInitial, imgBig, imgPawn);
+	public AgentFBI() {
+		super(Context.getCarte().getMapLieux().get(SPAWN_LIEU), imgBig, imgPawn);
 		this.num = nbAgents;
 		nbAgents++;
 	}

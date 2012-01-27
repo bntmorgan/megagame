@@ -3,8 +3,9 @@ package org.insa.megaupload.entities;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.newdawn.slick.Graphics;
@@ -12,13 +13,14 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 public class Carte extends Image implements Graphe{
-	private Collection<Lieu> lieux;
+	private Map<String, Lieu> mapLieux; 
+	private List<Lieu> lieux;
 	
 	public Carte() throws SlickException {
 		super("resources/img/map.png");
 		
 		try {
-			Map<String, Lieu> lieux = new HashMap<String, Lieu>();
+			mapLieux = new HashMap<String, Lieu>();
 			BufferedReader br;
 			String filename;
 			
@@ -32,7 +34,7 @@ public class Carte extends Image implements Graphe{
 				if (data.length == 6) {
 					Lieu l = new Lieu(data[0], Integer.valueOf(data[1]), Integer.valueOf(data[2]),
 							Integer.valueOf(data[3]), Integer.valueOf(data[4]), Integer.valueOf(data[5]));
-					lieux.put(l.getNom(), l);
+					mapLieux.put(l.getNom(), l);
 				}
 			}
 			br.close();
@@ -45,8 +47,8 @@ public class Carte extends Image implements Graphe{
 				String data[] = line.split("\t");
 				
 				if (data.length == 2) {
-					Lieu depart = lieux.get(data[0]);
-					Lieu arrivee = lieux.get(data[1]);
+					Lieu depart = mapLieux.get(data[0]);
+					Lieu arrivee = mapLieux.get(data[1]);
 					
 					if (depart != null && arrivee != null) {
 						Trajet t = new Trajet(depart, arrivee);
@@ -57,14 +59,18 @@ public class Carte extends Image implements Graphe{
 			}
 			br.close();
 			
-			this.lieux = lieux.values();
+			this.lieux = new ArrayList<Lieu>(mapLieux.values());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public Collection<Lieu> getLieux() {
+	public List<Lieu> getLieux() {
 		return lieux;
+	}
+	
+	public Map<String, Lieu> getMapLieux() {
+		return mapLieux;
 	}
 	
 	public void draw(Graphics g) {
