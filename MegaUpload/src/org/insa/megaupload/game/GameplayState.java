@@ -119,7 +119,8 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 	protected void prepareNifty(Nifty nifty, StateBasedGame game) {
 		this.nifty = nifty;
 		nifty.fromXml("src/resources/layout/console.xml", "mainScreen");
-		Context.setMainScreenController((MainScreenController) nifty.getCurrentScreen().getScreenController());
+		Context.setMainScreen(nifty.getCurrentScreen());
+		Context.setMainScreenController((MainScreenController) Context.getMainScreen().getScreenController());
 		Context.getMainScreenController().setGameplayState(this);
 	}
 

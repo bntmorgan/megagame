@@ -219,7 +219,6 @@ public class MegaPerso extends Personnage {
 	        particleEmitter.setX(this.getX());
 	        particleEmitter.setY(this.getY());
 		}
-        
 	}
 	
 	public static ParticleSystem getParticleSystem() {
@@ -241,6 +240,8 @@ public class MegaPerso extends Personnage {
 	public void kill() {
 		setDead(true);
 		desactivateParticleSystem();
+		System.out.println(Context.getMainScreen().findElementByName(getNom()));
+		Context.getMainScreen().findElementByName(getNom()).hide();
 	}
 	
 	public void activateParticleSystem(){

@@ -8,6 +8,8 @@ import java.util.Random;
 import org.insa.megaupload.control.MainScreenController;
 import org.insa.megaupload.entities.*;
 
+import de.lessvoid.nifty.screen.Screen;
+
 public class Context {
 	private static Carte carte;
 	private static int cptServeursOuverts;
@@ -17,6 +19,7 @@ public class Context {
 	private static Lieu hoveredLieu;
 	private static MegaPerso hoveredPerso;
 	private static MainScreenController mainScreenController;
+	private static Screen mainScreen;
 	private static int niveau = 1;
 	private static List<Personnage> personnages = new ArrayList<Personnage>();
 	private static Action selectedAction;
@@ -311,6 +314,20 @@ public class Context {
 
 	public static void removePersonnage(Personnage personnage) {
 		personnages.remove(personnage);
+	}
+
+	/**
+	 * @return the mainScreen
+	 */
+	public static Screen getMainScreen() {
+		return mainScreen;
+	}
+
+	/**
+	 * @param mainScreen the mainScreen to set
+	 */
+	public static void setMainScreen(Screen mainScreen) {
+		Context.mainScreen = mainScreen;
 	}
 
 }
