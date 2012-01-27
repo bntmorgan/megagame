@@ -32,8 +32,8 @@ public class Lieu {
 	}
 	
 	public static void init() throws SlickException {
-		img = new Image("resources/img/City-20px.png");
-		imgH = new Image("resources/img/City-30px.png");
+		img = new Image("resources/img/City-30px.png");
+		imgH = new Image("resources/img/City-40px.png");
 		imgMu = new Image("resources/img/megaupload-logo-20px.png");
 		imgMuH = new Image("resources/img/megaupload-logo-30px.png");
 	}
