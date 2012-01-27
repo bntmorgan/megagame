@@ -206,6 +206,18 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 					// Update du contexte
 					Context.update(delta);
 					
+					if (Context.getMegaPersos().size() == 0) {
+						this.state = MegaUploadGameState.LOST;
+					}
+					
+					if (Context.getCptThunes() == 0 && Context.getCptServeursOuverts() == 0) {
+						this.state = MegaUploadGameState.LOST;
+					}
+					
+					if (Context.getCptServeursOuverts() >= 50) {
+						this.state = MegaUploadGameState.WON;
+					}
+					
 					// Toutes les secondes
 					if (++this.cptSoft % 100 == 0) {
 						// Récupérer les gains des serveurs

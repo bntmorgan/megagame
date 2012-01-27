@@ -22,7 +22,7 @@ public class Context {
 	private static Action selectedAction;
 	private static Lieu selectedLieu;
 	private static MegaPerso selectedPerso;
-	private static int[] seuilsNiveaux = { 10, 25, 50, 80 };
+	private static int[] seuilsNiveaux = { 10, 25, 40 };
 	private static List<Lieu> lieuxAvecServeurs = new ArrayList<Lieu>();
 
 	public static void addPersonnage(Personnage p) {

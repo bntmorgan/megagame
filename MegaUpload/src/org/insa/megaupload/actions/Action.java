@@ -16,8 +16,8 @@ public abstract class Action {
 	
 	public void update(int delta) {
 		if (tempsRestant <= 0) {
-			finished();
 			perso.setAction(null);
+			finished();
 		} else {
 			tempsRestant -= delta;
 		}
