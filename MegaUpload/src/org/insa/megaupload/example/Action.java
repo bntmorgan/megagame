@@ -8,5 +8,5 @@ package org.insa.megaupload.example;
  *
  */
 public enum Action {
-	OUVRIR_SERVEUR, SE_DEPLACER
+	OUVRIR_SERVEUR, FUIR
 }

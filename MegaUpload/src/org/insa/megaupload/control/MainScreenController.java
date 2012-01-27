@@ -48,7 +48,7 @@ public class MainScreenController implements ScreenController, KeyInputHandler {
 
 	public void onStartScreen() {
 		infoConsole = screen.findNiftyControl("consoleInfo", Console.class);
-		infoConsole.output("Game started HFGL");
+		infoConsole.output("Game started! Good luck and beware of the millenium :)");
 		actionConsole = screen.findNiftyControl("consoleAction", Console.class);
 		for (Personnage p : Context.getPersonnages()) {
 			if (p instanceof MegaPerso) {
@@ -153,8 +153,10 @@ public class MainScreenController implements ScreenController, KeyInputHandler {
 		Context.setSelectedAction(null);
 		if (a == Action.OUVRIR_SERVEUR) {
 			getSelectedMegaPerso(nom).ouvrirServeur();
-			Context.setSelectedAction(null);
+		} else if (a == Action.FUIR){
+			getSelectedMegaPerso(nom).seDeplacer(Context.getCarte().getLieux().get(Context.rand(Context.getCarte().getLieux().size() - 1)));
 		}
+		Context.setSelectedAction(null);
 	}
 
 	/**

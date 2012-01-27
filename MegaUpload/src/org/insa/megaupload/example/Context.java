@@ -154,13 +154,9 @@ public class Context {
 			if (clickCount == 1) {
 				MegaPerso selectedPerso = Context.getSelectedPerso();
 				Lieu selectedLieu = Context.getSelectedLieu();
-				Action selectedAction = Context.getSelectedAction();
 
 				if (selectedPerso != null && selectedLieu != null) {
 					selectedPerso.seDeplacer(selectedLieu);
-				} else if (selectedAction == Action.SE_DEPLACER && selectedLieu != null) {
-					selectedPerso.seDeplacer(selectedLieu);
-					Context.setSelectedAction(null);
 				}		
 			} else {
 				if (Context.getSelectedPerso() != null) {

@@ -156,7 +156,7 @@ public class MegaPerso extends Personnage {
 		    	  height("50");
 		    	  filename("resources/img/plane.png");
 		    	  visibleToMouse(true);
-		    	  interactOnClick("megaPersoActionSelected(" + getNom() + ", SE_DEPLACER)");
+		    	  interactOnClick("megaPersoActionSelected(" + getNom() + ", FUIR)");
 		      }});
 		}};
 	
