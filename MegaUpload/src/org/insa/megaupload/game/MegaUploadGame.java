@@ -21,7 +21,7 @@ public class MegaUploadGame extends StateBasedGame {
 	public static void main(String argv[]) {
 		try {
 			AppGameContainer app;
-			app = new AppGameContainer(new MegaUploadGame("MegaUploadFougeanoob"));
+			app = new AppGameContainer(new MegaUploadGame("MegaUpload Game"));
 			app.setDisplayMode(1280, 667, false);
 			app.setMaximumLogicUpdateInterval(10);
 			app.setMinimumLogicUpdateInterval(10);

@@ -5,6 +5,7 @@ import org.insa.megaupload.entities.Personnage;
 import org.insa.megaupload.example.Action;
 import org.insa.megaupload.example.Context;
 import org.insa.megaupload.game.GameplayState;
+import org.insa.megaupload.utils.StringUtil;
 import org.newdawn.slick.state.StateBasedGame;
 
 import de.lessvoid.nifty.EndNotify;
@@ -36,6 +37,7 @@ public class MainScreenController implements ScreenController, KeyInputHandler {
 
 	private StateBasedGame game;
 	private GameplayState gameplayState;
+	private static final int CONSOLE_COLUMNS = 29;
 	
 	public void bind(final Nifty newNifty, final Screen newScreen) {
 		nifty = newNifty;
@@ -59,7 +61,6 @@ public class MainScreenController implements ScreenController, KeyInputHandler {
 	}
 
 	public void back() {
-		// nifty.fromXml("all/intro.xml", "menu");
 		toggleConsole();
 	}
 
@@ -118,19 +119,19 @@ public class MainScreenController implements ScreenController, KeyInputHandler {
 		if ("exit".equals(command.getCommand())) {
 			back();
 		}
-		if ("killdamothafucka".equals(command.getCommand())
-				|| "kdm".equals(command.getCommand())) {
+		if ("killdamothafucka".equals(command.getCommand()) || "kdm".equals(command.getCommand())) {
 			gameplayState.returnToMenu();
 		}
 		
-	}
+	};
 	
-	public void addActionText(String text){
+	public void addActionText(String text){		
 		actionConsole.output(text);
 	}
 	
 	public void addInfoText(String text){
-		infoConsole.output(text);
+		for(String str : StringUtil.getParts(text,CONSOLE_COLUMNS))
+			infoConsole.output(str);
 	}
 	
 	
