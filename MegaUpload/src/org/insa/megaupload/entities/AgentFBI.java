@@ -20,7 +20,7 @@ public class AgentFBI extends Personnage {
 	private static Image imgPawn;
 	public static final String SPAWN_LIEU = "New York";
 	
-	protected final static double coefRand = 0;
+	protected static double coefRand = 1;
 	
 	private MegaPerso poursuivi;
 	private int num;
@@ -30,6 +30,14 @@ public class AgentFBI extends Personnage {
 	
 	public double getCoefRand() {
 		return coefRand;
+	}
+	
+	public static double getFBICoefRand() {
+		return coefRand;
+	}
+	
+	public static void setFBICoefRand(double coef) {
+		AgentFBI.coefRand = coef;
 	}
 	
 	public static void init() throws SlickException {

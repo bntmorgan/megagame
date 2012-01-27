@@ -24,7 +24,7 @@ public abstract class Personnage {
 
 	private static ParticleSystem particleSystem = null; 
     
-	protected final static double coefRand = 0;
+	protected static double coefRand = 0;
 	
 	private int vitesse;
 	
