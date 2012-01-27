@@ -70,7 +70,7 @@ public class MenuController implements ScreenController {
 	}
 
 	public void rules() {
-		nifty.fromXml("hint/hint.xml", "start");
+		nifty.gotoScreen("menu");
 	}
 
 	public void credits() {

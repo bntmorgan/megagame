@@ -14,7 +14,7 @@
   <registerSound id="panel" filename="src/resources/sound/34556__Corsica_S__reverse_bass_blip_2.wav" />
   <registerSound id="select" filename="src/resources/sound/select.wav" />
   <registerSound id="popup" filename="src/resources/sound/744__elmomo__MutantJewsArp.ogg" />
-  <registerMusic id="outro" filename="src/resources/sound/a.ogg" />
+  <registerMusic id="outro" filename="src/resources/sound/megasongremix.ogg" />
 
   <style id="special-scrollpanel#scrollpanel">
     <attributes />
@@ -74,35 +74,48 @@
 
   <controlDefinition name="endscroller-page-1">
     <panel childLayout="vertical" width="100%">
-      <panel height="600px" childLayout="vertical" />
-      <text style="button-font" text="Nifty GUI&#13;&#10;(Examples/Demo)" align="center" />
       <panel height="100px" childLayout="vertical" />
-      <text style="button-font" text="written and performed&#13;&#10;by void" align="center" />
-      <panel height="100px" childLayout="vertical" />
-        <text style="button-font" text="Nifty is written in Java&#13;&#10;" align="center" />
-        <image filename="src/resources/img/biatch.jpeg" align="center" />
-      <panel height="100px" childLayout="vertical" />
-        <text style="button-font" text="Nifty is using the following libs:" align="center" />
+      <text style="button-font" text="Modouv Credige INSA Toulouse 2011-2012&#13;&#10;Initiation à la conception de jeux video&#13;&#10;encadré par Damien DJAOUTI" align="center" />
+      <image filename="src/resources/img/game_pad.png" align="center" />
       <panel height="50px" childLayout="vertical" />
-        <text style="button-font" text="LWJGL&#13;&#10;" align="center" />
-        <image filename="src/resources/img/biatch.jpeg" align="center" />
+      <text style="button-font" text="Ben, Juju, Flof, Flow and Alex&#13;&#10;" align="center" />
+      <image filename="src/resources/img/kim-sick.png" align="center" />
+      <text style="button-font" text="present... &#13;&#10;" align="center" />
       <panel height="50px" childLayout="vertical" />
-        <text style="button-font" text="Slick2D&#13;&#10;" align="center" />
-        <image filename="src/resources/img/biatch.jpeg" align="center" />
+        <image filename="src/resources/img/megaupload-play.png" align="center" />
+        <text style="button-font" text="The MegaUpload Escape Game&#13;&#10;" align="center" />
+      <panel height="50px" childLayout="vertical" />
+        <text style="button-font" text="The Megauplod Game is using the following libraries:" align="center" />
+      <panel height="50px" childLayout="vertical" />
+        <panel childLayout="horizontal" align="center">
+        	<panel childLayout="vertical">
+        		<text style="button-font" text="Nifty&#13;&#10;" align="center" />
+      			<image filename="src/resources/img/intro-logo.png" align="center" />
+        	</panel>
+        	<panel childLayout="vertical">
+        		<text style="button-font" text="LWJGL&#13;&#10;" align="center" />
+        	</panel>
+        	<panel childLayout="vertical">
+        		<text style="button-font" text="Slick2D&#13;&#10;" align="center" />
+        		<image filename="src/resources/img/slicklogo.png" align="center" />
+        	</panel>
+        </panel>
+      
       <panel height="50px" childLayout="vertical" />
         <panel childLayout="horizontal" align="center">
           <panel childLayout="vertical">
-            <text style="button-font" text="OpenGL&#13;&#10;" align="center" />
-            <image filename="src/resources/img/biatch.jpeg" align="center" />
+            <text style="button-font" text="OpenAL&#13;&#10;" align="center" />
+            
           </panel>
           <panel childLayout="vertical">
-            <text style="button-font" text="OpenAL&#13;&#10;" align="center" />
-            <image filename="src/resources/img/biatch.jpeg" align="center" />
+            <text style="button-font" text="OpenGL&#13;&#10;" align="center" />
+            <image filename="src/resources/img/opengl-logo.png" align="center" />
+          </panel>
+          <panel childLayout="vertical">
+        	<text style="button-font" text="Ogg Vorbis with JOrbis&#13;&#10;" align="center" />
+        	
           </panel>
         </panel>
-      <panel height="50px" childLayout="vertical" />
-        <text style="button-font" text="Ogg Vorbis with JOrbis&#13;&#10;" align="center" />
-        <image filename="src/resources/img/biatch.jpeg" align="center" />
       <panel height="150px" childLayout="vertical" />
         <text style="button-font" text="This Example uses creative commons licenced sound samples&#13;&#10;and music from the following Sources" align="center" />
       <panel height="50px" childLayout="vertical" />
@@ -114,17 +127,9 @@
 34556__Corsica_S__reverse_bass_blip_2.wav&#13;&#10;
 744__elmomo__MutantJewsArp.wav&#13;&#10;" align="center" />
       <panel height="50px" childLayout="vertical" />
-        <text style="button-font" text="Nine Inch Nails&#13;&#10;" align="center" />
-        <image filename="src/resources/img/biatch.jpeg" align="center" />
-      <panel height="30px" childLayout="vertical" />
-        <text style="button-font" text="&quot;The Four of Us are Dying&quot;&#13;&#10;
-from the&#13;&#10;
-&quot;creative commons attribution-noncommercial share alike&quot;&#13;&#10;
-licensed album&#13;&#10;
-&quot;The Slip&quot;&#13;&#10;
-&#13;&#10;
-&#13;&#10;
-Thank you Trent.&#13;&#10;" align="center" />
+        <text style="button-font" text="The Megaupload Song&#13;&#10;The Megaupload Song (Stanley Dubstep Remix)&#13;&#10;by&#13;&#10;Kim Kardashian, Puff Daddy, Will.I.Am,&#13;&#10;Alicia Keys, Snoop Dogg, Chris Brown&#13;&#10;Kanye West, Lil John, Jamie Foxx&#13;&#10;Serena Williams, Russel Simons&#13;&#10;Brett Rattner, Floyd Mayweather, Estelle&#13;&#10;Carmello Anthony, Ciara, The Game&#13;&#10;Mary J Blidge, Swizz Beatz, Kim Dotcom&#13;&#10;Kim Junior, etc&#13;&#10;" align="center" />
+        <image filename="src/resources/img/megaupload-song.png" align="center" />
+      
         <panel height="200px" childLayout="vertical" />
         <text style="button-font" text="THE END" align="center" />
         <panel height="20px" childLayout="vertical" />
@@ -275,7 +280,7 @@ Thank you Trent.&#13;&#10;" align="center" />
         <panel height="64px" childLayout="vertical">
           <effect>
             <onActive overlay="true" name="blendMode" blendMode="multiply" post="true" />
-            <onActive overlay="true" name="imageOverlay" filename="src/resources/img/megaupload-logo.png" post="true"/>
+            <!-- <onActive overlay="true" name="imageOverlay" filename="src/resources/img/vide.png" post="true"/>  -->
           </effect>
         </panel>
       </panel>
