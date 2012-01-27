@@ -167,5 +167,10 @@ public class AgentFBI extends Personnage {
 			imgBig.draw(getAvatarX(), getAvatarY(), getAvatarWidth(), getAvatarHeight());
 		}
 	}
+	
+	@Override
+	public int getVitesse() {
+		return super.getVitesse()+Context.getNiveau()+1;
+	}
 
 }

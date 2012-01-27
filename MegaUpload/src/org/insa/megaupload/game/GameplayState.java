@@ -327,10 +327,12 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 						Context.setSelectedPerso(Context.getMegaPersos().get(3));
 					break;
 				case Input.KEY_A:
-					Context.getSelectedPerso().ouvrirServeur();
+					if (Context.getSelectedPerso() != null)
+						Context.getSelectedPerso().ouvrirServeur();
 					break;
 				case Input.KEY_R:
-					Context.getSelectedPerso().seDeplacer(Context.getCarte().getLieux().get(Context.rand(Context.getCarte().getLieux().size() - 1)));
+					if (Context.getSelectedPerso() != null)
+						Context.getSelectedPerso().seDeplacer(Context.getCarte().getLieux().get(Context.rand(Context.getCarte().getLieux().size() - 1)));
 					break;
 				// Impossible
 				default:
