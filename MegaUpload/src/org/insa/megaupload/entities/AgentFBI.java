@@ -3,7 +3,6 @@ package org.insa.megaupload.entities;
 import java.awt.Color;
 
 import org.insa.megaupload.actions.Arreter;
-import org.insa.megaupload.actions.Deplacement;
 import org.insa.megaupload.actions.FermetureServeurs;
 import org.insa.megaupload.example.Context;
 import org.insa.megaupload.example.CoolFireEmitter;

@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -76,7 +77,19 @@ public class Carte extends Image implements Graphe{
 	public void draw(Graphics g) {
 		super.draw();
 		
+		g.setAntiAlias(true);
+		g.setLineWidth(2);
+		g.setColor(new Color(44, 86, 106));
+		
+		// XXX: debug: affichage des arêtes
 		for (Lieu l : lieux) {
+			for (Trajet t : l.getTrajets()) {
+				g.drawLine(t.getDepart().getX(), t.getDepart().getY(), t.getArrivee().getX(), t.getArrivee().getY());
+			}
+		}
+		
+		for (Lieu l : lieux) {
+			// Afficage des lieux
 			l.draw(g);
 		}
 	}

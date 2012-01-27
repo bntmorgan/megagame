@@ -7,7 +7,6 @@ import org.insa.megaupload.example.Action;
 import org.insa.megaupload.example.Context;
 import org.insa.megaupload.example.CoolFireEmitter;
 import org.insa.megaupload.rules.ServeurRules;
-import org.lwjgl.opengl.Drawable;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;

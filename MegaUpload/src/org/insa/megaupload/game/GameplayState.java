@@ -11,7 +11,6 @@ import org.insa.megaupload.entities.FBI;
 import org.insa.megaupload.entities.Lieu;
 import org.insa.megaupload.entities.MegaPerso;
 import org.insa.megaupload.entities.Personnage;
-import org.insa.megaupload.entities.Trajet;
 import org.insa.megaupload.example.Context;
 import org.insa.megaupload.rules.ServeurRules;
 import org.insa.megaupload.utils.FontUtils;
@@ -19,6 +18,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.loading.DeferredResource;
@@ -145,11 +145,12 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 				Context.getCarte().draw(g);
 				
 				g.setColor(Color.red);
+				g.setAntiAlias(true);
 				
 				// XXX: alignement
 				FontUtils.drawRight(g.getFont(), "Cash: " + Integer.toString(Context.getCptThunes()) + "$", 0, 10, 1280 - 15);
 				FontUtils.drawRight(g.getFont(), Integer.toString(Context.getCptServeursOuverts()) + " servers up", 0, 30, 1280 - 15);
-	
+				
 				// Dessin des personnages à leur nouvelle position
 				MegaPerso.getParticleSystem().render();
 				AgentFBI.getParticleSystem().render();
@@ -175,12 +176,7 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 					g.drawString("Selected lieu: " + Context.getSelectedLieu().getNom(), 10, 620);
 				}
 	
-				// XXX: debug: affichage des arêtes
-				for (Lieu l : Context.getCarte().getLieux()) {
-					for (Trajet t : l.getTrajets()) {
-						g.drawLine(t.getDepart().getX(), t.getDepart().getY(), t.getArrivee().getX(), t.getArrivee().getY());
-					}
-				}
+
 				break;
 			case WON:
 				
@@ -294,6 +290,38 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 		Context.mouseClicked(button, x, y, clickCount);
 	}
 
+	@Override
+	public void keyPressed(int key, char c) {
+			switch (key) {
+				case Input.KEY_1:
+					if (Context.getMegaPersos().size() >= 1)
+						Context.setSelectedPerso(Context.getMegaPersos().get(0));
+					break;
+				case Input.KEY_2:
+					if (Context.getMegaPersos().size() >= 2)
+						Context.setSelectedPerso(Context.getMegaPersos().get(1));
+					break;
+				case Input.KEY_3:
+					if (Context.getMegaPersos().size() >= 3)
+						Context.setSelectedPerso(Context.getMegaPersos().get(2));
+					break;
+				case Input.KEY_4:
+					if (Context.getMegaPersos().size() >= 4)
+						Context.setSelectedPerso(Context.getMegaPersos().get(3));
+					break;
+				case Input.KEY_A:
+					Context.getSelectedPerso().ouvrirServeur();
+					break;
+				case Input.KEY_R:
+					Context.getSelectedPerso().seDeplacer(Context.getCarte().getLieux().get(Context.rand(Context.getCarte().getLieux().size() - 1)));
+					break;
+				// Impossible
+				default:
+					break;
+			}
+
+	}
+	
 	/**
 	 * @param returnToMenu the returnToMenu to set
 	 */

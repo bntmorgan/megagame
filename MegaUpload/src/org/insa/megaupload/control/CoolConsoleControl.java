@@ -25,6 +25,7 @@ import de.lessvoid.xml.xpp3.Attributes;
 
 public class CoolConsoleControl extends AbstractController implements Console {
 	private Nifty nifty;
+	@SuppressWarnings("unused")
 	private Screen screen;
 	private Element element;
 	private ListBox<String> listBox;
