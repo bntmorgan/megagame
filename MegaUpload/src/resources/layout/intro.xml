@@ -156,10 +156,10 @@ Thank you Trent.&#13;&#10;" align="center" />
         <panel id="mainMenu" font="menu.fnt" style="menu" childLayout="center" padding="50px,20px,60px,20px">
           <panel childLayout="horizontal" width="100%" height="100%">
             <panel width="50%" childLayout="absolute">
-              <image id="thumbHelloWorld" style="thumbStyle" x="150px" y="50px" filename="src/resources/img/megaupload-logo.png" />
-              <image id="thumbHint" style="thumbStyle" x="150px" y="50px" filename="src/resources/img/megaupload-logo.png" />
-              <image id="thumbCredits" style="thumbStyle" x="150px" y="50px" filename="src/resources/img/biatch.jpeg" />
-              <image id="thumbExit" style="thumbStyle" x="150px" y="50px" filename="src/resources/img/megaupload-logo.png" />
+              <image id="thumbHelloWorld" style="thumbStyle" x="150px" y="50px" filename="src/resources/img/megaupload-play.png" />
+              <image id="thumbHint" style="thumbStyle" x="150px" y="50px" filename="src/resources/img/megaupload-rules.png" />
+              <image id="thumbCredits" style="thumbStyle" x="150px" y="50px" filename="src/resources/img/megaupload-credits.png" />
+              <image id="thumbExit" style="thumbStyle" x="150px" y="50px" filename="src/resources/img/megaupload-exit.png" />
             </panel>
             <control id="menuScrollPanel" name="scrollPanel" style="special-scrollpanel" horizontal="false" stepSizeY="30" height="100%">
               <panel id="huhu-1" childLayout="center" width="100%" height="400px" padding="0px,40px,0px,40px">
