@@ -3,10 +3,6 @@
  */
 package org.insa.megaupload.game;
 
-import java.util.ArrayList;
-
-import javax.swing.plaf.basic.BasicSliderUI.ActionScroller;
-
 import org.insa.megaupload.actions.OuvertureServeur;
 import org.insa.megaupload.control.MainScreenController;
 import org.insa.megaupload.entities.AgentFBI;
@@ -139,6 +135,7 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 						(container.getHeight() - loadingImg.getHeight()) / 2);
 				break;
 			case RUNNING:
+				g.setBackground(new Color(64, 122, 156));
 				Context.getCarte().draw(g);
 				
 				g.setColor(Color.red);
