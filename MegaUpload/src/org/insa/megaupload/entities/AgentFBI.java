@@ -73,7 +73,7 @@ public class AgentFBI extends Personnage {
 		if(this.getAction() == null){
 		
 			for (MegaPerso megaPerso : Context.getMegaPersos()){
-				if(megaPerso.getLieuActuel().equals(this.getLieuActuel())){
+				if( megaPerso.getDeplacement() == null && megaPerso.getLieuActuel().equals(this.getLieuActuel())){
 					this.setAction(new Arreter(this, 1000, megaPerso));
 					break;
 				}

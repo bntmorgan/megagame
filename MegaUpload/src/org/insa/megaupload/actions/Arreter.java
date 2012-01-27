@@ -24,7 +24,9 @@ public class Arreter extends Action {
 	 */
 	@Override
 	public void finished() {
-		megaPerso.kill();
+		if( megaPerso.getDeplacement() == null && megaPerso.getLieuActuel().equals(perso.getLieuActuel())){
+			megaPerso.kill();
+		}
 	}
 
 }
