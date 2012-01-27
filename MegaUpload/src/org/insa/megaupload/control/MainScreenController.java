@@ -48,7 +48,7 @@ public class MainScreenController implements ScreenController, KeyInputHandler {
 
 	public void onStartScreen() {
 		infoConsole = screen.findNiftyControl("consoleInfo", Console.class);
-		infoConsole.output("Game started! Good luck and beware of the millenium :)");
+		this.addInfoText("Game started! Good luck and beware of the millenium :)");
 		actionConsole = screen.findNiftyControl("consoleAction", Console.class);
 		for (Personnage p : Context.getPersonnages()) {
 			if (p instanceof MegaPerso) {

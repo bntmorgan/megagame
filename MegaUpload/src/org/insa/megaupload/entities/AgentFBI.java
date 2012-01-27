@@ -1,5 +1,9 @@
 package org.insa.megaupload.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.insa.megaupload.actions.Arreter;
 import org.insa.megaupload.actions.FermetureServeurs;
 import org.insa.megaupload.example.Context;
 import org.newdawn.slick.Graphics;
@@ -64,6 +68,16 @@ public class AgentFBI extends Personnage {
 			if (risque > 1) {
 				setAction(new FermetureServeurs(this, this.getLieuActuel().getServeurs().size() * 10000));
 			}
+		} 
+		
+		if(this.getAction() == null){
+		
+			for (MegaPerso megaPerso : Context.getMegaPersos()){
+				if(megaPerso.getLieuActuel().equals(this.getLieuActuel())){
+					this.setAction(new Arreter(this, 1000, megaPerso));
+					break;
+				}
+			}
 		}
 		
 		super.update(delta);
@@ -102,9 +116,10 @@ public class AgentFBI extends Personnage {
 	
 	@Override
 	public void draw(Graphics g, Nifty nifty) {
-		super.draw(g, nifty);
-		
-		imgBig.draw(getAvatarX(), getAvatarY(), getAvatarWidth(), getAvatarHeight());
+		if(!isDead()){
+			super.draw(g, nifty);		
+			imgBig.draw(getAvatarX(), getAvatarY(), getAvatarWidth(), getAvatarHeight());
+		}
 	}
 
 }

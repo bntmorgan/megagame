@@ -20,8 +20,9 @@ public abstract class Personnage {
 	protected Image imgPawn;
 	private Lieu lieuActuel;
 	protected int num;
-	
-    private static ParticleSystem particleSystem = null; 
+	private boolean dead;
+
+	private static ParticleSystem particleSystem = null; 
     
 	protected final static double coefRand = 0;
 	
@@ -32,9 +33,6 @@ public abstract class Personnage {
 		this.imgBig = imgBig;
 		this.imgPawn = imgPawn;
 		this.vitesse = 5;
-		
-		//particleEmitter = new CoolFireEmitter(this.getX(), this.getY(), 6f, Color.GREEN );
-		//getParticleSystem().addEmitter(particleEmitter);	
 		
 		Context.addPersonnage(this);
 	}
@@ -154,22 +152,26 @@ public abstract class Personnage {
 	}
 
 	public void update(int delta) {
-        if (action != null) {
-        	action.update(delta);
-        }
+		if(!isDead()){
+	        if (action != null) {
+	        	action.update(delta);
+	        }
+		}
 	}
 	
 	public void kill(){
-		Context.removePersonnage(this);
+		dead = true;
 	}
 
 	
 	public void draw(Graphics g, Nifty nifty) {
-		imgPawn.draw(this.getX() - imgPawn.getWidth()/2, this.getY() - imgPawn.getHeight()/2, imgPawn.getWidth(), imgPawn.getHeight());
-		
-		// XXX: uniformiser draw/render
-		if (action != null) {
-			action.render(g);
+		if(!isDead()){
+			imgPawn.draw(this.getX() - imgPawn.getWidth()/2, this.getY() - imgPawn.getHeight()/2, imgPawn.getWidth(), imgPawn.getHeight());
+			
+			// XXX: uniformiser draw/render
+			if (action != null) {
+				action.render(g);
+			}
 		}
 	}
 	
@@ -185,6 +187,20 @@ public abstract class Personnage {
 			particleSystem.setPosition(0, 0);
 		}
 		return particleSystem;
+	}
+	
+    /**
+	 * @return the dead
+	 */
+	public boolean isDead() {
+		return dead;
+	}
+
+	/**
+	 * @param dead the dead to set
+	 */
+	public void setDead(boolean dead) {
+		this.dead = dead;
 	}
 }
 

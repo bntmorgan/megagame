@@ -3,16 +3,20 @@
  */
 package org.insa.megaupload.actions;
 
+import org.insa.megaupload.entities.MegaPerso;
 import org.insa.megaupload.entities.Personnage;
 
 /**
  * @author garfunk
  *
  */
-public class Poursuivre extends Action {
+public class Arreter extends Action {
 
-	public Poursuivre(Personnage perso, int tempsTotal) {
+	private MegaPerso megaPerso;
+	
+	public Arreter(Personnage perso, int tempsTotal, MegaPerso megaPerso) {
 		super(perso, tempsTotal);
+		this.megaPerso = megaPerso;
 	}
 
 	/* (non-Javadoc)
@@ -20,7 +24,7 @@ public class Poursuivre extends Action {
 	 */
 	@Override
 	public void finished() {
-		perso.kill();
+		megaPerso.kill();
 	}
 
 }

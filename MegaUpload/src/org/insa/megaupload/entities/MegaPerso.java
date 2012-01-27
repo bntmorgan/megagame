@@ -99,13 +99,15 @@ public class MegaPerso extends Personnage {
 	
 	@Override
 	public void draw(Graphics g, Nifty nifty) {
-		super.draw(g, nifty);
-		
-		if (timestampDenierAchat > (System.currentTimeMillis() - 1*1000)) {
-			String str = String.valueOf(-this.frais) + "$";
-			int x = this.getX() - ((imgPawn.getWidth()/2 + g.getFont().getWidth(str))/2);
-			int y = this.getY() + imgPawn.getHeight()/2;
-			g.drawString(str, x, y);
+		if(!isDead()){
+			super.draw(g, nifty);
+
+			if (timestampDenierAchat > (System.currentTimeMillis() - 1*1000)) {
+				String str = String.valueOf(-this.frais) + "$";
+				int x = this.getX() - ((imgPawn.getWidth()/2 + g.getFont().getWidth(str))/2);
+				int y = this.getY() + imgPawn.getHeight()/2;
+				g.drawString(str, x, y);
+			}
 		}
 	}
 	
@@ -189,14 +191,16 @@ public class MegaPerso extends Personnage {
 	
 	@Override
 	public void update(int delta) {
-		super.update(delta);
-        if (action != null) {
-        	action.update(delta);
-        }
-        
-        particleSystem.update(delta);
-        particleEmitter.setX(this.getX());
-        particleEmitter.setY(this.getY());
+		if(!isDead()){
+			super.update(delta);
+	        if (action != null) {
+	        	action.update(delta);
+	        }
+	        
+	        particleSystem.update(delta);
+	        particleEmitter.setX(this.getX());
+	        particleEmitter.setY(this.getY());
+		}
         
 	}
 	
@@ -217,7 +221,8 @@ public class MegaPerso extends Personnage {
 	
 	@Override
 	public void kill() {
-		
+		setDead(true);
+		desactivateParticleSystem();
 	}
 	
 	public void activateParticleSystem(){

@@ -118,7 +118,7 @@ public class Context {
 	public static ArrayList<MegaPerso> getNonSelectedPerso() {
 		ArrayList<MegaPerso> ret = new ArrayList<MegaPerso>();
 		for(Personnage p : personnages){
-			if(p instanceof MegaPerso && p != Context.getSelectedPerso()){
+			if(p instanceof MegaPerso && p != Context.getSelectedPerso() && !p.isDead()){
 				ret.add((MegaPerso)p);
 			}
 		}
@@ -137,7 +137,7 @@ public class Context {
 	 * @return the selectedPerso
 	 */
 	public static MegaPerso getSelectedPerso() {
-		return selectedPerso;
+		return (selectedPerso != null && selectedPerso.isDead()) ? null : selectedPerso;
 	}
 
 	public static void incCptServeurs() {
@@ -275,7 +275,7 @@ public class Context {
 	public static List<MegaPerso> getMegaPersos() {
 		List<MegaPerso> megaPersos = new ArrayList<MegaPerso>();
 		for (Personnage p : getPersonnages()) {
-			if (p instanceof MegaPerso) {
+			if (p instanceof MegaPerso && !p.isDead()) {
 				megaPersos.add((MegaPerso) p);
 			}
 		}
