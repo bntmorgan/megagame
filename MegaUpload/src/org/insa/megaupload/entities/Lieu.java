@@ -82,11 +82,15 @@ public class Lieu {
 	public void delServeurs() {
 		//décrémente le compteur global de serveurs
 		Context.decCptServeurs(this.serveurs.size());
+		Context.removeLieuAvecServeur(this);
 		this.serveurs.removeAll(this.serveurs);
 	}
 
 	public void addServeur(Serveur serveur) {
 		this.serveurs.add(serveur);
+		if (this.serveurs.size() == 1) {
+			Context.addLieuAvecServeur(this);
+		}
 		Context.incCptServeurs();
 	}
 

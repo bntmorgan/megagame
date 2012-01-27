@@ -6,6 +6,7 @@ package org.insa.megaupload.game;
 import org.insa.megaupload.control.MainScreenController;
 import org.insa.megaupload.entities.AgentFBI;
 import org.insa.megaupload.entities.Carte;
+import org.insa.megaupload.entities.FBI;
 import org.insa.megaupload.entities.Lieu;
 import org.insa.megaupload.entities.MegaPerso;
 import org.insa.megaupload.entities.Personnage;
@@ -88,24 +89,12 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 		Context.addPersonnage(bram);
 		Context.addPersonnage(finn);
 
-		// Initialisation agents FBI
-		AgentFBI a1 = new AgentFBI((Lieu) c.getLieux().toArray()[1]);
-		AgentFBI a2 = new AgentFBI((Lieu) c.getLieux().toArray()[2]);
-		AgentFBI a3 = new AgentFBI((Lieu) c.getLieux().toArray()[3]);
-		AgentFBI a4 = new AgentFBI((Lieu) c.getLieux().toArray()[4]);
-		
-		Context.addPersonnage(a1);
-		Context.addPersonnage(a2);
-		Context.addPersonnage(a3);
-		Context.addPersonnage(a4);
-		
-		a1.poursuivre(kim);
-		
-		Context.setSelectedPerso(kim);
+		// Initialisation FBI
+		FBI.getInstance();
 		
 		// Paramètres d'affichage
 		container.setShowFPS(false);
-		
+
 		// On initialise le cul
 		initNifty(container, game);
 	}
@@ -195,6 +184,9 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 				started = true;
 			}
 
+			// Update du contexte
+			Context.update(delta);
+			
 			// Toutes les secondes
 			if (++this.cptSoft % 100 == 0) {
 				// Récupérer les gains des serveurs
@@ -206,9 +198,11 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 				p.update(delta);
 			}
 			
+			// Update du FBI
+			FBI.getInstance().update(delta);
 		}
 		
-		if(returnToMenu){
+		if (returnToMenu) {
 			game.enterState(0);
 			returnToMenu = false;
 		}

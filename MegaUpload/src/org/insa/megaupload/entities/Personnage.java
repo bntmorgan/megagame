@@ -1,66 +1,59 @@
 package org.insa.megaupload.entities;
 
-import java.awt.Color;
-import java.sql.Timestamp;
 import java.util.Stack;
 
 import org.insa.megaupload.actions.Action;
 import org.insa.megaupload.actions.Deplacement;
 import org.insa.megaupload.example.Context;
-import org.insa.megaupload.example.CoolFireEmitter;
 import org.insa.megaupload.rules.DeplacementRules;
 import org.insa.megaupload.utils.Algo;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.particles.ParticleSystem;
 
 import de.lessvoid.nifty.Nifty;
 
 public abstract class Personnage {
+	protected final static double coefRand = 0;
+	protected Action action;
 	protected Image imgBig;
 	protected Image imgPawn;
 	private Lieu lieuActuel;
-	protected Action action;
-	private int vitesse;
 	protected int num;
-	private int frais;
-	private Timestamp timestampDenierAchat;
-    
-	protected final static double coefRand = 0;
+	private int vitesse;
 	
 	public Personnage(Lieu lieuInitial, Image imgBig, Image imgPawn) {
 		this.lieuActuel = lieuInitial;
 		this.imgBig = imgBig;
 		this.imgPawn = imgPawn;
 		this.vitesse = 5;
-		this.frais = 0;
-		this.timestampDenierAchat = new Timestamp(0);
-			
+		
+		//particleEmitter = new CoolFireEmitter(this.getX(), this.getY(), 6f, Color.GREEN );
+		//getParticleSystem().addEmitter(particleEmitter);	
 	}
 	
-	public int getNum() {
-		return num;
+	public void draw(Graphics g, Nifty nifty) {
+				imgPawn.draw(this.getX() - imgPawn.getWidth()/2, this.getY() - imgPawn.getHeight()/2, imgPawn.getWidth(), imgPawn.getHeight());
+		
+		// XXX: uniformiser draw/render
+		if (action != null) {
+			action.render(g);
+		}
 	}
 	
-	public int getVitesse() {
-		return vitesse;
+	public Action getAction() {
+		return action;
 	}
+
+	public abstract int getAvatarHeight();
+	
+	public abstract int getAvatarWidth();
+	
+	public abstract int getAvatarX();
+	
+	public abstract int getAvatarY();
 	
 	public double getCoefRand() {
 		return coefRand;
-	}
-
-	public Lieu getLieuActuel() {
-		return lieuActuel;
-	}
-	
-	public void setLieuActuel(Lieu l) {
-		this.lieuActuel = l;
-	}
-	
-	public void setAction(Action a) {
-		this.action = a;
 	}
 	
 	public Deplacement getDeplacement() {
@@ -71,26 +64,23 @@ public abstract class Personnage {
 		}
 	}
 	
-	public void seDeplacer(Lieu l) {
-		if (action == null) { // On ne fait rien
-			Stack<Trajet> trajets = (Stack<Trajet>) Algo.PCC(Context.getCarte(), this.getLieuActuel(), l, 1 - getCoefRand());
-			if (!trajets.isEmpty()) {
-				setAction(new Deplacement(this, this.getLieuActuel(), l, trajets));
-			}
-		} else if (action instanceof Deplacement) { // On se déplace déjà : on ajuste le déplacement
-			Lieu curCible = getDeplacement().getEtape().getCible(this.getLieuActuel());
-			Stack<Trajet> trajets = (Stack<Trajet>) Algo.PCC(Context.getCarte(), curCible, l, 1 - getCoefRand());
-			if (!trajets.isEmpty()) {
-				if (DeplacementRules.peutSeDeplacer(Deplacement.getDistance(trajets))) {
-					trajets.push(getDeplacement().getEtape());
-					getDeplacement().setEtapes(trajets);
-					getDeplacement().setCible(l);
-				}
-				else {
-					Context.getMainScreenController().addInfoText("Pas assez d'argent pour voyager ! Veuillez vendre plus de comptes premium !");
-				}
-			}
-		}
+	public int getHeight() {
+		return imgPawn.getHeight();
+	}
+	
+	public Lieu getLieuActuel() {
+		return lieuActuel;
+	}
+	
+	public int getNum() {
+		return num;
+	}
+	
+	public int getVitesse() {
+		return vitesse;
+	}
+	public int getWidth() {
+		return imgPawn.getWidth();
 	}
 	
 	public int getX() {
@@ -125,31 +115,39 @@ public abstract class Personnage {
 		return y;
 	}
 	
+	public void seDeplacer(Lieu l) {
+		if (action == null) { // On ne fait rien
+			Stack<Trajet> trajets = Algo.PCC(Context.getCarte(), this.getLieuActuel(), l, 1 - getCoefRand());
+			if (!trajets.isEmpty()) {
+				setAction(new Deplacement(this, this.getLieuActuel(), l, trajets));
+			}
+		} else if (action instanceof Deplacement) { // On se déplace déjà : on ajuste le déplacement
+			Lieu curCible = getDeplacement().getEtape().getCible(this.getLieuActuel());
+			Stack<Trajet> trajets = Algo.PCC(Context.getCarte(), curCible, l, 1 - getCoefRand());
+			if (!trajets.isEmpty()) {
+				if (DeplacementRules.peutSeDeplacer(Deplacement.getDistance(trajets))) {
+					trajets.push(getDeplacement().getEtape());
+					getDeplacement().setEtapes(trajets);
+					getDeplacement().setCible(l);
+				}
+				else {
+					Context.getMainScreenController().addInfoText("Pas assez d'argent pour voyager ! Veuillez vendre plus de comptes premium !");
+				}
+			}
+		}
+	}
+	public void setAction(Action a) {
+		this.action = a;
+	}
+	
+	public void setLieuActuel(Lieu l) {
+		this.lieuActuel = l;
+	}
+
 	public void update(int delta) {
         if (action != null) {
         	action.update(delta);
         }
 	}
-	
-	public void draw(Graphics g, Nifty nifty) {
-		imgPawn.draw(this.getX() - imgPawn.getWidth()/2, this.getY() - imgPawn.getHeight()/2, imgPawn.getWidth(), imgPawn.getHeight());
-		
-		// XXX: uniformiser draw/render
-		if (action != null) {
-			action.render(g);
-		}
-		
-		if (this.timestampDenierAchat.after(new Timestamp(System.currentTimeMillis()-1*1000))) {
-			String str = String.valueOf(-this.frais) + "$";
-			int x = this.getX() - ((imgPawn.getWidth()/2 + g.getFont().getWidth(str))/2);
-			int y = this.getY() + imgPawn.getHeight()/2;
-			g.drawString(str, x, y);
-		}
-	}
-	
-	public abstract int getAvatarX();
-	public abstract int getAvatarY();
-	public abstract int getAvatarWidth();
-	public abstract int getAvatarHeight();
-	
+
 }
