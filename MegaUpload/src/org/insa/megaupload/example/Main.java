@@ -94,6 +94,7 @@ public class Main extends CoolNiftyOverlayBasicGame {
 		this.nifty = nifty;
 		nifty.fromXml("src/resources/layout/console.xml", "mainScreen");
 		Context.setMainScreenController((MainScreenController) nifty.getCurrentScreen().getScreenController());
+		nifty.setDebugOptionPanelColors(true);
 	}
 	
 	@Override

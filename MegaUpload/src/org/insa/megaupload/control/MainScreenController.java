@@ -123,10 +123,6 @@ public class MainScreenController implements ScreenController, KeyInputHandler {
 			gameplayState.returnToMenu();
 		}
 		
-		//TODO: pour test
-		Console consoleInfo = screen.findNiftyControl("consoleInfo", Console.class);
-		consoleInfo.output("bite your input was: " + command.getCommandLine() + " ["
-				+ command.getArgumentCount() + " parameter(s)]");
 	}
 	
 	public void addActionText(String text){
