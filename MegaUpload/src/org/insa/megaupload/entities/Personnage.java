@@ -9,16 +9,22 @@ import org.insa.megaupload.rules.DeplacementRules;
 import org.insa.megaupload.utils.Algo;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.particles.ParticleSystem;
 
 import de.lessvoid.nifty.Nifty;
 
 public abstract class Personnage {
-	protected final static double coefRand = 0;
 	protected Action action;
 	protected Image imgBig;
 	protected Image imgPawn;
 	private Lieu lieuActuel;
 	protected int num;
+	
+    private static ParticleSystem particleSystem = null; 
+    
+	protected final static double coefRand = 0;
+	
 	private int vitesse;
 	
 	public Personnage(Lieu lieuInitial, Image imgBig, Image imgPawn) {
@@ -29,15 +35,6 @@ public abstract class Personnage {
 		
 		//particleEmitter = new CoolFireEmitter(this.getX(), this.getY(), 6f, Color.GREEN );
 		//getParticleSystem().addEmitter(particleEmitter);	
-	}
-	
-	public void draw(Graphics g, Nifty nifty) {
-				imgPawn.draw(this.getX() - imgPawn.getWidth()/2, this.getY() - imgPawn.getHeight()/2, imgPawn.getWidth(), imgPawn.getHeight());
-		
-		// XXX: uniformiser draw/render
-		if (action != null) {
-			action.render(g);
-		}
 	}
 	
 	public Action getAction() {
@@ -63,7 +60,7 @@ public abstract class Personnage {
 			return null;
 		}
 	}
-	
+
 	public int getHeight() {
 		return imgPawn.getHeight();
 	}
@@ -120,6 +117,12 @@ public abstract class Personnage {
 			Stack<Trajet> trajets = Algo.PCC(Context.getCarte(), this.getLieuActuel(), l, 1 - getCoefRand());
 			if (!trajets.isEmpty()) {
 				setAction(new Deplacement(this, this.getLieuActuel(), l, trajets));
+				
+				// Initialisation 
+				if (this instanceof MegaPerso) {
+					float coutDeplacement = ((Deplacement)action).getDistance()*DeplacementRules.getCoutDeplacement();
+					Context.getMainScreenController().addInfoText(((MegaPerso)this).getNom() + " takes plane $" + (new Float(coutDeplacement)).intValue());
+				}
 			}
 		} else if (action instanceof Deplacement) { // On se déplace déjà : on ajuste le déplacement
 			Lieu curCible = getDeplacement().getEtape().getCible(this.getLieuActuel());
@@ -149,5 +152,29 @@ public abstract class Personnage {
         	action.update(delta);
         }
 	}
-
+	
+	public void draw(Graphics g, Nifty nifty) {
+		imgPawn.draw(this.getX() - imgPawn.getWidth()/2, this.getY() - imgPawn.getHeight()/2, imgPawn.getWidth(), imgPawn.getHeight());
+		
+		// XXX: uniformiser draw/render
+		if (action != null) {
+			action.render(g);
+		}
+	}
+	
+	public static ParticleSystem getParticleSystem() {
+		if (particleSystem == null) {
+			Image image = null;
+			try {
+				image = new Image("resources/img/dollard.png");
+			} catch (SlickException e) {
+				e.printStackTrace();
+			}
+			particleSystem = new ParticleSystem(image);
+			particleSystem.setPosition(0, 0);
+		}
+		return particleSystem;
+	}
 }
+
+

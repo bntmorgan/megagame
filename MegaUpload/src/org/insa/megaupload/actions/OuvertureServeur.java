@@ -10,7 +10,8 @@ public class OuvertureServeur extends Action {
 
 	public OuvertureServeur(Personnage perso, int tempsTotal) {
 		super(perso, tempsTotal);
-		Context.getMainScreenController().addInfoText(((MegaPerso)perso).getNom() + " : Commence a ouvrir un serveur");
+		Context.getMainScreenController().addInfoText(((MegaPerso)perso).getNom() + " set up a new server $" + ServeurRules.getRegleCoutOuverture()*perso.getLieuActuel().getCoutHeberg());
+		
 		//décompte le cout d'ouverture du serveur du compteur de thune
 		Context.decCptThunes(ServeurRules.getRegleCoutOuverture());
 	}
@@ -18,7 +19,7 @@ public class OuvertureServeur extends Action {
 	@Override
 	public void finished() {
 		perso.getLieuActuel().addServeur(new Serveur());
-		Context.getMainScreenController().addInfoText(((MegaPerso)perso).getNom() + " : a fini d'ouvrir un serveur");
+		Context.getMainScreenController().addInfoText(((MegaPerso)perso).getNom() + " succeeds to create the server");
 	}
 
 }

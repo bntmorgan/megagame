@@ -111,8 +111,14 @@ public class Deplacement extends Action {
 	public void update(int delta) {
 		if (perso instanceof MegaPerso && getAvancementEtape() == 0 ) {
 			int distanceTotale = getEtape().getDistance();
-			Context.decCptThunes((int) (distanceTotale*DeplacementRules.getCoutDeplacement()));
-		}
+			int coutDeplacement = (int) (distanceTotale*DeplacementRules.getCoutDeplacement()); 
+			Context.decCptThunes(coutDeplacement);
+			
+			// Argent sous les personnages
+			((MegaPerso)perso).setFrais((int) (distanceTotale*DeplacementRules.getCoutDeplacement()));
+			((MegaPerso)perso).setTimestampDenierAchat(System.currentTimeMillis());
+		}	
+
 		
 		int tempsTotal = getEtape().getTemps();
 		double tempsParcouru = (getAvancementEtape() * tempsTotal) / 100.;
@@ -128,5 +134,7 @@ public class Deplacement extends Action {
 	public void finished() {
 		// Do nothing :)
 	}
+
+	
 	
 }

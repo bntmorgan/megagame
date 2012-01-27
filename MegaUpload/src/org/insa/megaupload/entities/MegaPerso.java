@@ -7,6 +7,7 @@ import org.insa.megaupload.example.Action;
 import org.insa.megaupload.example.Context;
 import org.insa.megaupload.example.CoolFireEmitter;
 import org.insa.megaupload.rules.ServeurRules;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.particles.ParticleSystem;
@@ -29,6 +30,9 @@ public class MegaPerso extends Personnage {
 	private int nbServeursOuverts;
 	private Action hoveredAction;
 	private String avatarFilename;
+
+	private int frais;
+	private long timestampDenierAchat;
 	
 	private CoolFireEmitter particleEmitter;
     private static ParticleSystem particleSystem = null; 
@@ -41,6 +45,9 @@ public class MegaPerso extends Personnage {
 		this.nbServeursOuverts = 0;
 		this.num = nbPersos;
 		nbPersos++;
+		
+		this.frais = 0;
+		this.timestampDenierAchat = 0;
 		
 		particleEmitter = new CoolFireEmitter(this.getX(), this.getY(), 6f, Color.GREEN );
 		getParticleSystem().addEmitter(particleEmitter);	
@@ -86,6 +93,18 @@ public class MegaPerso extends Personnage {
 			} else {
 				Context.getMainScreenController().addInfoText("Pas assez d'argent pour ouvrir un serveur ! Veuillez vendre plus de comptes premium !");
 			}
+		}
+	}
+	
+	@Override
+	public void draw(Graphics g, Nifty nifty) {
+		super.draw(g, nifty);
+		
+		if (timestampDenierAchat > (System.currentTimeMillis() - 1*1000)) {
+			String str = String.valueOf(-this.frais) + "$";
+			int x = this.getX() - ((imgPawn.getWidth()/2 + g.getFont().getWidth(str))/2);
+			int y = this.getY() + imgPawn.getHeight()/2;
+			g.drawString(str, x, y);
 		}
 	}
 	
@@ -203,4 +222,19 @@ public class MegaPerso extends Personnage {
 		particleEmitter.setEnabled(false);
 	}
 
+	public long getTimestampDenierAchat() {
+		return timestampDenierAchat;
+	}
+
+	public void setTimestampDenierAchat(long timestampDenierAchat) {
+		this.timestampDenierAchat = timestampDenierAchat;
+	}
+
+	public int getFrais() {
+		return frais;
+	}
+
+	public void setFrais(int frais) {
+		this.frais = frais;
+	}	
 }
