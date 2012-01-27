@@ -184,6 +184,12 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 						(container.getHeight()-winImg.getHeight())/2 );
 
 				if(!popupOn){
+					try {
+						Thread.sleep(3000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					popupOn = true;
 					nifty.createPopupWithId("popupWin", "popupWin");
 					nifty.showPopup(nifty.getCurrentScreen(), "popupWin", null);
@@ -195,8 +201,14 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 				
 				g.drawImage( loseImg, (container.getWidth() - loseImg.getWidth() ) /2,
 								(container.getHeight()-loseImg.getHeight())/2 );
-				
+
 				if(!popupOn){
+					try {
+						Thread.sleep(3000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					popupOn = true;
 					nifty.createPopupWithId("popupWin", "popupWin");
 					nifty.showPopup(nifty.getCurrentScreen(), "popupWin", null);
