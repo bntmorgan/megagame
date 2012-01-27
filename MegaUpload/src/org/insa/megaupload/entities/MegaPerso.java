@@ -10,6 +10,7 @@ import org.insa.megaupload.rules.ServeurRules;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.particles.ParticleEmitter;
 import org.newdawn.slick.particles.ParticleSystem;
 
 import de.lessvoid.nifty.Nifty;
@@ -225,6 +226,10 @@ public class MegaPerso extends Personnage {
 	
 	public void desactivateParticleSystem(){
 		particleEmitter.setEnabled(false);
+	}
+	
+	public ParticleEmitter getParticleEmitter(){
+		return (ParticleEmitter)particleEmitter;
 	}
 
 	public long getTimestampDenierAchat() {

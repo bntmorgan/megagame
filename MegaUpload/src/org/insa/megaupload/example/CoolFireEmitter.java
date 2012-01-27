@@ -94,6 +94,14 @@ public class CoolFireEmitter  implements ParticleEmitter {
 			p.setVelocity(0,0,1.1f);
 		}
 	}
+	
+	public Color getColor(){
+		return color;
+	}
+	
+	public void setColor(Color c){
+		this.color = c;
+	}
 
 	/**
 	 * @see org.newdawn.slick.particles.ParticleEmitter#updateParticle(org.newdawn.slick.particles.Particle, int)
