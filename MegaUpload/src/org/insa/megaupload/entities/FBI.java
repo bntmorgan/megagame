@@ -24,7 +24,7 @@ public class FBI {
 		}
 		
 		for (AgentFBI a : Context.getAgentsFBI()) {
-			if (a.getAction() == null) {
+			if (a.getAction() == null && a.getPoursuivi() == null) {
 				int pieceStrategie = Context.rand(1);
 				if (pieceStrategie == 0) {
 					// Pile : on ferme les serveurs d'un lieu
