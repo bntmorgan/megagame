@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.insa.megaupload.actions.Arreter;
+import org.insa.megaupload.actions.Deplacement;
 import org.insa.megaupload.actions.FermetureServeurs;
 import org.insa.megaupload.example.Context;
 import org.insa.megaupload.example.CoolFireEmitter;
@@ -73,6 +74,7 @@ public class AgentFBI extends Personnage {
 		
 		// S'il y a des serveurs sur la position actuelle, ils peuvent etre fermés
 		if (this.getPoursuivi() == null && !this.getLieuActuel().getServeurs().isEmpty() && !(this.action instanceof FermetureServeurs)) {
+			System.out.println("Je ferme des serveurs");
 			double rand = Math.random();
 			Lieu l = this.getLieuActuel();
 			double risque = rand * l.getRisque();
@@ -80,8 +82,9 @@ public class AgentFBI extends Personnage {
 				setAction(new FermetureServeurs(this, this.getLieuActuel().getServeurs().size() * 10000));
 				this.activateParticleSystem();
 			}
-		} else if(this.getAction() == null){
-			for (MegaPerso megaPerso : Context.getMegaPersos()){
+		} else if (this.getAction() == null) {
+			System.out.println("J'arrête un type");
+			for (MegaPerso megaPerso : Context.getMegaPersos()) {
 				if (megaPerso.getDeplacement() == null && megaPerso.getLieuActuel().equals(this.getLieuActuel())){
 					this.setAction(new Arreter(this, 1000, megaPerso));
 					this.activateParticleSystem();
@@ -89,7 +92,10 @@ public class AgentFBI extends Personnage {
 				}
 			}
 		} else {
-			this.desactivateParticleSystem();
+			if (!(getAction() instanceof Deplacement)) {
+				System.out.println("Je fous rien..." + getAction().getClass());
+				this.desactivateParticleSystem();
+			}
 		}
 		
 		
@@ -129,8 +135,9 @@ public class AgentFBI extends Personnage {
 	
 	public void arreter(MegaPerso perso) {
 		if (this.getLieuActuel() == perso.getLieuActuel()) {
-			//System.out.println(perso.getNom() + " arrêté!");
-			//this.poursuivi = null;
+			perso.kill();
+			System.out.println(perso.getNom() + " arrêté!");
+			this.poursuivi = null;
 		}
 	}
 	

@@ -29,7 +29,7 @@ public class Arreter extends Action {
 		System.out.println("Je suis arrivé !!");
 		if( megaPerso.getDeplacement() == null && megaPerso.getLieuActuel().equals(perso.getLieuActuel())){
 			System.out.println("J'arrête...");
-			megaPerso.kill();
+			((AgentFBI) perso).arreter(megaPerso);
 			perso.seDeplacer(Context.getCarte().getMapLieux().get(AgentFBI.SPAWN_LIEU));
 		} else {
 			System.out.println("J'arrête pas ?!");
