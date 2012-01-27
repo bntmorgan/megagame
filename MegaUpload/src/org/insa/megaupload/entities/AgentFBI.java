@@ -23,7 +23,7 @@ public class AgentFBI extends Personnage {
 	private static Image imgPawn;
 	public static final String SPAWN_LIEU = "New York";
 	
-	protected final static double coefRand = 0.9;
+	protected final static double coefRand = 0;
 	
 	private MegaPerso poursuivi;
 	private int num;
@@ -61,43 +61,33 @@ public class AgentFBI extends Personnage {
 	@Override
 	public void update(int delta) {
 
+		// Gestion des poursuites
 		MegaPerso poursuivi = this.getPoursuivi();
 		if (poursuivi != null) {
-			if (this.getLieuActuel() == poursuivi.getLieuActuel()) {
-				 this.arreter(poursuivi);
+			if (this.getLieuActuel().equals(poursuivi.getLieuActuel()) && poursuivi.getDeplacement() == null) {				
+				if (!(this.getAction() instanceof Arreter)) {
+					this.setAction(new Arreter(this, 1000, poursuivi));
+					this.activateParticleSystem();
+				}
 			} else if (this.getDeplacement() == null) {
 				this.seDeplacer(poursuivi.getLieuActuel());
 			} else if (this.getDeplacement().getCible() != poursuivi.getLieuActuel()) {
 				this.seDeplacer(poursuivi.getLieuActuel());
 			}
-		}
-		
-		// S'il y a des serveurs sur la position actuelle, ils peuvent etre fermés
-		if (this.getPoursuivi() == null && !this.getLieuActuel().getServeurs().isEmpty() && !(this.action instanceof FermetureServeurs)) {
-			System.out.println("Je ferme des serveurs");
-			double rand = Math.random();
-			Lieu l = this.getLieuActuel();
-			double risque = rand * l.getRisque();
-			if (risque > 1) {
-				setAction(new FermetureServeurs(this, this.getLieuActuel().getServeurs().size() * 10000));
-				this.activateParticleSystem();
-			}
-		} else if (this.getAction() == null) {
-			System.out.println("J'arrête un type");
-			for (MegaPerso megaPerso : Context.getMegaPersos()) {
-				if (megaPerso.getDeplacement() == null && megaPerso.getLieuActuel().equals(this.getLieuActuel())){
-					this.setAction(new Arreter(this, 1000, megaPerso));
+		} else if (!this.getLieuActuel().getServeurs().isEmpty()) {
+			// S'il y a des serveurs sur la position actuelle, ils peuvent etre fermés
+			if (!(this.action instanceof FermetureServeurs)) {
+				double rand = Math.random();
+				Lieu l = this.getLieuActuel();
+				double risque = rand * l.getRisque();
+				if (risque > 1) {
+					setAction(new FermetureServeurs(this, this.getLieuActuel().getServeurs().size() * 10000));
 					this.activateParticleSystem();
-					break;
 				}
 			}
 		} else {
-			if (!(getAction() instanceof Deplacement)) {
-				System.out.println("Je fous rien..." + getAction().getClass());
-				this.desactivateParticleSystem();
-			}
+			this.desactivateParticleSystem();
 		}
-		
 		
         particleSystem.update(delta);
         particleEmitter.setX(this.getX());

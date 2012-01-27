@@ -32,6 +32,7 @@ public class FBI {
 					if (lieuxAvecServeurs.size() > 0) {
 						int deLieu = Context.rand(lieuxAvecServeurs.size() - 1);
 						a.seDeplacer(lieuxAvecServeurs.get(deLieu));
+						System.out.println("Je vais owned les serveurs de " + lieuxAvecServeurs.get(deLieu).getNom());
 					}
 				} else {
 					// Face : on poursuit un personnage
@@ -39,6 +40,7 @@ public class FBI {
 					if (megaPersos.size() > 0) {
 						int dePerso = Context.rand(megaPersos.size() - 1);
 						a.poursuivre(megaPersos.get(dePerso));
+						System.out.println("Je poursuis " + megaPersos.get(dePerso).getNom());
 					}
 				}
 			}
