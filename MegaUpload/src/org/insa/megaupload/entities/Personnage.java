@@ -118,25 +118,29 @@ public abstract class Personnage {
 		if (action == null) { // On ne fait rien
 			Stack<Trajet> trajets = Algo.PCC(Context.getCarte(), this.getLieuActuel(), l, 1 - getCoefRand());
 			if (!trajets.isEmpty()) {
-				setAction(new Deplacement(this, this.getLieuActuel(), l, trajets));
+				if (DeplacementRules.peutSeDeplacer(this, Deplacement.getDistance(trajets))) {
+					setAction(new Deplacement(this, this.getLieuActuel(), l, trajets));
 				
-				// Initialisation 
-				if (this instanceof MegaPerso) {
-					float coutDeplacement = ((Deplacement)action).getDistance()*DeplacementRules.getCoutDeplacement();
-					Context.getMainScreenController().addInfoText(((MegaPerso)this).getNom() + " takes plane $" + (new Float(coutDeplacement)).intValue());
+					// Affichage du cout du déplacement total 
+					if (this instanceof MegaPerso) {
+						float coutDeplacement = ((Deplacement)action).getDistance()*DeplacementRules.getCoutDeplacement();
+						Context.getMainScreenController().addInfoText(((MegaPerso)this).getNom() + " takes plane $" + (new Float(coutDeplacement)).intValue());
+					}
+				} else {
+					Context.getMainScreenController().addInfoText("Not enougth money ! Sell prenium accounts !");
 				}
 			}
 		} else if (action instanceof Deplacement) { // On se déplace déjà : on ajuste le déplacement
 			Lieu curCible = getDeplacement().getEtape().getCible(this.getLieuActuel());
 			Stack<Trajet> trajets = Algo.PCC(Context.getCarte(), curCible, l, 1 - getCoefRand());
 			if (!trajets.isEmpty()) {
-				if (DeplacementRules.peutSeDeplacer(Deplacement.getDistance(trajets))) {
+				if (DeplacementRules.peutSeDeplacer(this, Deplacement.getDistance(trajets))) {
 					trajets.push(getDeplacement().getEtape());
 					getDeplacement().setEtapes(trajets);
 					getDeplacement().setCible(l);
 				}
 				else {
-					Context.getMainScreenController().addInfoText("Pas assez d'argent pour voyager ! Veuillez vendre plus de comptes premium !");
+					Context.getMainScreenController().addInfoText("Not enougth money ! Sell prenium accounts !");
 				}
 			}
 		}

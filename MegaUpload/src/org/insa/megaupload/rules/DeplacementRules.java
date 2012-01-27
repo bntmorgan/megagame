@@ -13,8 +13,7 @@ public class DeplacementRules {
 		return coutDeplacement;
 	}
 	
-	public static boolean peutSeDeplacer(int distance){
-		Personnage p = Context.getSelectedPerso();
+	public static boolean peutSeDeplacer(Personnage p, int distance){
 		if (p != null) {
 			if (p instanceof AgentFBI) {
 				return true;
