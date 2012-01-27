@@ -61,7 +61,7 @@ public class AgentFBI extends Personnage {
 		}
 		
 		// S'il y a des serveurs sur la position actuelle, ils peuvent etre fermés
-		if (!this.getLieuActuel().getServeurs().isEmpty() && !(this.action instanceof FermetureServeurs)) {
+		if (this.getPoursuivi() == null && !this.getLieuActuel().getServeurs().isEmpty() && !(this.action instanceof FermetureServeurs)) {
 			double rand = Math.random();
 			Lieu l = this.getLieuActuel();
 			double risque = rand * l.getRisque();
@@ -70,10 +70,9 @@ public class AgentFBI extends Personnage {
 			}
 		} 
 		
-		if(this.getAction() == null){
-		
+		if (this.getAction() == null) {		
 			for (MegaPerso megaPerso : Context.getMegaPersos()){
-				if( megaPerso.getDeplacement() == null && megaPerso.getLieuActuel().equals(this.getLieuActuel())){
+				if (megaPerso.getDeplacement() == null && megaPerso.getLieuActuel().equals(this.getLieuActuel())){
 					this.setAction(new Arreter(this, 1000, megaPerso));
 					break;
 				}
