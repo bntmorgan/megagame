@@ -242,6 +242,7 @@ public class MegaPerso extends Personnage {
 		desactivateParticleSystem();
 		System.out.println(Context.getMainScreen().findElementByName(getNom()));
 		Context.getMainScreen().findElementByName(getNom()).hide();
+		Context.getMainScreen().findElementByName("submenu_" + getNom()).hide();
 	}
 	
 	public void activateParticleSystem(){
