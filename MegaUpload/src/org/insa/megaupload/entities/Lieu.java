@@ -18,6 +18,7 @@ public class Lieu {
 	private ArrayList<Serveur> serveurs;
 
 	private static Image img, imgH;
+	private static Image imgMu, imgMuH;
 
 	public Lieu(String nom, int x, int y, int coutHeberg, int risque, int tempsMiseEnPlace) {
 		this.nom = nom;
@@ -33,6 +34,8 @@ public class Lieu {
 	public static void init() throws SlickException {
 		img = new Image("resources/img/City-20px.png");
 		imgH = new Image("resources/img/City-30px.png");
+		imgMu = new Image("resources/img/megaupload-logo-20px.png");
+		imgMuH = new Image("resources/img/megaupload-logo-30px.png");
 	}
 
 	public String getNom() {
@@ -96,7 +99,13 @@ public class Lieu {
 
 	public void draw(Graphics g) {
 		if (Context.getHoveredLieu() == this) {
-			imgH.draw(x - imgH.getWidth() / 2, y - imgH.getHeight() / 2);
+			if(this.serveurs.isEmpty()){
+				imgH.draw(x - imgH.getWidth() / 2, y - imgH.getHeight() / 2);				
+			}
+			else{
+				imgMuH.draw(x - imgMuH.getWidth() / 2, y - imgMuH.getHeight() / 2);	
+			}
+
 			g.drawString(this.nom, x, y + imgH.getHeight() / 2);
 			if (this.serveurs.size() <= 1)
 				g.drawString(Integer.toString(this.serveurs.size()) + " server" , x, y + imgH.getHeight());
@@ -104,7 +113,13 @@ public class Lieu {
 				g.drawString(Integer.toString(this.serveurs.size()) + " servers" , x, y + imgH.getHeight());
 				
 		} else {
-			img.draw(x - img.getWidth() / 2, y - img.getHeight() / 2);
+			if(this.serveurs.isEmpty()){
+				img.draw(x - img.getWidth() / 2, y - img.getHeight() / 2);				
+			}
+			else{
+				imgMu.draw(x - imgMu.getWidth() / 2, y - imgMu.getHeight() / 2);
+			}
+
 		}
 	}
 	
