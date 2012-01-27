@@ -88,6 +88,8 @@ public class Carte extends Image implements Graphe{
 			}
 		}
 		
+		g.setLineWidth(1);
+		
 		for (Lieu l : lieux) {
 			// Afficage des lieux
 			l.draw(g);
