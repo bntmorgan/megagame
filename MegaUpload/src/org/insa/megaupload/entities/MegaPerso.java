@@ -1,11 +1,15 @@
 package org.insa.megaupload.entities;
 
+import java.awt.Color;
+
 import org.insa.megaupload.actions.OuvertureServeur;
 import org.insa.megaupload.example.Action;
 import org.insa.megaupload.example.Context;
+import org.insa.megaupload.example.CoolFireEmitter;
 import org.insa.megaupload.rules.ServeurRules;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.particles.ParticleSystem;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.builder.HoverEffectBuilder;
@@ -26,6 +30,9 @@ public class MegaPerso extends Personnage {
 	private Action hoveredAction;
 	private String avatarFilename;
 	
+	private CoolFireEmitter particleEmitter;
+    private static ParticleSystem particleSystem = null; 
+	
 	public MegaPerso(String nom, Lieu lieuInitial, String imgBig, String imgPawn) throws SlickException {
 		super(lieuInitial, new Image(imgBig), new Image(imgPawn));
 
@@ -34,6 +41,9 @@ public class MegaPerso extends Personnage {
 		this.nbServeursOuverts = 0;
 		this.num = nbPersos;
 		nbPersos++;
+		
+		particleEmitter = new CoolFireEmitter(this.getX(), this.getY(), 6f, Color.GREEN );
+		getParticleSystem().addEmitter(particleEmitter);	
 	}
 	
 	public static void init() throws SlickException {
@@ -150,6 +160,34 @@ public class MegaPerso extends Personnage {
 		Element panel = mainScreen.findElementByName("menuPanel");
 		panel.add(i.build(nifty, mainScreen, panel));
 		panel.add(p.build(nifty, mainScreen, panel));
+	}
+	
+	@Override
+	public void update(int delta) {
+		super.update(delta);
+        if (action != null) {
+        	action.update(delta);
+        }
+        
+        particleSystem.update(delta);
+        particleEmitter.setX(this.getX());
+        particleEmitter.setY(this.getY());
+        
+	}
+	
+	public static ParticleSystem getParticleSystem() {
+		if (particleSystem == null) {
+			Image image = null;
+			try {
+				image = new Image("resources/img/dollard.png");
+			} catch (SlickException e) {
+				e.printStackTrace();
+			}
+			particleSystem = new ParticleSystem(image);
+			particleSystem.setPosition(0, 0);
+		}
+
+		return particleSystem;
 	}
 
 }

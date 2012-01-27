@@ -150,7 +150,8 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 			FontUtils.drawRight(g.getFont(), Integer.toString(Context.getCptServeursOuverts()) + " servers up", 0, 30, 1280 - 15);
 
 			// Dessin des personnages à leur nouvelle position
-			Personnage.getParticleSystem().render();
+			//Personnage.getParticleSystem().render();
+			MegaPerso.getParticleSystem().render();
 			for (Personnage p : Context.getPersonnages()) {
 				p.draw(g, nifty);
 			}
