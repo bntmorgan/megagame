@@ -48,6 +48,7 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 	private boolean returnToMenu;
 	private MegaUploadGameState state;
 	private boolean popupOn;
+	private boolean imageDrawn;
 
 	public GameplayState() {
 		// TODO Auto-generated constructor stub
@@ -183,7 +184,7 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 				g.drawImage( winImg, (container.getWidth() - winImg.getWidth() ) /2,
 						(container.getHeight()-winImg.getHeight())/2 );
 
-				if(!popupOn){
+				if(!popupOn && imageDrawn){
 					try {
 						Thread.sleep(3000);
 					} catch (InterruptedException e) {
@@ -194,6 +195,8 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 					nifty.createPopupWithId("popupWin", "popupWin");
 					nifty.showPopup(nifty.getCurrentScreen(), "popupWin", null);
 				}
+				
+				imageDrawn = true;
 				
 				break;
 				
@@ -202,7 +205,7 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 				g.drawImage( loseImg, (container.getWidth() - loseImg.getWidth() ) /2,
 								(container.getHeight()-loseImg.getHeight())/2 );
 
-				if(!popupOn){
+				if(!popupOn && imageDrawn){
 					try {
 						Thread.sleep(3000);
 					} catch (InterruptedException e) {
@@ -213,6 +216,8 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 					nifty.createPopupWithId("popupWin", "popupWin");
 					nifty.showPopup(nifty.getCurrentScreen(), "popupWin", null);
 				}
+				
+				imageDrawn = true;
 				
 				break;
 		}
