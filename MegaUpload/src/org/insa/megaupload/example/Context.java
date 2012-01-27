@@ -258,7 +258,7 @@ public class Context {
 	}
 
 	public static void update(int delta) {
-		if (niveau < seuilsNiveaux.length && cptServeursOuverts >= seuilsNiveaux[niveau - 1]) {
+		if (niveau <= seuilsNiveaux.length && cptServeursOuverts >= seuilsNiveaux[niveau - 1]) {
 			niveau++;
 			if (AgentFBI.getFBICoefRand() > 0) {
 				AgentFBI.setFBICoefRand(AgentFBI.getFBICoefRand() - 0.25);
