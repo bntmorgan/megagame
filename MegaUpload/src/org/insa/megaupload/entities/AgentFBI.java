@@ -1,8 +1,6 @@
 package org.insa.megaupload.entities;
 
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.insa.megaupload.actions.Arreter;
 import org.insa.megaupload.actions.Deplacement;

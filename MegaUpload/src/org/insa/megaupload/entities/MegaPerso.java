@@ -7,6 +7,7 @@ import org.insa.megaupload.example.Action;
 import org.insa.megaupload.example.Context;
 import org.insa.megaupload.example.CoolFireEmitter;
 import org.insa.megaupload.rules.ServeurRules;
+import org.lwjgl.opengl.Drawable;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -26,6 +27,7 @@ public class MegaPerso extends Personnage {
 	private static int nbPersos = 0;
 	private static Image runawayImg;
 	private static Image openServerImg;
+	private static Image viewfinder;
 	
 	private String nom;
 	private int nbServeursOuverts;
@@ -62,6 +64,7 @@ public class MegaPerso extends Personnage {
 	public static void init() throws SlickException {
 		openServerImg = new Image("resources/img/add-server.png");
 		runawayImg = new Image("resources/img/run_away.png");
+		viewfinder = new Image("resources/img/viewfinder.png");
 	}
 	
 	public String getNom() {
@@ -108,6 +111,21 @@ public class MegaPerso extends Personnage {
 				int y = this.getY() + imgPawn.getHeight()/2;
 				g.drawString(str, x, y);
 			}
+			
+			//ajout de la cible si on est poursuivit
+			boolean isFollowed = false;			
+			for(AgentFBI agent : Context.getAgentsFBI()){
+				if(agent.getPoursuivi() != null && agent.getPoursuivi().equals(this)){
+					isFollowed = true;
+					break;
+				}
+			}			
+			if(isFollowed){
+				int x = this.getX() - viewfinder.getWidth()/2;
+				int y = this.getY() - viewfinder.getHeight()/2;
+				g.drawImage(viewfinder, x, y);
+			}
+			
 		}
 	}
 	
