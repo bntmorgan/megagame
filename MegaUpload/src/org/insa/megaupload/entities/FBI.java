@@ -36,8 +36,10 @@ public class FBI {
 				} else {
 					// Face : on poursuit un personnage
 					List<MegaPerso> megaPersos = Context.getMegaPersos();
-					int dePerso = Context.rand(megaPersos.size() - 1);
-					a.poursuivre(megaPersos.get(dePerso));
+					if (megaPersos.size() > 0) {
+						int dePerso = Context.rand(megaPersos.size() - 1);
+						a.poursuivre(megaPersos.get(dePerso));
+					}
 				}
 			}
 		}
