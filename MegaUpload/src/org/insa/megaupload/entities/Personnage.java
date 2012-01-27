@@ -35,6 +35,8 @@ public abstract class Personnage {
 		
 		//particleEmitter = new CoolFireEmitter(this.getX(), this.getY(), 6f, Color.GREEN );
 		//getParticleSystem().addEmitter(particleEmitter);	
+		
+		Context.addPersonnage(this);
 	}
 	
 	public Action getAction() {
@@ -152,6 +154,11 @@ public abstract class Personnage {
         	action.update(delta);
         }
 	}
+	
+	public void kill(){
+		Context.removePersonnage(this);
+	}
+
 	
 	public void draw(Graphics g, Nifty nifty) {
 		imgPawn.draw(this.getX() - imgPawn.getWidth()/2, this.getY() - imgPawn.getHeight()/2, imgPawn.getWidth(), imgPawn.getHeight());

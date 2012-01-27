@@ -81,15 +81,10 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 		Context.setCarte(c);
 
 		// Initialisation personnages
-		MegaPerso kim = new MegaPerso("Kim DotCom", "resources/img/avatar-yellow.png", "resources/img/yellow.png");
-		MegaPerso mathias = new MegaPerso("Mathias Ortmann", "resources/img/avatar-green.png", "resources/img/green.png");
-		MegaPerso bram = new MegaPerso("Bram van der Kolk", "resources/img/avatar-purple.png", "resources/img/purple.png");
-		MegaPerso finn = new MegaPerso("Finn Batato", "resources/img/avatar-red.png", "resources/img/red.png");
-		
-		Context.addPersonnage(kim);
-		Context.addPersonnage(mathias);
-		Context.addPersonnage(bram);
-		Context.addPersonnage(finn);
+		new MegaPerso("Kim DotCom", "resources/img/avatar-yellow.png", "resources/img/yellow.png");
+		new MegaPerso("Mathias Ortmann", "resources/img/avatar-green.png", "resources/img/green.png");
+		new MegaPerso("Bram van der Kolk", "resources/img/avatar-purple.png", "resources/img/purple.png");
+		new MegaPerso("Finn Batato", "resources/img/avatar-red.png", "resources/img/red.png");
 
 		// Initialisation FBI
 		FBI.getInstance();

@@ -50,7 +50,7 @@ public class MegaPerso extends Personnage {
 		this.timestampDenierAchat = 0;
 		
 		particleEmitter = new CoolFireEmitter(this.getX(), this.getY(), 6f, Color.GREEN );
-		getParticleSystem().addEmitter(particleEmitter);	
+		getParticleSystem().addEmitter(particleEmitter);
 		particleEmitter.setEnabled(false);
 	}
 	
@@ -212,6 +212,11 @@ public class MegaPerso extends Personnage {
 		}
 
 		return particleSystem;
+	}
+	
+	@Override
+	public void kill() {
+		
 	}
 	
 	public void activateParticleSystem(){

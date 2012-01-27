@@ -14,8 +14,7 @@ public class FBI {
 	}
 	
 	private void nouvelAgent() {
-		AgentFBI a1 = new AgentFBI();
-		Context.addPersonnage(a1);
+		new AgentFBI();
 		nbAgents++;
 	}
 	

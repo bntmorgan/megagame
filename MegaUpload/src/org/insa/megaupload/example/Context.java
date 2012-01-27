@@ -309,4 +309,8 @@ public class Context {
 		return randomLieu;
 	}
 
+	public static void removePersonnage(Personnage personnage) {
+		personnages.remove(personnage);
+	}
+
 }
