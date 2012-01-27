@@ -5,6 +5,9 @@ package org.insa.megaupload.game;
 
 import java.util.ArrayList;
 
+import javax.swing.plaf.basic.BasicSliderUI.ActionScroller;
+
+import org.insa.megaupload.actions.OuvertureServeur;
 import org.insa.megaupload.control.MainScreenController;
 import org.insa.megaupload.entities.AgentFBI;
 import org.insa.megaupload.entities.Carte;
@@ -154,8 +157,9 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 				if (Context.getSelectedPerso() != null) {
 					Context.getSelectedPerso().activateParticleSystem();
 					for(MegaPerso mp : Context.getNonSelectedPerso()){
+					if(!(mp.getAction() instanceof OuvertureServeur)){
 						mp.desactivateParticleSystem();
-					}
+					}					}
 					g.drawString("Selected perso: "	+ Context.getSelectedPerso().getNom(), 10, 600);
 				}
 				if (Context.getSelectedLieu() != null) {
