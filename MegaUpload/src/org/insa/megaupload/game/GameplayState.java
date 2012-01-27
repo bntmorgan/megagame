@@ -41,6 +41,7 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 	
 	private Music music;
 	private Image loadingImg;
+	private Image loseImg;
 	private int cptSoft;
 	private Nifty nifty;
 	private boolean returnToMenu;
@@ -70,6 +71,7 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 		// Initialisation ressources
 		// Chargée directement pour pouvoir être affichée pendant le chargement des autres
 		loadingImg = new Image("resources/img/megaupload-logo.png");
+		loseImg = new Image("resources/img/fbi-closed.jpg");
 		
 		// Chargement différé pour afficher l'écran de chargement
 		//LoadingList.setDeferredLoading(true);
@@ -179,6 +181,9 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 			case WON:
 				break;
 			case LOST:
+				
+				g.drawImage( loseImg, (container.getWidth() - loseImg.getWidth() ) /2,
+								(container.getHeight()-loseImg.getHeight())/2 );
 				break;
 		}
 	}

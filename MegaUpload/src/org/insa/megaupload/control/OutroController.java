@@ -65,6 +65,7 @@ public class OutroController implements ScreenController, KeyInputHandler {
   }
 
   public void onEndScreen() {
+	  
   }
 
   public void shizzleHide(final String id) {
