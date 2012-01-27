@@ -4,6 +4,8 @@ import org.insa.megaupload.entities.MegaPerso;
 import org.insa.megaupload.entities.Personnage;
 import org.insa.megaupload.example.Action;
 import org.insa.megaupload.example.Context;
+import org.insa.megaupload.game.GameplayState;
+import org.newdawn.slick.state.StateBasedGame;
 
 import de.lessvoid.nifty.EndNotify;
 import de.lessvoid.nifty.Nifty;
@@ -32,6 +34,9 @@ public class MainScreenController implements ScreenController, KeyInputHandler {
 	private Console infoConsole;
 	private Console actionConsole;
 
+	private StateBasedGame game;
+	private GameplayState gameplayState;
+	
 	public void bind(final Nifty newNifty, final Screen newScreen) {
 		nifty = newNifty;
 		screen = newScreen;
@@ -113,13 +118,14 @@ public class MainScreenController implements ScreenController, KeyInputHandler {
 		if ("exit".equals(command.getCommand())) {
 			back();
 		}
-		if ("killdamothafucka".equals(command.getCommand())) {
-			nifty.exit();
+		if ("killdamothafucka".equals(command.getCommand())
+				|| "kdm".equals(command.getCommand())) {
+			gameplayState.returnToMenu();
 		}
 		
 		//TODO: pour test
 		Console consoleInfo = screen.findNiftyControl("consoleInfo", Console.class);
-		consoleInfo.output("your input was: " + command.getCommandLine() + " ["
+		consoleInfo.output("bite your input was: " + command.getCommandLine() + " ["
 				+ command.getArgumentCount() + " parameter(s)]");
 	}
 	
@@ -153,4 +159,26 @@ public class MainScreenController implements ScreenController, KeyInputHandler {
 			Context.setSelectedAction(null);
 		}
 	}
+
+	/**
+	 * @return the game
+	 */
+	public StateBasedGame getGame() {
+		return game;
+	}
+
+	/**
+	 * @param game the game to set
+	 */
+	public void setGame(StateBasedGame game) {
+		this.game = game;
+	}
+
+	/**
+	 * @param gameplayState the gameplayState to set
+	 */
+	public void setGameplayState(GameplayState gameplayState) {
+		this.gameplayState = gameplayState;
+	}
+	
 }

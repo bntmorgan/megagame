@@ -1,53 +1,71 @@
-package org.insa.megaupload.example;
-
-import org.insa.megaupload.control.MainScreenController;
-import org.insa.megaupload.entities.*;
-import org.insa.megaupload.rules.ServeurRules;
-import org.insa.megaupload.utils.FontUtils;
-import org.newdawn.slick.*;
-import org.newdawn.slick.loading.DeferredResource;
-import org.newdawn.slick.loading.LoadingList;
-
-import de.lessvoid.nifty.Nifty;
-
 /**
- * @author fougeanoob
  * 
  */
-public class Main extends CoolNiftyOverlayBasicGame {
+package org.insa.megaupload.game;
+
+import org.insa.megaupload.control.MainScreenController;
+import org.insa.megaupload.entities.AgentFBI;
+import org.insa.megaupload.entities.Carte;
+import org.insa.megaupload.entities.Lieu;
+import org.insa.megaupload.entities.MegaPerso;
+import org.insa.megaupload.entities.Personnage;
+import org.insa.megaupload.entities.Trajet;
+import org.insa.megaupload.example.Context;
+import org.insa.megaupload.rules.ServeurRules;
+import org.insa.megaupload.utils.FontUtils;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.Music;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.loading.DeferredResource;
+import org.newdawn.slick.loading.LoadingList;
+import org.newdawn.slick.state.StateBasedGame;
+
+import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.slick2d.NiftyOverlayBasicGameState;
+
+/**
+ * @author garfunk
+ *
+ */
+public class GameplayState extends NiftyOverlayBasicGameState {
+	
 	private boolean started;
 	private Music music;
 	private Image loadingImg;
 	private int cptSoft;
 	private Nifty nifty;
+	private boolean returnToMenu;
 
-	public Main() {
-		super("MegaUpload");
+	public GameplayState() {
+		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @param args
+	/* (non-Javadoc)
+	 * @see de.lessvoid.nifty.slick2d.NiftyOverlayBasicGameState#enterState(org.newdawn.slick.GameContainer, org.newdawn.slick.state.StateBasedGame)
 	 */
-	public static void main(String[] args) {
-		try {
-			AppGameContainer app = new AppGameContainer(new Main());
-			app.setDisplayMode(1280, 667, false);
-			app.setMaximumLogicUpdateInterval(10);
-			app.setMinimumLogicUpdateInterval(10);
-			app.start();
-		} catch (SlickException e) {
-			e.printStackTrace();
-		}
+	@Override
+	protected void enterState(GameContainer arg0, StateBasedGame game)
+			throws SlickException {
+		// TODO Auto-generated method stub
+
 	}
 
+	/* (non-Javadoc)
+	 * @see de.lessvoid.nifty.slick2d.NiftyOverlayBasicGameState#initGameAndGUI(org.newdawn.slick.GameContainer, org.newdawn.slick.state.StateBasedGame)
+	 */
 	@Override
-	protected void initGameAndGUI(GameContainer container) throws SlickException {		
+	protected void initGameAndGUI(GameContainer container, StateBasedGame game)
+			throws SlickException {
+		
 		// Initialisation ressources
 		// Chargée directement pour pouvoir être affichée pendant le chargement des autres
 		loadingImg = new Image("resources/img/megaupload-logo.png");
 		
 		// Chargement différé pour afficher l'écran de chargement
-		LoadingList.setDeferredLoading(true);
+		//LoadingList.setDeferredLoading(true);
 		
 		// Initialisation ressources
 		music = new Music("resources/sound/megasong.ogg");
@@ -87,51 +105,36 @@ public class Main extends CoolNiftyOverlayBasicGame {
 		
 		// Paramètres d'affichage
 		container.setShowFPS(false);
+		
+		// On initialise le cul
+		initNifty(container, game);
 	}
 
+	/* (non-Javadoc)
+	 * @see de.lessvoid.nifty.slick2d.NiftyOverlayBasicGameState#leaveState(org.newdawn.slick.GameContainer, org.newdawn.slick.state.StateBasedGame)
+	 */
 	@Override
-	protected void prepareNifty(Nifty nifty) {
+	protected void leaveState(GameContainer container, StateBasedGame game)
+			throws SlickException {
+	}
+
+	/* (non-Javadoc)
+	 * @see de.lessvoid.nifty.slick2d.NiftyOverlayBasicGameState#prepareNifty(de.lessvoid.nifty.Nifty, org.newdawn.slick.state.StateBasedGame)
+	 */
+	@Override
+	protected void prepareNifty(Nifty nifty, StateBasedGame game) {
 		this.nifty = nifty;
 		nifty.fromXml("src/resources/layout/console.xml", "mainScreen");
 		Context.setMainScreenController((MainScreenController) nifty.getCurrentScreen().getScreenController());
-	}
-	
-	@Override
-	protected void updateGame(GameContainer container, int delta)
-			throws SlickException {
-		if (LoadingList.get().getRemainingResources() > 0) {
-			// Chargement de la prochaine ressource différée
-			DeferredResource nextResource = LoadingList.get().getNext();
-			try {
-				nextResource.load();
-			} catch (Exception e) {
-				throw new SlickException("Failed to load: " + nextResource.getDescription(), e);
-			}
-		} else {
-			if (!started) {
-				// Chargement différé terminé, démarrage du jeu
-				LoadingList.setDeferredLoading(false);
-				initNifty(container);
-				music.loop();
-				started = true;
-			}
-
-			// Toutes les secondes
-			if (++this.cptSoft % 100 == 0) {
-				// Récupérer les gains des serveurs
-				Context.incCptThunes(ServeurRules.getRegleGainBase() * Context.getCptServeursOuverts());
-			}
-			
-			// Update des actions et déplacements des personnages
-			for (Personnage p : Context.getPersonnages()) {
-				p.update(delta);
-			}
-		}
+		Context.getMainScreenController().setGameplayState(this);
 	}
 
+	/* (non-Javadoc)
+	 * @see de.lessvoid.nifty.slick2d.NiftyOverlayBasicGameState#renderGame(org.newdawn.slick.GameContainer, org.newdawn.slick.state.StateBasedGame, org.newdawn.slick.Graphics)
+	 */
 	@Override
-	protected void renderGame(GameContainer container, Graphics g)
-			throws SlickException {
+	protected void renderGame(GameContainer container, StateBasedGame game,
+			Graphics g) throws SlickException {
 		if (!started) {
 			// XXX: laid (taille, alignement, couleur...)
 			FontUtils.drawCenter(g.getFont(), "Loading...", 0, 150, 1280);
@@ -168,6 +171,56 @@ public class Main extends CoolNiftyOverlayBasicGame {
 			}
 		}
 	}
+
+	/* (non-Javadoc)
+	 * @see de.lessvoid.nifty.slick2d.NiftyOverlayBasicGameState#updateGame(org.newdawn.slick.GameContainer, org.newdawn.slick.state.StateBasedGame, int)
+	 */
+	@Override
+	protected void updateGame(GameContainer container, StateBasedGame game, int delta)
+			throws SlickException {
+		if (LoadingList.get().getRemainingResources() > 0) {
+			// Chargement de la prochaine ressource différée
+			DeferredResource nextResource = LoadingList.get().getNext();
+			try {
+				nextResource.load();
+			} catch (Exception e) {
+				throw new SlickException("Failed to load: " + nextResource.getDescription(), e);
+			}
+		} else {
+			if (!started) {
+				// Chargement différé terminé, démarrage du jeu
+				LoadingList.setDeferredLoading(false);
+				music.loop();
+				started = true;
+			}
+
+			// Toutes les secondes
+			if (++this.cptSoft % 100 == 0) {
+				// Récupérer les gains des serveurs
+				Context.incCptThunes(ServeurRules.getRegleGainBase() * Context.getCptServeursOuverts());
+			}
+			
+			// Update des actions et déplacements des personnages
+			for (Personnage p : Context.getPersonnages()) {
+				p.update(delta);
+			}
+			
+		}
+		
+		if(returnToMenu){
+			game.enterState(0);
+			returnToMenu = false;
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see org.newdawn.slick.state.BasicGameState#getID()
+	 */
+	@Override
+	public int getID() {
+		// TODO Auto-generated method stub
+		return 1;
+	}
 	
 	@Override
 	public void mouseMoved(int oldx, int oldy, int newx, int newy) {
@@ -178,4 +231,13 @@ public class Main extends CoolNiftyOverlayBasicGame {
 	public void mouseClicked(int button, int x, int y, int clickCount) {
 		Context.mouseClicked(button, x, y, clickCount);
 	}
+
+	/**
+	 * @param returnToMenu the returnToMenu to set
+	 */
+	public void returnToMenu() {
+		this.music.stop();
+		this.returnToMenu = true;
+	}
+	
 }
