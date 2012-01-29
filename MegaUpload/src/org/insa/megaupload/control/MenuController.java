@@ -1,7 +1,5 @@
 package org.insa.megaupload.control;
 
-import org.newdawn.slick.state.StateBasedGame;
-
 import de.lessvoid.nifty.EndNotify;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.elements.Element;
@@ -13,7 +11,6 @@ import de.lessvoid.nifty.screen.ScreenController;
  * @author void
  */
 public class MenuController implements ScreenController {
-
 	/**
 	 * the nifty instance.
 	 */
@@ -23,8 +20,6 @@ public class MenuController implements ScreenController {
 	 * the screen this menu belongs to.
 	 */
 	private Screen screen;
-
-	private StateBasedGame game;
 
 	/**
 	 * bind.
@@ -66,7 +61,7 @@ public class MenuController implements ScreenController {
 	}
 
 	public void start() {
-		game.enterState(1);
+		nifty.gotoScreen("game");
 	}
 
 	public void rules() {
@@ -95,19 +90,5 @@ public class MenuController implements ScreenController {
 				}
 			}
 		});
-	}
-
-	/**
-	 * @return the game
-	 */
-	public StateBasedGame getGame() {
-		return game;
-	}
-
-	/**
-	 * @param game the game to set
-	 */
-	public void setGame(StateBasedGame game) {
-		this.game = game;
 	}
 }

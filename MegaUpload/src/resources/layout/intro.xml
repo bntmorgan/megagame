@@ -196,6 +196,9 @@
       </panel>
     </layer>
   </screen>
+  
+  <screen id="game" controller="org.insa.megaupload.control.GameController">
+  </screen>
 
   <!-- +++++++++++++++++++++++++++++++++++++++ -->
   <!-- outro screen -->

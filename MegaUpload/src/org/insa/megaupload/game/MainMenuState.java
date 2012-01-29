@@ -7,7 +7,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.slick2d.NiftyBasicGameState;
-import org.insa.megaupload.control.MenuController;
+import org.insa.megaupload.control.GameController;
 
 /**
  * @author garfunk
@@ -22,7 +22,7 @@ public class MainMenuState extends NiftyBasicGameState {
 	@Override
 	protected void prepareNifty(Nifty nifty, StateBasedGame game) {
 		nifty.fromXml("resources/layout/intro.xml", "menu");
-		((MenuController) nifty.getCurrentScreen().getScreenController()).setGame(game);
+		((GameController) nifty.getScreen("game").getScreenController()).setGame(game);
 	}
 
 	@Override
