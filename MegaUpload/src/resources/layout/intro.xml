@@ -204,7 +204,7 @@
   <!-- outro screen -->
   <!-- +++++++++++++++++++++++++++++++++++++++ -->
   <screen id="outro" controller="org.insa.megaupload.control.OutroController" inputMapping="de.lessvoid.nifty.input.mapping.DefaultScreenMapping">
-    <layer id="background" childLayout="absolute">
+    <layer id="background" childLayout="absolute" backgroundColor="#000f">
       <effect>
         <onEndScreen name="alphaHide" alternateEnable="exit" inherit="true" oneShot="true" />
       </effect>
