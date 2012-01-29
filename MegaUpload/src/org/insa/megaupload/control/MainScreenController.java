@@ -5,7 +5,6 @@ import org.insa.megaupload.entities.Personnage;
 import org.insa.megaupload.example.Action;
 import org.insa.megaupload.example.Context;
 import org.insa.megaupload.game.GameplayState;
-import org.insa.megaupload.utils.StringUtil;
 import org.newdawn.slick.state.StateBasedGame;
 
 import de.lessvoid.nifty.EndNotify;
@@ -37,7 +36,7 @@ public class MainScreenController implements ScreenController, KeyInputHandler {
 
 	private StateBasedGame game;
 	private GameplayState gameplayState;
-	private static final int CONSOLE_COLUMNS = 29;
+	private static final int CONSOLE_COLUMNS = 36;
 	
 	public void bind(final Nifty newNifty, final Screen newScreen) {
 		nifty = newNifty;
@@ -129,9 +128,23 @@ public class MainScreenController implements ScreenController, KeyInputHandler {
 		actionConsole.output(text);
 	}
 	
-	public void addInfoText(String text){
-		for(String str : StringUtil.getParts(text,CONSOLE_COLUMNS))
+	public void addInfoText(String text) {
+		/*for (String str : StringUtil.getParts(text,CONSOLE_COLUMNS)) {
 			infoConsole.output(str);
+		}*/
+		String curLine = "";
+		for (String word : text.split(" ")) {
+			if (curLine.length() + word.length() > CONSOLE_COLUMNS) {
+				infoConsole.output(curLine);
+				curLine = word + " ";
+			} else {
+				curLine += word + " ";
+			}
+		}
+		
+		if (!curLine.equals("")) {
+			infoConsole.output(curLine);
+		}
 	}
 	
 	
