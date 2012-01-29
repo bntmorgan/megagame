@@ -9,12 +9,12 @@
   <!-- +++++++++++++++++++++++++++++++++++++++ -->
   <!-- register sounds -->
   <!-- +++++++++++++++++++++++++++++++++++++++ -->
-  <registerSound id="gong" filename="src/resources/sound/19546__tobi123__Gong_mf2.ogg" />
-  <registerSound id="eagle" filename="src/resources/sound/27257__kerri__eagle_feather_short.ogg" />
-  <registerSound id="panel" filename="src/resources/sound/34556__Corsica_S__reverse_bass_blip_2.wav" />
-  <registerSound id="select" filename="src/resources/sound/select.wav" />
-  <registerSound id="popup" filename="src/resources/sound/744__elmomo__MutantJewsArp.ogg" />
-  <registerMusic id="outro" filename="src/resources/sound/megasongremix.ogg" />
+  <registerSound id="gong" filename="resources/sound/19546__tobi123__Gong_mf2.ogg" />
+  <registerSound id="eagle" filename="resources/sound/27257__kerri__eagle_feather_short.ogg" />
+  <registerSound id="panel" filename="resources/sound/34556__Corsica_S__reverse_bass_blip_2.wav" />
+  <registerSound id="select" filename="resources/sound/select.wav" />
+  <registerSound id="popup" filename="resources/sound/744__elmomo__MutantJewsArp.ogg" />
+  <registerMusic id="outro" filename="resources/sound/megasongremix.ogg" />
 
   <style id="special-scrollpanel#scrollpanel">
     <attributes />
@@ -29,7 +29,7 @@
 
   <!-- main menu style -->
   <style id="menu">
-    <attributes align="left" valign="center" backgroundImage="src/resources/img/special-panel.png" width="1024px" height="409px" />
+    <attributes align="left" valign="center" backgroundImage="resources/img/special-panel.png" width="1024px" height="409px" />
     <effect>
       <onStartScreen name="move" timeType="exp" factor="3.5" direction="left" mode="in" length="250" startDelay="1500" inherit="true"/>
       <onStartScreen name="playSound" sound="panel" length="10" startDelay="1500" />
@@ -76,13 +76,13 @@
     <panel childLayout="vertical" width="100%">
       <panel height="100px" childLayout="vertical" />
       <text style="button-font" text="Modouv Credige INSA Toulouse 2011-2012&#13;&#10;Initiation à la conception de jeux video&#13;&#10;encadré par Damien DJAOUTI" align="center" />
-      <image filename="src/resources/img/game_pad.png" align="center" />
+      <image filename="resources/img/game_pad.png" align="center" />
       <panel height="50px" childLayout="vertical" />
       <text style="button-font" text="Ben, Juju, Flof, Flow and Alex&#13;&#10;" align="center" />
-      <image filename="src/resources/img/kim-sick.png" align="center" />
+      <image filename="resources/img/kim-sick.png" align="center" />
       <text style="button-font" text="present... &#13;&#10;" align="center" />
       <panel height="50px" childLayout="vertical" />
-        <image filename="src/resources/img/megaupload-play.png" align="center" />
+        <image filename="resources/img/megaupload-play.png" align="center" />
         <text style="button-font" text="The MegaUpload Escape Game&#13;&#10;" align="center" />
       <panel height="50px" childLayout="vertical" />
         <text style="button-font" text="The Megauplod Game is using the following libraries:" align="center" />
@@ -90,14 +90,14 @@
         <panel childLayout="horizontal" align="center">
         	<panel childLayout="vertical">
         		<text style="button-font" text="Nifty&#13;&#10;" align="center" />
-      			<image filename="src/resources/img/intro-logo.png" align="center" />
+      			<image filename="resources/img/intro-logo.png" align="center" />
         	</panel>
         	<panel childLayout="vertical">
         		<text style="button-font" text="LWJGL&#13;&#10;" align="center" />
         	</panel>
         	<panel childLayout="vertical">
         		<text style="button-font" text="Slick2D&#13;&#10;" align="center" />
-        		<image filename="src/resources/img/slicklogo.png" align="center" />
+        		<image filename="resources/img/slicklogo.png" align="center" />
         	</panel>
         </panel>
       
@@ -109,7 +109,7 @@
           </panel>
           <panel childLayout="vertical">
             <text style="button-font" text="OpenGL&#13;&#10;" align="center" />
-            <image filename="src/resources/img/opengl-logo.png" align="center" />
+            <image filename="resources/img/opengl-logo.png" align="center" />
           </panel>
           <panel childLayout="vertical">
         	<text style="button-font" text="Ogg Vorbis with JOrbis&#13;&#10;" align="center" />
@@ -120,7 +120,7 @@
         <text style="button-font" text="This Example uses creative commons licenced sound samples&#13;&#10;and music from the following Sources" align="center" />
       <panel height="50px" childLayout="vertical" />
         <text style="button-font" text="The Freesound Project&#13;&#10;" align="center" />
-        <image filename="src/resources/img/biatch.jpeg" align="center" />
+        <image filename="resources/img/biatch.jpeg" align="center" />
       <panel height="30px" childLayout="vertical" />
         <text style="button-font" text="19546__tobi123__Gong_mf2.wav&#13;&#10;
 27257__kerri__eagle_feather_short.wav&#13;&#10;
@@ -128,7 +128,7 @@
 744__elmomo__MutantJewsArp.wav&#13;&#10;" align="center" />
       <panel height="50px" childLayout="vertical" />
         <text style="button-font" text="The Megaupload Song&#13;&#10;The Megaupload Song (Stanley Dubstep Remix)&#13;&#10;by&#13;&#10;Kim Kardashian, Puff Daddy, Will.I.Am,&#13;&#10;Alicia Keys, Snoop Dogg, Chris Brown&#13;&#10;Kanye West, Lil John, Jamie Foxx&#13;&#10;Serena Williams, Russel Simons&#13;&#10;Brett Rattner, Floyd Mayweather, Estelle&#13;&#10;Carmello Anthony, Ciara, The Game&#13;&#10;Mary J Blidge, Swizz Beatz, Kim Dotcom&#13;&#10;Kim Junior, etc&#13;&#10;" align="center" />
-        <image filename="src/resources/img/megaupload-song.png" align="center" />
+        <image filename="resources/img/megaupload-song.png" align="center" />
       
         <panel height="200px" childLayout="vertical" />
         <text style="button-font" text="THE END" align="center" />
@@ -140,13 +140,13 @@
   <!-- menu screen -->
   <!-- +++++++++++++++++++++++++++++++++++++++ -->
   <screen id="menu" controller="org.insa.megaupload.control.MenuController">
-    <layer id="top" childLayout="vertical" backgroundImage="src/resources/img/background.png">
+    <layer id="top" childLayout="vertical" backgroundImage="resources/img/background.png">
       <effect>
         <onStartScreen name="fade" start="#0" end="#f" length="500" alternateEnable="fade" />
         <onEndScreen name="fade" startColor="#393939ff" endColor="#00000000" startDelay="1000" length="500" alternateEnable="fade"/>
       </effect>
       <panel id="panel" width="100%" height="30%" childLayout="center">
-        <image id="image" filename="src/resources/img/kim.png" align="center" valign="center">
+        <image id="image" filename="resources/img/kim.png" align="center" valign="center">
           <effect>
             <onStartScreen name="fade" start="#0" end="#f" startDelay="500" length="500" />
             <onStartScreen name="move" timeType="exp" factor="3.5" direction="top" mode="in" startDelay="500" length="500" />
@@ -161,10 +161,10 @@
         <panel id="mainMenu" font="menu.fnt" style="menu" childLayout="center" padding="50px,20px,60px,20px">
           <panel childLayout="horizontal" width="100%" height="100%">
             <panel width="50%" childLayout="absolute">
-              <image id="thumbHelloWorld" style="thumbStyle" x="150px" y="0px" filename="src/resources/img/megaupload-play.png" />
-              <image id="thumbHint" style="thumbStyle" x="150px" y="0px" filename="src/resources/img/megaupload-rules.png" />
-              <image id="thumbCredits" style="thumbStyle" x="150px" y="0px" filename="src/resources/img/megaupload-credits.png" />
-              <image id="thumbExit" style="thumbStyle" x="150px" y="0px" filename="src/resources/img/megaupload-exit.png" />
+              <image id="thumbHelloWorld" style="thumbStyle" x="150px" y="0px" filename="resources/img/megaupload-play.png" />
+              <image id="thumbHint" style="thumbStyle" x="150px" y="0px" filename="resources/img/megaupload-rules.png" />
+              <image id="thumbCredits" style="thumbStyle" x="150px" y="0px" filename="resources/img/megaupload-credits.png" />
+              <image id="thumbExit" style="thumbStyle" x="150px" y="0px" filename="resources/img/megaupload-exit.png" />
             </panel>
             <control id="menuScrollPanel" name="scrollPanel" style="special-scrollpanel" horizontal="false" stepSizeY="30" height="100%">
               <panel id="huhu-1" childLayout="center" width="100%" height="400px" padding="0px,40px,0px,40px">
@@ -205,49 +205,49 @@
       <effect>
         <onEndScreen name="alphaHide" alternateEnable="exit" inherit="true" oneShot="true" />
       </effect>
-      <image id="1" filename="src/resources/img/megaupload-logo.png" x="600px" y="400px">
+      <image id="1" filename="resources/img/megaupload-logo.png" x="600px" y="400px">
         <effect>
           <onShow name="fade" start="#0" end="#A" length="3000" startDelay="10000" onEndEffect="shizzleHide(1)" alternateDisable="exit"/>
           <onHide name="fade" start="#A" end="#0" length="3000" startDelay="3000" onEndEffect="shizzleShow(2)" alternateDisable="exit"/>
         </effect>
       </image>
-      <image id="2" filename="src/resources/img/kim-sick.png" x="100px" y="400px">
+      <image id="2" filename="resources/img/kim-sick.png" x="100px" y="400px">
         <effect>
           <onShow name="fade" start="#0" end="#A" length="3000" startDelay="1000" onEndEffect="shizzleHide(2)" alternateDisable="exit"/>
           <onHide name="fade" start="#A" end="#0" length="3000" startDelay="3000" onEndEffect="shizzleShow(3)" alternateDisable="exit"/>
         </effect>
       </image>
-      <image id="3" filename="src/resources/img/megaupload-logo.png" x="40px" y="500px">
+      <image id="3" filename="resources/img/megaupload-logo.png" x="40px" y="500px">
         <effect>
           <onShow name="fade" start="#0" end="#A" length="3000" startDelay="1000" onEndEffect="shizzleHide(3)" alternateDisable="exit"/>
           <onHide name="fade" start="#A" end="#0" length="3000" startDelay="3000" onEndEffect="shizzleShow(4)" alternateDisable="exit"/>
         </effect>
       </image>
-      <image id="4" filename="src/resources/img/megaupload-logo.png" x="760px" y="300px">
+      <image id="4" filename="resources/img/megaupload-logo.png" x="760px" y="300px">
         <effect>
           <onShow name="fade" start="#0" end="#A" length="3000" startDelay="1000" onEndEffect="shizzleHide(4)" alternateDisable="exit"/>
           <onHide name="fade" start="#A" end="#0" length="3000" startDelay="3000" onEndEffect="shizzleShow(5)" alternateDisable="exit"/>
         </effect>
       </image>
-      <image id="5" filename="src/resources/img/megaupload-logo.png" x="60px" y="550px">
+      <image id="5" filename="resources/img/megaupload-logo.png" x="60px" y="550px">
         <effect>
           <onShow name="fade" start="#0" end="#A" length="3000" startDelay="1000" onEndEffect="shizzleHide(5)" alternateDisable="exit"/>
           <onHide name="fade" start="#A" end="#0" length="3000" startDelay="3000" onEndEffect="shizzleShow(6)" alternateDisable="exit"/>
         </effect>
       </image>
-      <image id="6" filename="src/resources/img/megaupload-logo.png" x="680px" y="200px">
+      <image id="6" filename="resources/img/megaupload-logo.png" x="680px" y="200px">
         <effect>
           <onShow name="fade" start="#0" end="#A" length="3000" startDelay="1000" onEndEffect="shizzleHide(6)" alternateDisable="exit"/>
           <onHide name="fade" start="#A" end="#0" length="3000" startDelay="3000" onEndEffect="shizzleShow(7)" alternateDisable="exit"/>
         </effect>
       </image>
-      <image id="7" filename="src/resources/img/megaupload-logo.png" x="10px" y="400px">
+      <image id="7" filename="resources/img/megaupload-logo.png" x="10px" y="400px">
         <effect>
           <onShow name="fade" start="#0" end="#A" length="3000" startDelay="1000" onEndEffect="shizzleHide(7)" alternateDisable="exit"/>
           <onHide name="fade" start="#A" end="#0" length="3000" startDelay="3000" onEndEffect="shizzleShow(8)" alternateDisable="exit"/>
         </effect>
       </image>
-      <image id="8" filename="src/resources/img/megaupload-logo.png" x="70px" y="300px">
+      <image id="8" filename="resources/img/megaupload-logo.png" x="70px" y="300px">
         <effect>
           <onShow name="fade" start="#0" end="#A" length="3000" startDelay="1000" onEndEffect="shizzleHide(8)" alternateDisable="exit"/>
           <onHide name="fade" start="#A" end="#0" length="3000" startDelay="3000" onEndEffect="shizzleShow(end)" alternateDisable="exit"/>
@@ -256,7 +256,7 @@
     </layer>
     <layer id="logo" childLayout="vertical">
       <panel height="25%" childLayout="center" width="100%">
-        <image id="image" filename="src/resources/img/megaupload-logo.png" align="center" valign="center">
+        <image id="image" filename="resources/img/megaupload-logo.png" align="center" valign="center">
 	      <effect>
 	        <onStartScreen name="fade" startColor="#fff0" endColor="#ffff" length="1500" startDelay="500"/>
 	        <onStartScreen name="imageSize" startSize="0.0" endSize="1.0" length="1500" startDelay="500"/>
@@ -280,7 +280,7 @@
         <panel height="64px" childLayout="vertical">
           <effect>
             <onActive overlay="true" name="blendMode" blendMode="multiply" post="true" />
-            <!-- <onActive overlay="true" name="imageOverlay" filename="src/resources/img/vide.png" post="true"/>  -->
+            <!-- <onActive overlay="true" name="imageOverlay" filename="resources/img/vide.png" post="true"/>  -->
           </effect>
         </panel>
       </panel>

@@ -21,7 +21,7 @@ public class MainMenuState extends NiftyBasicGameState {
 	
 	@Override
 	protected void prepareNifty(Nifty nifty, StateBasedGame game) {
-		nifty.fromXml("src/resources/layout/intro.xml", "menu");
+		nifty.fromXml("resources/layout/intro.xml", "menu");
 		((MenuController) nifty.getCurrentScreen().getScreenController()).setGame(game);
 	}
 

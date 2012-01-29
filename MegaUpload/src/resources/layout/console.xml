@@ -3,10 +3,10 @@
   <!-- +++++++++++++++++++++++++++++++++++++++ -->
   <!-- load default styles and controls -->
   <!-- +++++++++++++++++++++++++++++++++++++++ -->
-  <useStyles filename="src/resources/layout/custom-console-style.xml" />
+  <useStyles filename="resources/layout/custom-console-style.xml" />
   <useStyles filename="nifty-default-styles.xml" />
   <useControls filename="nifty-default-controls.xml" />
-  <useControls filename="src/resources/controls/megaupload-controls.xml" />
+  <useControls filename="resources/controls/megaupload-controls.xml" />
 
   <!-- +++++++++++++++++++++++++++++++++++++++ -->
   <!-- start screen -->

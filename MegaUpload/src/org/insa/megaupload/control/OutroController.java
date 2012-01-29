@@ -85,7 +85,7 @@ public class OutroController implements ScreenController, KeyInputHandler {
       escape = true;
       nifty.setAlternateKey("exit");
       nifty.setAlternateKeyForNextLoadXml("fade");
-      nifty.fromXml("src/resources/layout/intro.xml", "menu");
+      nifty.fromXml("resources/layout/intro.xml", "menu");
       return true;
     }
     return false;
