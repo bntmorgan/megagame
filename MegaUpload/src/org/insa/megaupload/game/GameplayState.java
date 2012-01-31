@@ -155,21 +155,22 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 				// Dessin des personnages à leur nouvelle position
 				MegaPerso.getParticleSystem().render();
 				AgentFBI.getParticleSystem().render();
+				Lieu.getParticleSystem().render();
 				for (Personnage p : Context.getPersonnages()) {
-					p.draw(g, nifty);
+					p.draw(g);
 				}
 				
 				// XXX: debug
 				if (Context.getSelectedPerso() != null) {
-					Context.getSelectedPerso().activateParticleSystem();
+					Context.getSelectedPerso().activateParticleEmitter();
 					g.drawString("Selected perso: "	+ Context.getSelectedPerso().getNom(), 10, 600);
 				}
 
 				for (MegaPerso mp : Context.getNonSelectedPerso()) {
 					if (mp.getAction() instanceof OuvertureServeur) {
-						mp.activateParticleSystem();
+						mp.activateParticleEmitter();
 					} else {
-						mp.desactivateParticleSystem();
+						mp.desactivateParticleEmitter();
 					}
 				}
 

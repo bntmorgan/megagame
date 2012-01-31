@@ -13,6 +13,4 @@ public class Serveur {
 		Context.incCptThunes(ServeurRules.getRegleGainBase());
 	}
 
-	
-
 }

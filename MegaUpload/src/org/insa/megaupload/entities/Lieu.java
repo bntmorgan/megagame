@@ -1,13 +1,22 @@
 package org.insa.megaupload.entities;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 import org.insa.megaupload.example.Context;
+import org.insa.megaupload.example.CoolFireEmitter;
+import org.insa.megaupload.game.Drawable;
+import org.insa.megaupload.game.Updatable;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.particles.ParticleEmitter;
+import org.newdawn.slick.particles.ParticleSystem;
+import org.newdawn.slick.particles.effects.FireEmitter;
 
-public class Lieu {
+import de.lessvoid.nifty.Nifty;
+
+public class Lieu implements Updatable, Drawable{
 	private String nom;
 	private int coutHeberg;
 	private int risque;
@@ -16,6 +25,15 @@ public class Lieu {
 	private int y;
 	private ArrayList<Trajet> trajets;
 	private ArrayList<Serveur> serveurs;
+	
+	//fonctionnalité de pare feu
+	private PareFeu pareFeu;
+	
+	//gestionnaire de particules pour afficher de le pare feu de manière noobifiante
+	private static ParticleSystem particleSystem = null; 	
+	
+	//emmeteur de particule pour le lieu
+	private FireEmitter particleEmitter;
 
 	private static Image img, imgH;
 	private static Image imgMu, imgMuH;
@@ -29,6 +47,11 @@ public class Lieu {
 		this.tempsMiseEnPlace = tempsMiseEnPlace;
 		this.trajets = new ArrayList<Trajet>();
 		this.serveurs = new ArrayList<Serveur>();
+		
+		//initialisation de l'emtteur de particules
+		particleEmitter = new FireEmitter(this.getX(), this.getY(), 6f);
+		getParticleSystem().addEmitter(particleEmitter);
+		particleEmitter.setEnabled(false);
 	}
 	
 	public static void init() throws SlickException {
@@ -81,7 +104,7 @@ public class Lieu {
 	public ArrayList<Serveur> getServeurs() {
 		return serveurs;
 	}
-
+	
 	public void delServeurs() {
 		//décrémente le compteur global de serveurs
 		Context.decCptServeurs(this.serveurs.size());
@@ -126,5 +149,58 @@ public class Lieu {
 	@Override
 	public String toString() {
 		return this.nom;
+	}
+
+	/**
+	 * @return the pareFeu
+	 */
+	public PareFeu getPareFeu() {
+		return pareFeu;
+	}
+
+	/**
+	 * @param pareFeu the pareFeu to set
+	 */
+	public void setPareFeu(PareFeu pareFeu) {
+		this.pareFeu = pareFeu;
+	}
+	
+
+	public static ParticleSystem getParticleSystem() {
+		if (particleSystem == null) {
+			Image image = null;
+			try {
+				image = new Image("resources/img/dollard.png");
+			} catch (SlickException e) {
+				e.printStackTrace();
+			}
+			particleSystem = new ParticleSystem(image);
+			particleSystem.setPosition(0, 0);
+		}
+		return particleSystem;
+	}
+
+	@Override
+	public void update(int delta) {
+		//mise a jour du pare feu
+		pareFeu.setTempsRestant(pareFeu.getTempsRestant() - delta);
+		if(pareFeu.getTempsRestant() < 0){
+			//on supprime le pare feu
+			pareFeu = null;
+			//on desactive les particules
+			desactivateParticleEmitter();
+		}
+	}
+	
+	public void activateParticleEmitter(){
+		particleEmitter.setEnabled(true);
+	}
+	
+	public void desactivateParticleEmitter(){
+		particleEmitter.setEnabled(false);
+	}
+	
+	public ParticleEmitter getParticleEmitter(){
+		return (ParticleEmitter)particleEmitter;
 	}
 }

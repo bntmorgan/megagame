@@ -100,9 +100,9 @@ public class MegaPerso extends Personnage {
 	}
 	
 	@Override
-	public void draw(Graphics g, Nifty nifty) {
+	public void draw(Graphics g) {
 		if(!isDead()){
-			super.draw(g, nifty);
+			super.draw(g);
 
 			if (timestampDenierAchat > (System.currentTimeMillis() - 1*1000)) {
 				String str = String.valueOf(-this.frais) + "$";
@@ -238,17 +238,17 @@ public class MegaPerso extends Personnage {
 	@Override
 	public void kill() {
 		setDead(true);
-		desactivateParticleSystem();
+		desactivateParticleEmitter();
 		System.out.println(Context.getMainScreen().findElementByName(getNom()));
 		Context.getMainScreen().findElementByName(getNom()).hide();
 		Context.getMainScreen().findElementByName("submenu_" + getNom()).hide();
 	}
 	
-	public void activateParticleSystem(){
+	public void activateParticleEmitter(){
 		particleEmitter.setEnabled(true);
 	}
 	
-	public void desactivateParticleSystem(){
+	public void desactivateParticleEmitter(){
 		particleEmitter.setEnabled(false);
 	}
 	

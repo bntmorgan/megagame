@@ -161,9 +161,9 @@ public class AgentFBI extends Personnage {
 	}
 	
 	@Override
-	public void draw(Graphics g, Nifty nifty) {
+	public void draw(Graphics g) {
 		if(!isDead()){
-			super.draw(g, nifty);		
+			super.draw(g);		
 			imgBig.draw(getAvatarX(), getAvatarY(), getAvatarWidth(), getAvatarHeight());
 		}
 	}

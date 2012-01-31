@@ -5,6 +5,8 @@ import java.util.Stack;
 import org.insa.megaupload.actions.Action;
 import org.insa.megaupload.actions.Deplacement;
 import org.insa.megaupload.example.Context;
+import org.insa.megaupload.game.Drawable;
+import org.insa.megaupload.game.Updatable;
 import org.insa.megaupload.rules.DeplacementRules;
 import org.insa.megaupload.utils.Algo;
 import org.newdawn.slick.Graphics;
@@ -14,7 +16,7 @@ import org.newdawn.slick.particles.ParticleSystem;
 
 import de.lessvoid.nifty.Nifty;
 
-public abstract class Personnage {
+public abstract class Personnage implements Updatable, Drawable{
 	protected Action action;
 	protected Image imgBig;
 	protected Image imgPawn;
@@ -164,7 +166,7 @@ public abstract class Personnage {
 	}
 
 	
-	public void draw(Graphics g, Nifty nifty) {
+	public void draw(Graphics g) {
 		if(!isDead()){
 			imgPawn.draw(this.getX() - imgPawn.getWidth()/2, this.getY() - imgPawn.getHeight()/2, imgPawn.getWidth(), imgPawn.getHeight());
 			
