@@ -1,6 +1,8 @@
 package org.insa.megaupload.control;
 
+import org.insa.megaupload.entities.Lieu;
 import org.insa.megaupload.entities.MegaPerso;
+import org.insa.megaupload.entities.PareFeu;
 import org.insa.megaupload.entities.Personnage;
 import org.insa.megaupload.example.Action;
 import org.insa.megaupload.example.Context;
@@ -117,9 +119,20 @@ public class MainScreenController implements ScreenController, KeyInputHandler {
 				+ command.getArgumentCount() + " parameter(s)]");
 		if ("exit".equals(command.getCommand())) {
 			back();
-		}
-		if ("killdamothafucka".equals(command.getCommand()) || "kdm".equals(command.getCommand())) {
+		} else if ("killdamothafucka".equals(command.getCommand()) || "kdm".equals(command.getCommand())) {
 			gameplayState.returnToMenu();
+		} else if ("god".equals(command.getCommand()) || "kdm".equals(command.getCommand())) {
+			if(command.getArguments().length > 0 && "off".equals(command.getArguments()[0])){
+				for(Lieu l : Context.getCarte().getLieux()){
+					l.removePareFeu();
+				}
+			}
+			else{
+				for(Lieu l : Context.getCarte().getLieux()){
+					l.addPareFeu(new PareFeu(false));
+				}
+			}
+				
 		}
 		
 	};

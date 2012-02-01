@@ -170,7 +170,7 @@ public class Lieu implements Updatable, Drawable{
 	public void update(int delta) {
 		//mise a jour du pare feu
 		if(pareFeu != null){
-			pareFeu.setTempsRestant(pareFeu.getTempsRestant() - delta);
+			pareFeu.decrementTime(delta);
 			if(pareFeu.getTempsRestant() <= 0){
 				//on supprime le pare feu
 				pareFeu = null;
@@ -182,6 +182,11 @@ public class Lieu implements Updatable, Drawable{
 	
 	public void addPareFeu(){
 		pareFeu = new PareFeu();
+		activateParticleEmitter();
+	}
+	
+	public void addPareFeu(PareFeu pareFeu){
+		this.pareFeu = pareFeu;
 		activateParticleEmitter();
 	}
 	
