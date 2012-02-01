@@ -14,7 +14,7 @@ import org.newdawn.slick.particles.ParticleSystem;
  * @author garfunk
  *
  */
-public class CoolFireEmitter implements ParticleEmitter{
+public class CoolLinearParticleEmitter  implements ParticleEmitter {
 	/** The x coordinate of the center of the fire effect */
 	private int x;
 	/** The y coordinate of the center of the fire effect */
@@ -34,7 +34,7 @@ public class CoolFireEmitter implements ParticleEmitter{
 	/**
 	 * Create a default fire effect at 0,0
 	 */
-	public CoolFireEmitter() {
+	public CoolLinearParticleEmitter() {
 		color = Color.WHITE;
 	}
 
@@ -44,7 +44,7 @@ public class CoolFireEmitter implements ParticleEmitter{
 	 * @param x The x coordinate of the fire effect
 	 * @param y The y coordinate of the fire effect
 	 */
-	public CoolFireEmitter(int x, int y) {
+	public CoolLinearParticleEmitter(int x, int y) {
 		this.x = x;
 		this.y = y;
 		color = Color.WHITE;
@@ -59,7 +59,7 @@ public class CoolFireEmitter implements ParticleEmitter{
 	 * @param y The y coordinate of the fire effect
 	 * @param size The size of the particle being pumped out
 	 */
-	public CoolFireEmitter(int x, int y, float size) {
+	public CoolLinearParticleEmitter(int x, int y, float size) {
 		this.x = x;
 		this.y = y;
 		this.size = size;
@@ -72,7 +72,7 @@ public class CoolFireEmitter implements ParticleEmitter{
 	 * @param size
 	 * @param color
 	 */
-	public CoolFireEmitter(int x, int y, float size, Color color) {
+	public CoolLinearParticleEmitter(int x, int y, float size, Color color) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -90,10 +90,8 @@ public class CoolFireEmitter implements ParticleEmitter{
 			Particle p = system.getNewParticle(this, 2000);
 			p.setColor(color.getRed(), color.getGreen(), color.getBlue(), 0.5f);
 			p.setPosition(x, y);
-			p.setSize(size);			
-			float vx = (float) (-0.02f + (Math.random() * 0.04f));
-			float vy = (float) (-(Math.random() * 0.15f));
-			p.setVelocity(vx,vy,1.1f);
+			p.setSize(size);
+			p.setVelocity(0,0,1.1f);
 		}
 	}
 	
@@ -208,4 +206,3 @@ public class CoolFireEmitter implements ParticleEmitter{
 	}
 	
 }
-

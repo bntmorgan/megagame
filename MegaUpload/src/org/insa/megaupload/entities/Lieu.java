@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.insa.megaupload.example.Context;
 import org.insa.megaupload.example.CoolFireEmitter;
+import org.insa.megaupload.example.CoolLinearParticleEmitter;
 import org.insa.megaupload.game.Drawable;
 import org.insa.megaupload.game.Updatable;
 import org.newdawn.slick.Graphics;
@@ -33,7 +34,7 @@ public class Lieu implements Updatable, Drawable{
 	private static ParticleSystem particleSystem = null; 	
 	
 	//emmeteur de particule pour le lieu
-	private FireEmitter particleEmitter;
+	private CoolFireEmitter particleEmitter;
 
 	private static Image img, imgH;
 	private static Image imgMu, imgMuH;
@@ -49,7 +50,7 @@ public class Lieu implements Updatable, Drawable{
 		this.serveurs = new ArrayList<Serveur>();
 		
 		//initialisation de l'emtteur de particules
-		particleEmitter = new FireEmitter(this.getX(), this.getY(), 6f);
+		particleEmitter = new CoolFireEmitter(this.getX(), this.getY(), 4f);
 		getParticleSystem().addEmitter(particleEmitter);
 		particleEmitter.setEnabled(false);
 	}
@@ -149,28 +150,13 @@ public class Lieu implements Updatable, Drawable{
 	@Override
 	public String toString() {
 		return this.nom;
-	}
-
-	/**
-	 * @return the pareFeu
-	 */
-	public PareFeu getPareFeu() {
-		return pareFeu;
-	}
-
-	/**
-	 * @param pareFeu the pareFeu to set
-	 */
-	public void setPareFeu(PareFeu pareFeu) {
-		this.pareFeu = pareFeu;
-	}
-	
+	}	
 
 	public static ParticleSystem getParticleSystem() {
 		if (particleSystem == null) {
 			Image image = null;
 			try {
-				image = new Image("resources/img/dollard.png");
+				image = new Image("resources/img/kim.png");
 			} catch (SlickException e) {
 				e.printStackTrace();
 			}
@@ -183,13 +169,29 @@ public class Lieu implements Updatable, Drawable{
 	@Override
 	public void update(int delta) {
 		//mise a jour du pare feu
-		pareFeu.setTempsRestant(pareFeu.getTempsRestant() - delta);
-		if(pareFeu.getTempsRestant() < 0){
-			//on supprime le pare feu
-			pareFeu = null;
-			//on desactive les particules
-			desactivateParticleEmitter();
+		if(pareFeu != null){
+			pareFeu.setTempsRestant(pareFeu.getTempsRestant() - delta);
+			if(pareFeu.getTempsRestant() <= 0){
+				//on supprime le pare feu
+				pareFeu = null;
+				//on desactive les particules
+				desactivateParticleEmitter();
+			}
 		}
+	}
+	
+	public void addPareFeu(){
+		pareFeu = new PareFeu();
+		activateParticleEmitter();
+	}
+	
+	public void removePareFeu(){
+		pareFeu = null;
+		desactivateParticleEmitter();
+	}
+	
+	public boolean isPareFeu(){
+		return pareFeu != null;
 	}
 	
 	public void activateParticleEmitter(){

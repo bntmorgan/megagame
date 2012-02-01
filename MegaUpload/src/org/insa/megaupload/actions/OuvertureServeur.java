@@ -6,7 +6,7 @@ import org.insa.megaupload.entities.MegaPerso;
 import org.insa.megaupload.entities.Personnage;
 import org.insa.megaupload.entities.Serveur;
 import org.insa.megaupload.example.Context;
-import org.insa.megaupload.example.CoolFireEmitter;
+import org.insa.megaupload.example.CoolLinearParticleEmitter;
 import org.insa.megaupload.rules.ServeurRules;
 
 public class OuvertureServeur extends Action {
@@ -18,7 +18,7 @@ public class OuvertureServeur extends Action {
 		//décompte le cout d'ouverture du serveur du compteur de thune
 		Context.decCptThunes(ServeurRules.getRegleCoutOuverture());
 		MegaPerso mp = (MegaPerso)perso;
-		((CoolFireEmitter)mp.getParticleEmitter()).setColor(Color.RED);
+		((CoolLinearParticleEmitter)mp.getParticleEmitter()).setColor(Color.RED);
 	}
 
 	@Override
@@ -26,7 +26,7 @@ public class OuvertureServeur extends Action {
 		perso.getLieuActuel().addServeur(new Serveur());
 		Context.getMainScreenController().addInfoText(((MegaPerso)perso).getNom() + " succeeds to create the server");
 		MegaPerso mp = (MegaPerso)perso;
-		((CoolFireEmitter)mp.getParticleEmitter()).setColor(Color.GREEN);
+		((CoolLinearParticleEmitter)mp.getParticleEmitter()).setColor(Color.GREEN);
 	}
 
 }

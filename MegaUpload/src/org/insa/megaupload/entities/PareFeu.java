@@ -2,7 +2,7 @@ package org.insa.megaupload.entities;
 
 public class PareFeu {
 	
-	private static final long DUREE = 20;
+	private static final long DUREE = 2000;
 	
 	private long tempsRestant;
 	

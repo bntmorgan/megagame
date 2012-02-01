@@ -8,12 +8,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.insa.megaupload.game.Updatable;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public class Carte extends Image implements Graphe{
+public class Carte extends Image implements Graphe, Updatable{
 	private Map<String, Lieu> mapLieux; 
 	private List<Lieu> lieux;
 	
@@ -95,4 +96,12 @@ public class Carte extends Image implements Graphe{
 			l.draw(g);
 		}
 	}
+
+	@Override
+	public void update(int delta) {
+		for (Lieu l : lieux) {
+			l.update(delta);
+		}
+	}
+	
 }

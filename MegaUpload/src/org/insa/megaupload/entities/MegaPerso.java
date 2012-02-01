@@ -5,7 +5,7 @@ import java.awt.Color;
 import org.insa.megaupload.actions.OuvertureServeur;
 import org.insa.megaupload.example.Action;
 import org.insa.megaupload.example.Context;
-import org.insa.megaupload.example.CoolFireEmitter;
+import org.insa.megaupload.example.CoolLinearParticleEmitter;
 import org.insa.megaupload.rules.ServeurRules;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -36,7 +36,7 @@ public class MegaPerso extends Personnage {
 	private int frais;
 	private long timestampDenierAchat;
 	
-	private CoolFireEmitter particleEmitter;
+	private CoolLinearParticleEmitter particleEmitter;
     private static ParticleSystem particleSystem = null; 
 	
 	public MegaPerso(String nom, Lieu lieuInitial, String imgBig, String imgPawn) throws SlickException {
@@ -51,7 +51,7 @@ public class MegaPerso extends Personnage {
 		this.frais = 0;
 		this.timestampDenierAchat = 0;
 		
-		particleEmitter = new CoolFireEmitter(this.getX(), this.getY(), 6f, Color.GREEN );
+		particleEmitter = new CoolLinearParticleEmitter(this.getX(), this.getY(), 6f, Color.GREEN );
 		getParticleSystem().addEmitter(particleEmitter);
 		particleEmitter.setEnabled(false);
 	}
@@ -213,8 +213,6 @@ public class MegaPerso extends Personnage {
 	        if (action != null) {
 	        	action.update(delta);
 	        }
-	        
-	        particleSystem.update(delta);
 	        particleEmitter.setX(this.getX());
 	        particleEmitter.setY(this.getY());
 		}

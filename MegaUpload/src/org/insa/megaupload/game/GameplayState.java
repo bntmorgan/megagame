@@ -106,6 +106,10 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 		initNifty(container, game);
 		
 		this.state = MegaUploadGameState.LOADING;
+		
+		//on ajoute des pare feu pour le test
+		for(Lieu l : c.getLieux())
+			l.addPareFeu();
 	}
 
 	/* (non-Javadoc)
@@ -142,6 +146,7 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 						(container.getHeight() - loadingImg.getHeight()) / 2);
 				break;
 			case RUNNING:
+				
 				g.setBackground(new Color(64, 122, 156));
 				Context.getCarte().draw(g);
 				
@@ -151,11 +156,13 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 				// XXX: alignement
 				FontUtils.drawRight(g.getFont(), "Cash: " + Integer.toString(Context.getCptThunes()) + "$", 0, 10, 1280 - 15);
 				FontUtils.drawRight(g.getFont(), Integer.toString(Context.getCptServeursOuverts()) + " servers up", 0, 30, 1280 - 15);
-				
-				// Dessin des personnages à leur nouvelle position
+
+				//dessin des particules
+				Lieu.getParticleSystem().render();
 				MegaPerso.getParticleSystem().render();
 				AgentFBI.getParticleSystem().render();
-				Lieu.getParticleSystem().render();
+				
+				// Dessin des personnages à leur nouvelle position
 				for (Personnage p : Context.getPersonnages()) {
 					p.draw(g);
 				}
@@ -249,6 +256,14 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 				case RUNNING:
 					// Update du contexte
 					Context.update(delta);
+					
+					//update des particules
+					Lieu.getParticleSystem().update(delta);
+					MegaPerso.getParticleSystem().update(delta);
+					AgentFBI.getParticleSystem().update(delta);
+					
+					//update de la carte : tous les lieu et tous les pare feu
+					Context.getCarte().update(delta);
 					
 					if (Context.getMegaPersos().size() == 0) {
 						this.state = MegaUploadGameState.LOST;

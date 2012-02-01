@@ -5,7 +5,7 @@ import java.awt.Color;
 import org.insa.megaupload.actions.Arreter;
 import org.insa.megaupload.actions.FermetureServeurs;
 import org.insa.megaupload.example.Context;
-import org.insa.megaupload.example.CoolFireEmitter;
+import org.insa.megaupload.example.CoolLinearParticleEmitter;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -25,7 +25,7 @@ public class AgentFBI extends Personnage {
 	private MegaPerso poursuivi;
 	private int num;
 	
-	private CoolFireEmitter particleEmitter;
+	private CoolLinearParticleEmitter particleEmitter;
     private static ParticleSystem particleSystem = null; 
 	
 	public double getCoefRand() {
@@ -50,7 +50,7 @@ public class AgentFBI extends Personnage {
 		this.num = nbAgents;
 		nbAgents++;
 		
-		particleEmitter = new CoolFireEmitter(this.getX(), this.getY(), 6f, Color.RED );
+		particleEmitter = new CoolLinearParticleEmitter(this.getX(), this.getY(), 6f, Color.RED );
 		getParticleSystem().addEmitter(particleEmitter);
 		particleEmitter.setEnabled(false);
 	}
@@ -94,7 +94,6 @@ public class AgentFBI extends Personnage {
 			this.desactivateParticleSystem();
 		}
 		
-        particleSystem.update(delta);
         particleEmitter.setX(this.getX());
         particleEmitter.setY(this.getY());
 		
