@@ -107,7 +107,7 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 		
 		this.state = MegaUploadGameState.LOADING;
 		
-		//on ajoute des pare feu pour le test
+		//TODO : test : on ajoute des pare feu pour le test
 		for(Lieu l : c.getLieux())
 			l.addPareFeu();
 	}
