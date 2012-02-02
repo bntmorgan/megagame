@@ -322,19 +322,23 @@ public class GameplayState extends NiftyOverlayBasicGameState {
 	@Override
 	public void keyPressed(int key, char c) {
 			switch (key) {
-				case Input.KEY_1:
+				case Input.KEY_1 :
+				case Input.KEY_NUMPAD1 :
 					if (Context.getMegaPersos().size() >= 1)
 						Context.setSelectedPerso(Context.getMegaPersos().get(0));
 					break;
 				case Input.KEY_2:
+				case Input.KEY_NUMPAD2 :
 					if (Context.getMegaPersos().size() >= 2)
 						Context.setSelectedPerso(Context.getMegaPersos().get(1));
 					break;
 				case Input.KEY_3:
+				case Input.KEY_NUMPAD3 :
 					if (Context.getMegaPersos().size() >= 3)
 						Context.setSelectedPerso(Context.getMegaPersos().get(2));
 					break;
 				case Input.KEY_4:
+				case Input.KEY_NUMPAD4 :
 					if (Context.getMegaPersos().size() >= 4)
 						Context.setSelectedPerso(Context.getMegaPersos().get(3));
 					break;
